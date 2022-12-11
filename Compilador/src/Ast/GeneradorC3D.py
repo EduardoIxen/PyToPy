@@ -15,7 +15,7 @@ class GeneradorC3D:
         self.temporales = []
 
         #agregar funciones nativas
-        self.printStr = False
+        self.esPrint = False
         self.math = False
         self.excepciones = []
         self.almacenamientoTemp = {}
@@ -34,7 +34,7 @@ class GeneradorC3D:
         self.enNativas = ''
         self.enFuncion = ''
         self.temporales = []
-        self.printStr = False
+        self.esPrint = False
         self.almacenamientoTemp = {}
         GeneradorC3D.generadorC3D = GeneradorC3D()
 
@@ -198,4 +198,143 @@ class GeneradorC3D:
     def getStack(self, destino, posicion):
         self.insertarCodigo(f'{destino} = stack[int({posicion})];\n')
 
-    
+    def nuevoEntorno(self, tamanio):
+        self.insertarCodigo(f'P = P + {tamanio};\n')
+
+    def llamarFunc(self, id):
+        self.insertarCodigo(f'{id}();\n')
+
+    def retornarEntorno(self, tamanio):
+        self.insertarCodigo(f'P = P - {tamanio};\n')
+
+    def setHeap(self, posicion, valor):
+        self.insertarCodigo(f'heap[int({posicion})] = {valor};\n')
+
+    def getHeap(self, destino, posicion):
+        self.insertarCodigo(f'{destino} = heap[int({posicion})];\n')
+
+    def siguienteHeap(self):
+        self.insertarCodigo('H = H + 1;\n')
+
+    def getAlmacenamientoTemporal(self):
+        return self.almacenamientoTemp
+
+    def limpiarAlmacenamTemp(self):
+        self.almacenamientoTemp = {}
+
+    def setAlmacenamientTemp(self, almacenTemp):
+        self.almacenamientoTemp = almacenTemp
+
+    def agregarAlmacTemp(self, temp):
+        if not temp in self.almacenamientoTemp.keys():
+            self.almacenamientoTemp[temp] = temp
+
+    def guardarTemporales(self, entorno):
+        if len(self.almacenamientoTemp) > 0:
+            temporal = self.agregarTemp()
+            self.liberarTemp(temporal)
+
+            tamanio = 0
+            self.agregarEspacio()
+            self.agregarComentario(" INICIO - GUARDANDO TEMPORALES ")
+            self.agregarExpresion(temporal, 'P', entorno.tamanio, '+')
+
+            for nombre in self.almacenamientoTemp:
+                tamanio += 1
+                self.setStack(temporal, self.almacenamientoTemp[nombre])
+                if tamanio != len(self.almacenamientoTemp):
+                    self.agregarExpresion(temporal, temporal, '1', '+')
+            self.agregarComentario(" FIN - GUARDANDO TEMPORALES")
+            self.agregarEspacio()
+
+        puntero = entorno.tamanio
+        entorno.tamanio = puntero + len(self.almacenamientoTemp)
+
+        return puntero
+
+    def obtenerTemporales(self, entorno, posicion):
+        if len(self.almacenamientoTemp) > 0:
+            temp = self.agregarTemp()
+            self.liberarTemp(temp)
+
+            tamanio = 0
+            self.agregarEspacio()
+            self.agregarComentario(" COMENZANDO A RECUPERAR TEMPORALES ")
+            self.agregarExpresion(temp, 'P', posicion, '+')
+
+            for nombre in self.almacenamientoTemp:
+                tamanio += 1
+                self.getStack(self.almacenamientoTemp[nombre], temp)
+                if tamanio != len(self.almacenamientoTemp):
+                    self.agregarExpresion(temp, temp, '1', '+')
+            self.agregarComentario(" FIN RECUPERAR TEMPORALES ")
+            self.agregarEspacio()
+        entorno.tamanio = posicion
+
+    def setExcepcion(self, valor):
+        self.contExcepc += 1
+        excepc = f"\"column1\": \"{self.contExcepc}\", \"column2\": \"{valor.getDescripcion()}\", \"column3\": \"{valor.getLinea()}\", \"column4\": \"{valor.getColumna()}\", \"column5\": \"{valor.getFechaHora()}\""
+        excepc = "{" + excepc + "}"
+        self.excepciones.append(excepc)
+
+    def getExcepciones(self):
+        errores = ''
+        for err in self.excepciones:
+            errores += err
+        errores = "[" + errores[:-1] + "]"
+        return errores
+
+    # ESPACIO PARA LAS NATIVAS
+    def nativaPrint(self):
+        if self.esPrint:
+            return
+        self.esPrint = True
+        self.enNativas = True
+
+        '''Agregamos el nombre de la funcion nativa, una etiqueta para salir de la funcion y otra
+        para comparar el fin de la cadena que se ingresa'''
+        self.agregarInicioFunc('nativa_print')
+        etiqReturn = self.nuevaEtiqueta()
+        etiqComparacion = self.nuevaEtiqueta()
+
+        '''Punteros para el stack P y para el heap H'''
+        pTemporal = self.agregarTemp()
+        self.liberarTemp(pTemporal)
+
+        hTemp = self.agregarTemp()
+        self.liberarTemp(hTemp)
+
+        '''Comparar cada uno de los caracteres del string hasta encontrar el -1, cuando no lo encuentre
+        se agrega una etiqueta ara imprimir el caracter y cuando encuentre el -1 se realiza un salto a
+        la etiqueta return'''
+
+        self.agregarExpresion(pTemporal, 'P', '1', '+')
+        self.getStack(hTemp, pTemporal)
+
+        tempComp = self.agregarTemp()
+        self.liberarTemp(tempComp)
+
+        self.agregarEtiqueta(etiqComparacion)
+
+        self.getHeap(tempComp, hTemp)
+
+        self.agregarIf(tempComp, '-1', '==', etiqReturn)
+
+        self.agregarPrint('c', tempComp)
+
+        self.agregarExpresion(hTemp, hTemp, '1', '+')
+
+        self.agregarGoto(etiqComparacion)
+
+        self.agregarEtiqueta(etiqReturn)
+
+        self.agregarFinFunc()
+
+        self.enNativas = False
+
+
+
+
+
+
+
