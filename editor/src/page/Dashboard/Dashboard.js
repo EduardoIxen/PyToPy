@@ -29,7 +29,7 @@ export const Dashboard = () => {
 
   const execute = async () => {
     await axios
-      .post(`${url}/compilar`, { input: inputText })
+      .post(`${url}/compilar`, { entrada: inputText })
       .then((res) => {
  
         if (res.data.err !== "[]") {
