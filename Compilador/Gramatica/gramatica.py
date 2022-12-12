@@ -18,6 +18,7 @@ tokens = [
     'PARA',                     #signos
     'PARC',
     'PUNTO',
+    'COMA',
     'MAS',                      #aritmeticas
     'MENOS',
     'MODULO',
@@ -42,6 +43,7 @@ tokens = [
 t_PARA              = r'\('
 t_PARC              = r'\)'
 t_PUNTO             = r'\.'
+t_COMA              = r'\,'
 t_MAS               = r'\+'
 t_MENOS             = r'\-'
 t_MODULO            = r'\%'
@@ -140,4 +142,104 @@ precedence = (
     ('left', 'PUNTO'),
 )
 
-# Creando la gramatica
+# //////////////////////////////////// Creando la gramatica //////////////////////////////////////
+
+from src.Ast.AST import AST
+def p_init(t):
+    'init            : ls_instr'
+    t[0] = AST(t[1],0,0)
+
+def p_init_empty(t):
+    'init            : empty'
+    t[0] = t[1]
+
+def p_empty(t) :
+    'empty :'
+    t[0] = []
+
+def p_ls_instr(t):
+    'ls_instr   : ls_instr instr'
+    t[1].append(t[2])
+    t[0] = t[1]
+
+def p_ls_instr2(t):
+    'ls_instr   : instr'
+    t[0] = [t[1]]
+
+def p_instr_recib(t):
+    '''instr    : funcion_instr
+                | instruccion
+    '''
+    t[0] = t[1]
+
+#///////////////////////////////// FUNCIONES ///////////////////////////////////////////////
+def p_funcion_instr(t):
+    '''funcion_instr : '''
+
+#////////////////////////////////////// PARAMETROS /////////////////////////////////////////
+def p_lista_parametros(t):
+    '''PARAMETROS   : PARAMETROS COMA PARAMETRO'''
+    t[1].append(t[3])
+    t[0] = t[1]
+
+def p_lista_parametro2(t):
+    '''PARAMETROS   : PARAMETRO'''
+    t[0] = [t[1]]
+
+def p_parametro_v(t):
+    '''PARAMETRO    : expresion'''
+    t[0] = t[1]
+
+#///////////////////////////////////////INSTRUCCIONES//////////////////////////////////////////////////
+def p_instrucciones_instrucciones_instruccion(t):
+    'instrucciones    : instrucciones instruccion'
+    if t[2] != "":
+        t[1].append(t[2])
+    t[0] = t[1]
+
+def p_instrucciones_instruccion(t) :
+    'instrucciones    : instruccion'
+    if t[1] == "":
+        t[0] = []
+    else:
+        t[0] = [t[1]]
+
+def p_instruccion(t):
+    '''instruccion      : imprimir_instr'''
+    t[0] = t[1]
+
+#////////////////////////////////// IMPRIMIR //////////////////////////////////////////////
+def p_imprimir(t):
+    'impriimr_instr     : RPRINT PARC expresion PARC'
+
+#//////////////////////////////////// EXPRESIONES /////////////////////////////////////////
+def p_aritmeticas(t):
+    '''expresion     : expresion MAS expresion
+                    | expresion MENOS expresion
+                    | expresion MULTIPLICACION
+                    | expresion DIVISION expresion
+                    | expresion POTENCIA expresion
+                    | expresion MODULO expresion
+                    '''
+
+def p_relacionales(t):
+    '''expresion    : expresion IGUALIGUAL expresion
+                    | expresion MAYORQUE expresion
+                    | expresion MENORQUE expresion
+                    | expresion MAYORIGUAL expresion
+                    | expresion MENORIGUAL expresion
+                    | expresion DIFERENTE expresion'''
+
+def p_logicas(t):
+    '''expresion    : expresion RAND expresion
+                    | expresion ROR expresion'''
+
+def p_expre_not(t):
+    'expresion      : RNOT expresion %prec UNOT'
+
+def p_parentesis(t):
+    'expresion      : PARA expresion PARC'
+    t[0] = t[2]
+
+def p_negacion(t):
+    'expresion      : MENOS expresion %prec UMENOS'
