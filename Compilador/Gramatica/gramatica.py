@@ -13,7 +13,7 @@ reservadas = {
     'not'       :'RNOT',
     'print'     :'RPRINT',
     'False'     :'RFALSE',
-    'True'      :'RTRUE'
+    'True'      :'RTRUE',
 }
 
 tokens = [
@@ -21,6 +21,7 @@ tokens = [
     'PARC',
     'PUNTO',
     'COMA',
+    'LINEANUEVA',
     'MAS',                      #aritmeticas
     'MENOS',
     'MODULO',
@@ -37,7 +38,7 @@ tokens = [
     'DECIMAL',                  #DATOS
     'ENTERO',
     'CADENA',
-    'ID'
+    'ID',
 
 ] + list(reservadas.values())
 
@@ -46,6 +47,7 @@ t_PARA              = r'\('
 t_PARC              = r'\)'
 t_PUNTO             = r'\.'
 t_COMA              = r'\,'
+t_LINEANUEVA        = r'\n'
 t_MAS               = r'\+'
 t_MENOS             = r'\-'
 t_MODULO            = r'\%'
@@ -106,13 +108,14 @@ def t_newline(t):
     t.lexer.lineno += t.value.count("\n")
 
 def t_error(t):
-    print(f"Caracter invalido {t.value[0]} Fila {t.lexer.lineno} Columna {find_column(input, t)} ")
+    print(f"Caracter invalido {t.value[0]} Fila {t.lexer.lineno} Columna {find_column(t)} ")
 
 # Compute column.
 #     input is the input text string
 #     token is a token instance
-def find_column(inp, token):
-    line_start = inp.rfind('\n', 0, token.lexpos) + 1
+def find_column(token):
+    global input
+    line_start = input.rfind('\n', 0, token.lexpos) + 1
     return (token.lexpos - line_start) + 1
 
 
@@ -149,6 +152,7 @@ precedence = (
 from src.Ast.AST import AST
 from src.Expresion.Primitivo import Primitivo
 from src.Ast.Tipo import Tipo
+from src.Instruccion.Print import Print
 def p_init(t):
     'init            : ls_instr'
     t[0] = AST(t[1],0,0)
@@ -171,8 +175,7 @@ def p_ls_instr2(t):
     t[0] = [t[1]]
 
 def p_instr_recib(t):
-    '''instr    : funcion_instr
-                | instruccion
+    '''instr    : instruccion
     '''
     t[0] = t[1]
 
@@ -214,7 +217,8 @@ def p_instruccion(t):
 
 #////////////////////////////////// IMPRIMIR //////////////////////////////////////////////
 def p_imprimir(t):
-    'impriimr_instr     : RPRINT PARC expresion PARC'
+    'imprimir_instr     : RPRINT PARA PARAMETROS PARC'
+    t[0] = Print(t[3], t.lineno(1), find_column(t.slice[1]))
 
 #////////////////////////////// EXPRESIONES ARITMETICAS ///////////////////////////////////
 def p_aritmeticas(t):
@@ -279,3 +283,19 @@ def p_expresion_bool(t):
         t[0] = Primitivo(False, Tipo.BOOLEAN, t.lineno(1), find_column(t.slice[1]))
     else:
         t[0] = t[0] = Primitivo(None, Tipo.NULL, t.lineno(1), find_column(t.slice[1]))
+
+#//////////////////////////////////////// ERRORES /////////////////////////////////////////////
+def p_error(t):
+    print("Error sintactico en '%s'" % t.value)
+
+parser = yacc.yacc()
+input = ""
+
+def parse(entrada):
+    global input
+    global lexer
+    global parser
+    input = entrada
+    lexer = lex.lex()
+    parser = yacc.yacc()
+    return parser.parse(entrada)

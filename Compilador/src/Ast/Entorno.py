@@ -1,6 +1,7 @@
-from Tipo import Tipo
-from SimboloFunc import SimboloFunc
-from Simbolo import Simbolo
+from src.Ast.Tipo import Tipo
+from src.Ast.SimboloFunc import SimboloFunc
+from src.Ast.Simbolo import Simbolo
+
 
 class Entorno:
     def __init__(self, anterior):
@@ -17,7 +18,7 @@ class Entorno:
         self.etiquetaReturn = ''
         self.funcionActual = None
 
-        if anterior is None:
+        if anterior is not None:
             self.tamanio = self.anterior.tamanio
             self.etiquetaBreak = self.anterior.etiquetaBreak
             self.etiquetaContinue = self.anterior.etiquetaContinue

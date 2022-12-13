@@ -1,5 +1,5 @@
 from src.Abstract.Instruccion import Instruccion
-from Tipo import Tipo
+from src.Ast.Tipo import Tipo
 
 
 class AST(Instruccion):
@@ -8,12 +8,12 @@ class AST(Instruccion):
         self.instrucciones = instrucciones
         self.entornoGlobal = None
 
-    def compilador(self, entorno):
+    def compilar(self, entorno):
         for instr in self.instrucciones:
             instr.compilar(entorno)
         self.entornoGlobal = entorno
 
-    def getSimbolo(self):
+    def getSimbolos(self):
         simbolos = {}
         for id in self.entornoGlobal.getVariables():
             valor = self.entornoGlobal.getVariables()[id]
@@ -34,24 +34,24 @@ class AST(Instruccion):
 
         return simbolos
 
-    def getTipo(self, value):
-        if (value.getTipo() == Tipo.INT):
+    def getTipo(self, valor):
+        if (valor.getTipo() == Tipo.INT):
             return "int"
-        elif (value.getTipo() == Tipo.FLOAT):
+        elif (valor.getTipo() == Tipo.FLOAT):
             return "float"
-        elif (value.getTipo() == Tipo.STRING):
+        elif (valor.getTipo() == Tipo.STRING):
             return "string"
-        elif (value.getTipo() == Tipo.BOOLEAN):
+        elif (valor.getTipo() == Tipo.BOOLEAN):
             return "bool"
-        elif (value.getTipo() == Tipo.CHAR):
+        elif (valor.getTipo() == Tipo.CHAR):
             return "char"
-        elif (value.getTipo() == Tipo.LIST):
+        elif (valor.getTipo() == Tipo.LIST):
             return "list"
-        elif (value.getTipo() == Tipo.ANY):
+        elif (valor.getTipo() == Tipo.ANY):
             return "Any"
-        elif (value.getTipo() == Tipo.FUNCION):
+        elif (valor.getTipo() == Tipo.FUNCION):
             return "funcion"
-        elif (value.getTipo() == Tipo.STRUCT):
+        elif (valor.getTipo() == Tipo.STRUCT):
             return "struct"
-        elif (value.getTipo() == Tipo.NULL):
+        elif (valor.getTipo() == Tipo.NULL):
             return "None"

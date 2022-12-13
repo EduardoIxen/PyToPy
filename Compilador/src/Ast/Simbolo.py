@@ -8,8 +8,8 @@ class Simbolo:
 
         self.tipoAux = ''
         self.esTemporal = None
-        self.etiqTrue = ''
-        self.etiqFalse = ''
+        self.etiquetaTrue = ''
+        self.etiquetaFalse = ''
         self.atributos = []
         self.valores = []
         self.linea = 0

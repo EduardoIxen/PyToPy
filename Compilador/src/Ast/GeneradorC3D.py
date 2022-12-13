@@ -1,4 +1,3 @@
-from Tipo import Tipo
 
 class GeneradorC3D:
     generadorC3D = None
@@ -23,7 +22,7 @@ class GeneradorC3D:
     def getInstance(self):
         if GeneradorC3D.generadorC3D == None:
             GeneradorC3D.generadorC3D = GeneradorC3D()
-            return GeneradorC3D.generadorC3D
+        return GeneradorC3D.generadorC3D
 
     def resetGenerador(self):
         self.contTemp = 0
@@ -40,21 +39,9 @@ class GeneradorC3D:
 
     def getEncabezado(self):
         if self.math:
-            encab = """
-            /*---------------ENCABEZADO---------------*/
-            import(
-                "fmt"
-                "math"
-            );
-            """
+            encab = """/*---------------ENCABEZADO---------------*/\npackage main;\n\nimport (\n\t"fmt"\n\t"math"\n);\n\n"""
         else:
-            encab = """
-            /*---------------ENCABEZADO---------------*/
-            import(
-                "fmt"
-            );
-            
-            """
+            encab = """/*---------------ENCABEZADO---------------*/\npackage main;\n\nimport (\n\t"fmt"\n);\n\n"""
 
         if len(self.temporales) > 0:
             encab += 'var '
@@ -63,9 +50,7 @@ class GeneradorC3D:
                 if i != (len(self.temporales) - 1):
                     encab += ", "
             encab += " float64;\n"
-        encab += "var P, H float64;" \
-                 "var stack [20180052]float64;" \
-                 "var heap [20180052]float64;\n"
+        encab += "var P, H float64;\nvar stack [20180052]float64;\nvar heap [20180052]float64;\n"
         return encab
 
     def obtenerC3D(self):
@@ -119,13 +104,13 @@ class GeneradorC3D:
             self.insertarCodigo(f'fmt.Printf("%{tipo}", int({valor}));\n')
 
     def imprimirTrue(self):
-        self.agregarPrint("c", 116)
+        self.agregarPrint("c", 84)
         self.agregarPrint("c", 114)
         self.agregarPrint("c", 117)
         self.agregarPrint("c", 101)
 
     def imprimirFalse(self):
-        self.agregarPrint("c", 102)
+        self.agregarPrint("c", 70)
         self.agregarPrint("c", 97)
         self.agregarPrint("c", 108)
         self.agregarPrint("c", 115)

@@ -1,4 +1,4 @@
-from Tipo import Tipo
+from src.Ast.Tipo import Tipo
 
 class TablaTipo:
     def __init__(self):
