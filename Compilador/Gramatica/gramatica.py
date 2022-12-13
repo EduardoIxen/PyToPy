@@ -11,7 +11,9 @@ reservadas = {
     'or'        :'ROR',
     'and'       :'RAND',
     'not'       :'RNOT',
-    'print'     :'RPRINT'
+    'print'     :'RPRINT',
+    'False'     :'RFALSE',
+    'True'      :'RTRUE'
 }
 
 tokens = [
@@ -145,6 +147,8 @@ precedence = (
 # //////////////////////////////////// Creando la gramatica //////////////////////////////////////
 
 from src.Ast.AST import AST
+from src.Expresion.Primitivo import Primitivo
+from src.Ast.Tipo import Tipo
 def p_init(t):
     'init            : ls_instr'
     t[0] = AST(t[1],0,0)
@@ -212,7 +216,7 @@ def p_instruccion(t):
 def p_imprimir(t):
     'impriimr_instr     : RPRINT PARC expresion PARC'
 
-#//////////////////////////////////// EXPRESIONES /////////////////////////////////////////
+#////////////////////////////// EXPRESIONES ARITMETICAS ///////////////////////////////////
 def p_aritmeticas(t):
     '''expresion     : expresion MAS expresion
                     | expresion MENOS expresion
@@ -222,6 +226,7 @@ def p_aritmeticas(t):
                     | expresion MODULO expresion
                     '''
 
+#////////////////////////////// EXPRESIONES RELACIONALES ///////////////////////////////////
 def p_relacionales(t):
     '''expresion    : expresion IGUALIGUAL expresion
                     | expresion MAYORQUE expresion
@@ -230,6 +235,8 @@ def p_relacionales(t):
                     | expresion MENORIGUAL expresion
                     | expresion DIFERENTE expresion'''
 
+
+#////////////////////////////// EXPRESIONES LOGICAS ///////////////////////////////////
 def p_logicas(t):
     '''expresion    : expresion RAND expresion
                     | expresion ROR expresion'''
@@ -237,9 +244,38 @@ def p_logicas(t):
 def p_expre_not(t):
     'expresion      : RNOT expresion %prec UNOT'
 
+def p_negacion(t):
+    'expresion      : MENOS expresion %prec UMENOS'
+
+#////////////////////////////// EXPRESION DE AGRUPACION /////////////////////////////
 def p_parentesis(t):
     'expresion      : PARA expresion PARC'
     t[0] = t[2]
 
-def p_negacion(t):
-    'expresion      : MENOS expresion %prec UMENOS'
+#/////////////////////////////// EXPRESIONES PRIMITIVOS ////////////////////////////
+def p_expresion_entero(t):
+    'expresion      : ENTERO'
+    t[0] = Primitivo(t[1], Tipo.INT, t.lineno(1), find_column(t.slice[1]))
+
+def p_expresion_decimal(t):
+    'expresion      : DECIMAL'
+    t[0] = Primitivo(t[1], Tipo.FLOAT, t.lineno(1), find_column(t.slice[1]))
+
+def p_expresion_cadena(t):
+    'expresion      : CADENA'
+    t[0] = Primitivo(t[1], Tipo.STRING, t.lineno(1), find_column(t.slice[1]))
+
+def p_expresion_id(t):
+    'expresion      : ID'
+    t[0] = Primitivo(t[1], Tipo.IDENTIFICADOR, t.lineno(1), find_column(t.slice[1]))
+
+def p_expresion_bool(t):
+    '''expresion    : RTRUE
+                    | RFALSE
+                    | RNULO'''
+    if str(t[1]) == "True":
+        t[0] = Primitivo(True, Tipo.BOOLEAN, t.lineno(1), find_column(t.slice[1]))
+    elif str(t[1]) == "False":
+        t[0] = Primitivo(False, Tipo.BOOLEAN, t.lineno(1), find_column(t.slice[1]))
+    else:
+        t[0] = t[0] = Primitivo(None, Tipo.NULL, t.lineno(1), find_column(t.slice[1]))
