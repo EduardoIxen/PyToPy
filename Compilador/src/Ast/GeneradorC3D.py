@@ -15,6 +15,8 @@ class GeneradorC3D:
 
         #agregar funciones nativas
         self.esPrint = False
+        self.repetirString = False
+        self.concatenarCadena = False
         self.math = False
         self.excepciones = []
         self.almacenamientoTemp = {}
@@ -318,8 +320,69 @@ class GeneradorC3D:
         self.enNativas = False
 
 
+    def nativaRepetirStr(self):
+        if self.repetirString:
+            return
+        self.repetirString = True
+        self.enNativas = True
+        self.agregarInicioFunc("repetirString")
+        tempNStr = self.agregarTemp()
+        self.liberarTemp(tempNStr)
+
+        tempContador = self.agregarTemp()
+        self.liberarTemp(tempContador)
+
+        tmpR = self.agregarTemp()
+        self.liberarTemp(tmpR)
+        tmpP = self.agregarTemp()
+        self.liberarTemp(tmpP)
+        tmpP2 = self.agregarTemp()
+        self.liberarTemp(tmpP2)
+        tmpH = self.agregarTemp()
+        self.liberarTemp(tmpH)
+
+        etiquSalida = self.nuevaEtiqueta()
+        etiquInicio = self.nuevaEtiqueta()
+
+        self.agregarExpresion(tempNStr, 'H', '', '')  #save start string
+        self.agregarExpresion(tempContador, '1', '', '')
+
+        self.agregarExpresion(tmpP, 'P', '1', '+')
+        self.getStack(tmpP, tmpP)
+
+        self.agregarExpresion(tmpP2, 'P', '2', '+')
+        self.getStack(tmpP2, tmpP2)
+
+        self.agregarExpresion(tmpR, tmpP, '','')       #iniciando el recorrido
+        self.agregarEtiqueta(etiquInicio)
+
+        self.getHeap(tmpH, tmpP)                        #sacando valores del heap
+
+        etiqTrue = self.nuevaEtiqueta()
+        self.agregarIf(tmpH, '-1', '==', etiqTrue)
+
+        self.setHeap('H', tmpH)
+        self.agregarExpresion(tmpP, tmpP, '1', '+')
+        self.siguienteHeap()
+
+        self.agregarGoto(etiquInicio)               #volviendo al inicio
+        self.agregarEtiqueta(etiqTrue)              #termina el string
+        self.agregarIf(tmpP2, tempContador, '==', etiquSalida)
+        self.agregarExpresion(tempContador, tempContador, '1', '+')
+        self.agregarExpresion(tmpP, tmpR, '','')    #devolver el puntero para realizar el recorrido nuevamente
+        self.agregarGoto(etiquInicio)
+
+        self.agregarEtiqueta(etiquSalida)
+        self.setHeap('H', '-1')
+        self.siguienteHeap()
+
+        self.setStack('P', tempNStr)
+        self.agregarFinFunc()
+        self.enNativas = False
 
 
+    def nativaConcatenar(self):
+        pass
 
 
 

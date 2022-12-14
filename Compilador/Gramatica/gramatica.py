@@ -17,11 +17,11 @@ reservadas = {
 }
 
 tokens = [
+    'LINEANUEVA',
     'PARA',                     #signos
     'PARC',
     'PUNTO',
     'COMA',
-    'LINEANUEVA',
     'MAS',                      #aritmeticas
     'MENOS',
     'MODULO',
@@ -43,11 +43,11 @@ tokens = [
 ] + list(reservadas.values())
 
 #tokens
+t_LINEANUEVA        = r'\n'
 t_PARA              = r'\('
 t_PARC              = r'\)'
 t_PUNTO             = r'\.'
 t_COMA              = r'\,'
-t_LINEANUEVA        = r'\n'
 t_MAS               = r'\+'
 t_MENOS             = r'\-'
 t_MODULO            = r'\%'
@@ -151,8 +151,9 @@ precedence = (
 
 from src.Ast.AST import AST
 from src.Expresion.Primitivo import Primitivo
-from src.Ast.Tipo import Tipo
+from src.Ast.Tipo import Tipo, TipoOperacion
 from src.Instruccion.Print import Print
+from src.Expresion.Aritmetica import Aritmetica
 def p_init(t):
     'init            : ls_instr'
     t[0] = AST(t[1],0,0)
@@ -210,9 +211,11 @@ def p_instrucciones_instruccion(t) :
         t[0] = []
     else:
         t[0] = [t[1]]
+    print(t[1])
 
 def p_instruccion(t):
-    '''instruccion      : imprimir_instr'''
+    '''instruccion      : imprimir_instr
+    '''
     t[0] = t[1]
 
 #////////////////////////////////// IMPRIMIR //////////////////////////////////////////////
@@ -224,11 +227,13 @@ def p_imprimir(t):
 def p_aritmeticas(t):
     '''expresion     : expresion MAS expresion
                     | expresion MENOS expresion
-                    | expresion MULTIPLICACION
+                    | expresion MULTIPLICACION expresion
                     | expresion DIVISION expresion
                     | expresion POTENCIA expresion
                     | expresion MODULO expresion
                     '''
+    if t[2] == '*':
+        t[0] = Aritmetica(t[1], t[3], TipoOperacion.MULTIPLICACION, t.lineno(2), find_column(t.slice[2]))
 
 #////////////////////////////// EXPRESIONES RELACIONALES ///////////////////////////////////
 def p_relacionales(t):

@@ -31,7 +31,7 @@ Rule 13    instruccion -> imprimir_instr
 Rule 14    imprimir_instr -> RPRINT PARA PARAMETROS PARC
 Rule 15    expresion -> expresion MAS expresion
 Rule 16    expresion -> expresion MENOS expresion
-Rule 17    expresion -> expresion MULTIPLICACION
+Rule 17    expresion -> expresion MULTIPLICACION expresion
 Rule 18    expresion -> expresion DIVISION expresion
 Rule 19    expresion -> expresion POTENCIA expresion
 Rule 20    expresion -> expresion MODULO expresion
@@ -98,7 +98,7 @@ Nonterminals, with rules where they appear
 PARAMETRO            : 8 9
 PARAMETROS           : 8 14
 empty                : 2
-expresion            : 10 15 15 16 16 17 18 18 19 19 20 20 21 21 22 22 23 23 24 24 25 25 26 26 27 27 28 28 29 30 31
+expresion            : 10 15 15 16 16 17 17 18 18 19 19 20 20 21 21 22 22 23 23 24 24 25 25 26 26 27 27 28 28 29 30 31
 funcion_instr        : 
 imprimir_instr       : 13
 init                 : 0
@@ -206,7 +206,7 @@ state 9
     (10) PARAMETRO -> . expresion
     (15) expresion -> . expresion MAS expresion
     (16) expresion -> . expresion MENOS expresion
-    (17) expresion -> . expresion MULTIPLICACION
+    (17) expresion -> . expresion MULTIPLICACION expresion
     (18) expresion -> . expresion DIVISION expresion
     (19) expresion -> . expresion POTENCIA expresion
     (20) expresion -> . expresion MODULO expresion
@@ -249,7 +249,7 @@ state 10
     (31) expresion -> PARA . expresion PARC
     (15) expresion -> . expresion MAS expresion
     (16) expresion -> . expresion MENOS expresion
-    (17) expresion -> . expresion MULTIPLICACION
+    (17) expresion -> . expresion MULTIPLICACION expresion
     (18) expresion -> . expresion DIVISION expresion
     (19) expresion -> . expresion POTENCIA expresion
     (20) expresion -> . expresion MODULO expresion
@@ -307,7 +307,7 @@ state 13
     (10) PARAMETRO -> expresion .
     (15) expresion -> expresion . MAS expresion
     (16) expresion -> expresion . MENOS expresion
-    (17) expresion -> expresion . MULTIPLICACION
+    (17) expresion -> expresion . MULTIPLICACION expresion
     (18) expresion -> expresion . DIVISION expresion
     (19) expresion -> expresion . POTENCIA expresion
     (20) expresion -> expresion . MODULO expresion
@@ -343,7 +343,7 @@ state 14
     (30) expresion -> MENOS . expresion
     (15) expresion -> . expresion MAS expresion
     (16) expresion -> . expresion MENOS expresion
-    (17) expresion -> . expresion MULTIPLICACION
+    (17) expresion -> . expresion MULTIPLICACION expresion
     (18) expresion -> . expresion DIVISION expresion
     (19) expresion -> . expresion POTENCIA expresion
     (20) expresion -> . expresion MODULO expresion
@@ -384,7 +384,7 @@ state 15
     (29) expresion -> RNOT . expresion
     (15) expresion -> . expresion MAS expresion
     (16) expresion -> . expresion MENOS expresion
-    (17) expresion -> . expresion MULTIPLICACION
+    (17) expresion -> . expresion MULTIPLICACION expresion
     (18) expresion -> . expresion DIVISION expresion
     (19) expresion -> . expresion POTENCIA expresion
     (20) expresion -> . expresion MODULO expresion
@@ -579,7 +579,7 @@ state 23
     (31) expresion -> PARA expresion . PARC
     (15) expresion -> expresion . MAS expresion
     (16) expresion -> expresion . MENOS expresion
-    (17) expresion -> expresion . MULTIPLICACION
+    (17) expresion -> expresion . MULTIPLICACION expresion
     (18) expresion -> expresion . DIVISION expresion
     (19) expresion -> expresion . POTENCIA expresion
     (20) expresion -> expresion . MODULO expresion
@@ -623,7 +623,7 @@ state 25
     (10) PARAMETRO -> . expresion
     (15) expresion -> . expresion MAS expresion
     (16) expresion -> . expresion MENOS expresion
-    (17) expresion -> . expresion MULTIPLICACION
+    (17) expresion -> . expresion MULTIPLICACION expresion
     (18) expresion -> . expresion DIVISION expresion
     (19) expresion -> . expresion POTENCIA expresion
     (20) expresion -> . expresion MODULO expresion
@@ -665,7 +665,7 @@ state 26
     (15) expresion -> expresion MAS . expresion
     (15) expresion -> . expresion MAS expresion
     (16) expresion -> . expresion MENOS expresion
-    (17) expresion -> . expresion MULTIPLICACION
+    (17) expresion -> . expresion MULTIPLICACION expresion
     (18) expresion -> . expresion DIVISION expresion
     (19) expresion -> . expresion POTENCIA expresion
     (20) expresion -> . expresion MODULO expresion
@@ -706,7 +706,7 @@ state 27
     (16) expresion -> expresion MENOS . expresion
     (15) expresion -> . expresion MAS expresion
     (16) expresion -> . expresion MENOS expresion
-    (17) expresion -> . expresion MULTIPLICACION
+    (17) expresion -> . expresion MULTIPLICACION expresion
     (18) expresion -> . expresion DIVISION expresion
     (19) expresion -> . expresion POTENCIA expresion
     (20) expresion -> . expresion MODULO expresion
@@ -744,32 +744,10 @@ state 27
 
 state 28
 
-    (17) expresion -> expresion MULTIPLICACION .
-
-    MAS             reduce using rule 17 (expresion -> expresion MULTIPLICACION .)
-    MENOS           reduce using rule 17 (expresion -> expresion MULTIPLICACION .)
-    MULTIPLICACION  reduce using rule 17 (expresion -> expresion MULTIPLICACION .)
-    DIVISION        reduce using rule 17 (expresion -> expresion MULTIPLICACION .)
-    POTENCIA        reduce using rule 17 (expresion -> expresion MULTIPLICACION .)
-    MODULO          reduce using rule 17 (expresion -> expresion MULTIPLICACION .)
-    IGUALIGUAL      reduce using rule 17 (expresion -> expresion MULTIPLICACION .)
-    MAYORQUE        reduce using rule 17 (expresion -> expresion MULTIPLICACION .)
-    MENORQUE        reduce using rule 17 (expresion -> expresion MULTIPLICACION .)
-    MAYORIGUAL      reduce using rule 17 (expresion -> expresion MULTIPLICACION .)
-    MENORIGUAL      reduce using rule 17 (expresion -> expresion MULTIPLICACION .)
-    DIFERENTE       reduce using rule 17 (expresion -> expresion MULTIPLICACION .)
-    RAND            reduce using rule 17 (expresion -> expresion MULTIPLICACION .)
-    ROR             reduce using rule 17 (expresion -> expresion MULTIPLICACION .)
-    PARC            reduce using rule 17 (expresion -> expresion MULTIPLICACION .)
-    COMA            reduce using rule 17 (expresion -> expresion MULTIPLICACION .)
-
-
-state 29
-
-    (18) expresion -> expresion DIVISION . expresion
+    (17) expresion -> expresion MULTIPLICACION . expresion
     (15) expresion -> . expresion MAS expresion
     (16) expresion -> . expresion MENOS expresion
-    (17) expresion -> . expresion MULTIPLICACION
+    (17) expresion -> . expresion MULTIPLICACION expresion
     (18) expresion -> . expresion DIVISION expresion
     (19) expresion -> . expresion POTENCIA expresion
     (20) expresion -> . expresion MODULO expresion
@@ -805,12 +783,12 @@ state 29
 
     expresion                      shift and go to state 46
 
-state 30
+state 29
 
-    (19) expresion -> expresion POTENCIA . expresion
+    (18) expresion -> expresion DIVISION . expresion
     (15) expresion -> . expresion MAS expresion
     (16) expresion -> . expresion MENOS expresion
-    (17) expresion -> . expresion MULTIPLICACION
+    (17) expresion -> . expresion MULTIPLICACION expresion
     (18) expresion -> . expresion DIVISION expresion
     (19) expresion -> . expresion POTENCIA expresion
     (20) expresion -> . expresion MODULO expresion
@@ -846,12 +824,12 @@ state 30
 
     expresion                      shift and go to state 47
 
-state 31
+state 30
 
-    (20) expresion -> expresion MODULO . expresion
+    (19) expresion -> expresion POTENCIA . expresion
     (15) expresion -> . expresion MAS expresion
     (16) expresion -> . expresion MENOS expresion
-    (17) expresion -> . expresion MULTIPLICACION
+    (17) expresion -> . expresion MULTIPLICACION expresion
     (18) expresion -> . expresion DIVISION expresion
     (19) expresion -> . expresion POTENCIA expresion
     (20) expresion -> . expresion MODULO expresion
@@ -887,12 +865,12 @@ state 31
 
     expresion                      shift and go to state 48
 
-state 32
+state 31
 
-    (21) expresion -> expresion IGUALIGUAL . expresion
+    (20) expresion -> expresion MODULO . expresion
     (15) expresion -> . expresion MAS expresion
     (16) expresion -> . expresion MENOS expresion
-    (17) expresion -> . expresion MULTIPLICACION
+    (17) expresion -> . expresion MULTIPLICACION expresion
     (18) expresion -> . expresion DIVISION expresion
     (19) expresion -> . expresion POTENCIA expresion
     (20) expresion -> . expresion MODULO expresion
@@ -928,12 +906,12 @@ state 32
 
     expresion                      shift and go to state 49
 
-state 33
+state 32
 
-    (22) expresion -> expresion MAYORQUE . expresion
+    (21) expresion -> expresion IGUALIGUAL . expresion
     (15) expresion -> . expresion MAS expresion
     (16) expresion -> . expresion MENOS expresion
-    (17) expresion -> . expresion MULTIPLICACION
+    (17) expresion -> . expresion MULTIPLICACION expresion
     (18) expresion -> . expresion DIVISION expresion
     (19) expresion -> . expresion POTENCIA expresion
     (20) expresion -> . expresion MODULO expresion
@@ -969,12 +947,12 @@ state 33
 
     expresion                      shift and go to state 50
 
-state 34
+state 33
 
-    (23) expresion -> expresion MENORQUE . expresion
+    (22) expresion -> expresion MAYORQUE . expresion
     (15) expresion -> . expresion MAS expresion
     (16) expresion -> . expresion MENOS expresion
-    (17) expresion -> . expresion MULTIPLICACION
+    (17) expresion -> . expresion MULTIPLICACION expresion
     (18) expresion -> . expresion DIVISION expresion
     (19) expresion -> . expresion POTENCIA expresion
     (20) expresion -> . expresion MODULO expresion
@@ -1010,12 +988,12 @@ state 34
 
     expresion                      shift and go to state 51
 
-state 35
+state 34
 
-    (24) expresion -> expresion MAYORIGUAL . expresion
+    (23) expresion -> expresion MENORQUE . expresion
     (15) expresion -> . expresion MAS expresion
     (16) expresion -> . expresion MENOS expresion
-    (17) expresion -> . expresion MULTIPLICACION
+    (17) expresion -> . expresion MULTIPLICACION expresion
     (18) expresion -> . expresion DIVISION expresion
     (19) expresion -> . expresion POTENCIA expresion
     (20) expresion -> . expresion MODULO expresion
@@ -1051,12 +1029,12 @@ state 35
 
     expresion                      shift and go to state 52
 
-state 36
+state 35
 
-    (25) expresion -> expresion MENORIGUAL . expresion
+    (24) expresion -> expresion MAYORIGUAL . expresion
     (15) expresion -> . expresion MAS expresion
     (16) expresion -> . expresion MENOS expresion
-    (17) expresion -> . expresion MULTIPLICACION
+    (17) expresion -> . expresion MULTIPLICACION expresion
     (18) expresion -> . expresion DIVISION expresion
     (19) expresion -> . expresion POTENCIA expresion
     (20) expresion -> . expresion MODULO expresion
@@ -1092,12 +1070,12 @@ state 36
 
     expresion                      shift and go to state 53
 
-state 37
+state 36
 
-    (26) expresion -> expresion DIFERENTE . expresion
+    (25) expresion -> expresion MENORIGUAL . expresion
     (15) expresion -> . expresion MAS expresion
     (16) expresion -> . expresion MENOS expresion
-    (17) expresion -> . expresion MULTIPLICACION
+    (17) expresion -> . expresion MULTIPLICACION expresion
     (18) expresion -> . expresion DIVISION expresion
     (19) expresion -> . expresion POTENCIA expresion
     (20) expresion -> . expresion MODULO expresion
@@ -1133,12 +1111,12 @@ state 37
 
     expresion                      shift and go to state 54
 
-state 38
+state 37
 
-    (27) expresion -> expresion RAND . expresion
+    (26) expresion -> expresion DIFERENTE . expresion
     (15) expresion -> . expresion MAS expresion
     (16) expresion -> . expresion MENOS expresion
-    (17) expresion -> . expresion MULTIPLICACION
+    (17) expresion -> . expresion MULTIPLICACION expresion
     (18) expresion -> . expresion DIVISION expresion
     (19) expresion -> . expresion POTENCIA expresion
     (20) expresion -> . expresion MODULO expresion
@@ -1174,12 +1152,12 @@ state 38
 
     expresion                      shift and go to state 55
 
-state 39
+state 38
 
-    (28) expresion -> expresion ROR . expresion
+    (27) expresion -> expresion RAND . expresion
     (15) expresion -> . expresion MAS expresion
     (16) expresion -> . expresion MENOS expresion
-    (17) expresion -> . expresion MULTIPLICACION
+    (17) expresion -> . expresion MULTIPLICACION expresion
     (18) expresion -> . expresion DIVISION expresion
     (19) expresion -> . expresion POTENCIA expresion
     (20) expresion -> . expresion MODULO expresion
@@ -1215,12 +1193,53 @@ state 39
 
     expresion                      shift and go to state 56
 
+state 39
+
+    (28) expresion -> expresion ROR . expresion
+    (15) expresion -> . expresion MAS expresion
+    (16) expresion -> . expresion MENOS expresion
+    (17) expresion -> . expresion MULTIPLICACION expresion
+    (18) expresion -> . expresion DIVISION expresion
+    (19) expresion -> . expresion POTENCIA expresion
+    (20) expresion -> . expresion MODULO expresion
+    (21) expresion -> . expresion IGUALIGUAL expresion
+    (22) expresion -> . expresion MAYORQUE expresion
+    (23) expresion -> . expresion MENORQUE expresion
+    (24) expresion -> . expresion MAYORIGUAL expresion
+    (25) expresion -> . expresion MENORIGUAL expresion
+    (26) expresion -> . expresion DIFERENTE expresion
+    (27) expresion -> . expresion RAND expresion
+    (28) expresion -> . expresion ROR expresion
+    (29) expresion -> . RNOT expresion
+    (30) expresion -> . MENOS expresion
+    (31) expresion -> . PARA expresion PARC
+    (32) expresion -> . ENTERO
+    (33) expresion -> . DECIMAL
+    (34) expresion -> . CADENA
+    (35) expresion -> . ID
+    (36) expresion -> . RTRUE
+    (37) expresion -> . RFALSE
+    (38) expresion -> . RNULO
+
+    RNOT            shift and go to state 15
+    MENOS           shift and go to state 14
+    PARA            shift and go to state 10
+    ENTERO          shift and go to state 16
+    DECIMAL         shift and go to state 17
+    CADENA          shift and go to state 18
+    ID              shift and go to state 19
+    RTRUE           shift and go to state 20
+    RFALSE          shift and go to state 21
+    RNULO           shift and go to state 22
+
+    expresion                      shift and go to state 57
+
 state 40
 
     (30) expresion -> MENOS expresion .
     (15) expresion -> expresion . MAS expresion
     (16) expresion -> expresion . MENOS expresion
-    (17) expresion -> expresion . MULTIPLICACION
+    (17) expresion -> expresion . MULTIPLICACION expresion
     (18) expresion -> expresion . DIVISION expresion
     (19) expresion -> expresion . POTENCIA expresion
     (20) expresion -> expresion . MODULO expresion
@@ -1271,7 +1290,7 @@ state 41
     (29) expresion -> RNOT expresion .
     (15) expresion -> expresion . MAS expresion
     (16) expresion -> expresion . MENOS expresion
-    (17) expresion -> expresion . MULTIPLICACION
+    (17) expresion -> expresion . MULTIPLICACION expresion
     (18) expresion -> expresion . DIVISION expresion
     (19) expresion -> expresion . POTENCIA expresion
     (20) expresion -> expresion . MODULO expresion
@@ -1352,7 +1371,7 @@ state 44
     (15) expresion -> expresion MAS expresion .
     (15) expresion -> expresion . MAS expresion
     (16) expresion -> expresion . MENOS expresion
-    (17) expresion -> expresion . MULTIPLICACION
+    (17) expresion -> expresion . MULTIPLICACION expresion
     (18) expresion -> expresion . DIVISION expresion
     (19) expresion -> expresion . POTENCIA expresion
     (20) expresion -> expresion . MODULO expresion
@@ -1403,7 +1422,7 @@ state 45
     (16) expresion -> expresion MENOS expresion .
     (15) expresion -> expresion . MAS expresion
     (16) expresion -> expresion . MENOS expresion
-    (17) expresion -> expresion . MULTIPLICACION
+    (17) expresion -> expresion . MULTIPLICACION expresion
     (18) expresion -> expresion . DIVISION expresion
     (19) expresion -> expresion . POTENCIA expresion
     (20) expresion -> expresion . MODULO expresion
@@ -1451,10 +1470,61 @@ state 45
 
 state 46
 
+    (17) expresion -> expresion MULTIPLICACION expresion .
+    (15) expresion -> expresion . MAS expresion
+    (16) expresion -> expresion . MENOS expresion
+    (17) expresion -> expresion . MULTIPLICACION expresion
+    (18) expresion -> expresion . DIVISION expresion
+    (19) expresion -> expresion . POTENCIA expresion
+    (20) expresion -> expresion . MODULO expresion
+    (21) expresion -> expresion . IGUALIGUAL expresion
+    (22) expresion -> expresion . MAYORQUE expresion
+    (23) expresion -> expresion . MENORQUE expresion
+    (24) expresion -> expresion . MAYORIGUAL expresion
+    (25) expresion -> expresion . MENORIGUAL expresion
+    (26) expresion -> expresion . DIFERENTE expresion
+    (27) expresion -> expresion . RAND expresion
+    (28) expresion -> expresion . ROR expresion
+
+    MAS             reduce using rule 17 (expresion -> expresion MULTIPLICACION expresion .)
+    MENOS           reduce using rule 17 (expresion -> expresion MULTIPLICACION expresion .)
+    MULTIPLICACION  reduce using rule 17 (expresion -> expresion MULTIPLICACION expresion .)
+    DIVISION        reduce using rule 17 (expresion -> expresion MULTIPLICACION expresion .)
+    MODULO          reduce using rule 17 (expresion -> expresion MULTIPLICACION expresion .)
+    IGUALIGUAL      reduce using rule 17 (expresion -> expresion MULTIPLICACION expresion .)
+    MAYORQUE        reduce using rule 17 (expresion -> expresion MULTIPLICACION expresion .)
+    MENORQUE        reduce using rule 17 (expresion -> expresion MULTIPLICACION expresion .)
+    MAYORIGUAL      reduce using rule 17 (expresion -> expresion MULTIPLICACION expresion .)
+    MENORIGUAL      reduce using rule 17 (expresion -> expresion MULTIPLICACION expresion .)
+    DIFERENTE       reduce using rule 17 (expresion -> expresion MULTIPLICACION expresion .)
+    RAND            reduce using rule 17 (expresion -> expresion MULTIPLICACION expresion .)
+    ROR             reduce using rule 17 (expresion -> expresion MULTIPLICACION expresion .)
+    PARC            reduce using rule 17 (expresion -> expresion MULTIPLICACION expresion .)
+    COMA            reduce using rule 17 (expresion -> expresion MULTIPLICACION expresion .)
+    POTENCIA        shift and go to state 30
+
+  ! POTENCIA        [ reduce using rule 17 (expresion -> expresion MULTIPLICACION expresion .) ]
+  ! MAS             [ shift and go to state 26 ]
+  ! MENOS           [ shift and go to state 27 ]
+  ! MULTIPLICACION  [ shift and go to state 28 ]
+  ! DIVISION        [ shift and go to state 29 ]
+  ! MODULO          [ shift and go to state 31 ]
+  ! IGUALIGUAL      [ shift and go to state 32 ]
+  ! MAYORQUE        [ shift and go to state 33 ]
+  ! MENORQUE        [ shift and go to state 34 ]
+  ! MAYORIGUAL      [ shift and go to state 35 ]
+  ! MENORIGUAL      [ shift and go to state 36 ]
+  ! DIFERENTE       [ shift and go to state 37 ]
+  ! RAND            [ shift and go to state 38 ]
+  ! ROR             [ shift and go to state 39 ]
+
+
+state 47
+
     (18) expresion -> expresion DIVISION expresion .
     (15) expresion -> expresion . MAS expresion
     (16) expresion -> expresion . MENOS expresion
-    (17) expresion -> expresion . MULTIPLICACION
+    (17) expresion -> expresion . MULTIPLICACION expresion
     (18) expresion -> expresion . DIVISION expresion
     (19) expresion -> expresion . POTENCIA expresion
     (20) expresion -> expresion . MODULO expresion
@@ -1500,12 +1570,12 @@ state 46
   ! ROR             [ shift and go to state 39 ]
 
 
-state 47
+state 48
 
     (19) expresion -> expresion POTENCIA expresion .
     (15) expresion -> expresion . MAS expresion
     (16) expresion -> expresion . MENOS expresion
-    (17) expresion -> expresion . MULTIPLICACION
+    (17) expresion -> expresion . MULTIPLICACION expresion
     (18) expresion -> expresion . DIVISION expresion
     (19) expresion -> expresion . POTENCIA expresion
     (20) expresion -> expresion . MODULO expresion
@@ -1551,12 +1621,12 @@ state 47
   ! ROR             [ shift and go to state 39 ]
 
 
-state 48
+state 49
 
     (20) expresion -> expresion MODULO expresion .
     (15) expresion -> expresion . MAS expresion
     (16) expresion -> expresion . MENOS expresion
-    (17) expresion -> expresion . MULTIPLICACION
+    (17) expresion -> expresion . MULTIPLICACION expresion
     (18) expresion -> expresion . DIVISION expresion
     (19) expresion -> expresion . POTENCIA expresion
     (20) expresion -> expresion . MODULO expresion
@@ -1602,12 +1672,12 @@ state 48
   ! ROR             [ shift and go to state 39 ]
 
 
-state 49
+state 50
 
     (21) expresion -> expresion IGUALIGUAL expresion .
     (15) expresion -> expresion . MAS expresion
     (16) expresion -> expresion . MENOS expresion
-    (17) expresion -> expresion . MULTIPLICACION
+    (17) expresion -> expresion . MULTIPLICACION expresion
     (18) expresion -> expresion . DIVISION expresion
     (19) expresion -> expresion . POTENCIA expresion
     (20) expresion -> expresion . MODULO expresion
@@ -1653,12 +1723,12 @@ state 49
   ! ROR             [ shift and go to state 39 ]
 
 
-state 50
+state 51
 
     (22) expresion -> expresion MAYORQUE expresion .
     (15) expresion -> expresion . MAS expresion
     (16) expresion -> expresion . MENOS expresion
-    (17) expresion -> expresion . MULTIPLICACION
+    (17) expresion -> expresion . MULTIPLICACION expresion
     (18) expresion -> expresion . DIVISION expresion
     (19) expresion -> expresion . POTENCIA expresion
     (20) expresion -> expresion . MODULO expresion
@@ -1704,12 +1774,12 @@ state 50
   ! ROR             [ shift and go to state 39 ]
 
 
-state 51
+state 52
 
     (23) expresion -> expresion MENORQUE expresion .
     (15) expresion -> expresion . MAS expresion
     (16) expresion -> expresion . MENOS expresion
-    (17) expresion -> expresion . MULTIPLICACION
+    (17) expresion -> expresion . MULTIPLICACION expresion
     (18) expresion -> expresion . DIVISION expresion
     (19) expresion -> expresion . POTENCIA expresion
     (20) expresion -> expresion . MODULO expresion
@@ -1755,12 +1825,12 @@ state 51
   ! ROR             [ shift and go to state 39 ]
 
 
-state 52
+state 53
 
     (24) expresion -> expresion MAYORIGUAL expresion .
     (15) expresion -> expresion . MAS expresion
     (16) expresion -> expresion . MENOS expresion
-    (17) expresion -> expresion . MULTIPLICACION
+    (17) expresion -> expresion . MULTIPLICACION expresion
     (18) expresion -> expresion . DIVISION expresion
     (19) expresion -> expresion . POTENCIA expresion
     (20) expresion -> expresion . MODULO expresion
@@ -1806,12 +1876,12 @@ state 52
   ! ROR             [ shift and go to state 39 ]
 
 
-state 53
+state 54
 
     (25) expresion -> expresion MENORIGUAL expresion .
     (15) expresion -> expresion . MAS expresion
     (16) expresion -> expresion . MENOS expresion
-    (17) expresion -> expresion . MULTIPLICACION
+    (17) expresion -> expresion . MULTIPLICACION expresion
     (18) expresion -> expresion . DIVISION expresion
     (19) expresion -> expresion . POTENCIA expresion
     (20) expresion -> expresion . MODULO expresion
@@ -1857,12 +1927,12 @@ state 53
   ! ROR             [ shift and go to state 39 ]
 
 
-state 54
+state 55
 
     (26) expresion -> expresion DIFERENTE expresion .
     (15) expresion -> expresion . MAS expresion
     (16) expresion -> expresion . MENOS expresion
-    (17) expresion -> expresion . MULTIPLICACION
+    (17) expresion -> expresion . MULTIPLICACION expresion
     (18) expresion -> expresion . DIVISION expresion
     (19) expresion -> expresion . POTENCIA expresion
     (20) expresion -> expresion . MODULO expresion
@@ -1908,12 +1978,12 @@ state 54
   ! ROR             [ shift and go to state 39 ]
 
 
-state 55
+state 56
 
     (27) expresion -> expresion RAND expresion .
     (15) expresion -> expresion . MAS expresion
     (16) expresion -> expresion . MENOS expresion
-    (17) expresion -> expresion . MULTIPLICACION
+    (17) expresion -> expresion . MULTIPLICACION expresion
     (18) expresion -> expresion . DIVISION expresion
     (19) expresion -> expresion . POTENCIA expresion
     (20) expresion -> expresion . MODULO expresion
@@ -1959,12 +2029,12 @@ state 55
   ! ROR             [ shift and go to state 39 ]
 
 
-state 56
+state 57
 
     (28) expresion -> expresion ROR expresion .
     (15) expresion -> expresion . MAS expresion
     (16) expresion -> expresion . MENOS expresion
-    (17) expresion -> expresion . MULTIPLICACION
+    (17) expresion -> expresion . MULTIPLICACION expresion
     (18) expresion -> expresion . DIVISION expresion
     (19) expresion -> expresion . POTENCIA expresion
     (20) expresion -> expresion . MODULO expresion
