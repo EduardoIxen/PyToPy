@@ -17,6 +17,7 @@ class GeneradorC3D:
         self.esPrint = False
         self.repetirString = False
         self.concatenarCadena = False
+        self.potencia = False
         self.math = False
         self.excepciones = []
         self.almacenamientoTemp = {}
@@ -59,7 +60,7 @@ class GeneradorC3D:
         return f"{self.getEncabezado()}" \
                f"{self.nativas}" \
                f"{self.funciones}" \
-               f"func main(){{\n{self.codigo}\n\t}}"
+               f"func main(){{\n{self.codigo}\n}}"
 
     def insertarCodigo(self, codigo, tab="\t"):
         if self.enNativas:
@@ -71,7 +72,7 @@ class GeneradorC3D:
                 self.funciones = self.funciones + '/*--------- FUNCIONES -----------*/\n'
             self.funciones = self.funciones + tab + codigo
         else:
-            self.codigo += '\n' + codigo
+            self.codigo += '\t' + codigo
 
     def agregarComentario(self, comentario):
         self.insertarCodigo(f"/* {comentario} */")
@@ -442,6 +443,49 @@ class GeneradorC3D:
         self.setStack('P', tmpStr)
         self.agregarFinFunc()
         self.enNativas = False
+
+
+    def nativaPotencia(self):
+        if self.potencia:
+            return
+        self.potencia = True
+        self.enNativas = True
+        self.agregarInicioFunc('natPotencia')
+
+        tmpP = self.agregarTemp()
+        self.liberarTemp(tmpP)
+        tmpP1 = self.agregarTemp()
+        self.liberarTemp(tmpP1)
+        tmpP2 = self.agregarTemp()
+        self.liberarTemp(tmpP2)
+
+        etiquInicio = self.nuevaEtiqueta()  #etiqueta inicio
+        etiquetaReturn = self.nuevaEtiqueta()   #etiqueta de salida
+        exponencial = self.nuevaEtiqueta()      #etiqueta del exponente cuando es 0
+
+        self.agregarExpresion(tmpP, 'P', '1', '+')
+        self.getStack(tmpP1, tmpP)
+        self.agregarExpresion(tmpP, tmpP, '1', '+')
+        self.getStack(tmpP2, tmpP)
+
+        self.agregarExpresion(tmpP, tmpP1, '', '')  #save number base
+        self.agregarIf(tmpP2, '0', '==', exponencial)   #si el exponencial es cero
+
+        self.agregarEtiqueta(etiquInicio)
+        self.agregarIf(tmpP2, '1', '<=', etiquetaReturn)
+        self.agregarExpresion(tmpP1, tmpP1, tmpP, '*')
+        self.agregarExpresion(tmpP2, tmpP2, '1', '-')
+        self.agregarGoto(etiquInicio)
+
+        self.agregarEtiqueta(exponencial)           #cuando el exponente es 0 se salta a esta etiqueta
+        self.agregarExpresion(tmpP1, '1', '','')
+
+        self.agregarEtiqueta(etiquetaReturn)
+        self.setStack('P', tmpP1)
+
+        self.agregarFinFunc()
+        self.enNativas = False
+
 
 
 

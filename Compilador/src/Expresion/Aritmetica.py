@@ -28,6 +28,10 @@ class Aritmetica(Expresion):
             self.tipoOperacion == TipoOperacion.SUMA):              #"cadena"+"cadena"
             genC3D.nativaConcatenar()
             return self.concatenarCadena(entorno, izq.getValor(), der.getValor())
+        if self.tipoOperacion == TipoOperacion.POTENCIA:
+            genC3D.nativaPotencia()
+            return self.genPotencia(entorno, izq.getValor(), der.getValor())
+
 
 
 
@@ -70,3 +74,23 @@ class Aritmetica(Expresion):
         genC3D.getStack(tmp, 'P')
         genC3D.retornarEntorno(entorno.getTamanio())
         return Return(tmp, Tipo.STRING, True)
+
+    def genPotencia(self, entorno, numero, exponente):
+        inst = GeneradorC3D()
+        genC3D = inst.getInstance()
+        #numero
+        numTemp = genC3D.agregarTemp()
+        genC3D.agregarExpresion(numTemp, 'P', entorno.getTamanio(), '+')
+        genC3D.agregarExpresion(numTemp, numTemp, '1', '+')
+        genC3D.setStack(numTemp, numero)
+        #exponente
+        expTemp = genC3D.agregarTemp()
+        genC3D.agregarExpresion(expTemp, numTemp, '1', '+')
+        genC3D.setStack(expTemp, exponente)
+
+        genC3D.nuevoEntorno(entorno.getTamanio())
+        genC3D.llamarFunc('natPotencia')
+        temp = genC3D.agregarTemp()
+        genC3D.getStack(temp, 'P')
+        genC3D.retornarEntorno(entorno.getTamanio())
+        return Return(temp, Tipo.INT, True)
