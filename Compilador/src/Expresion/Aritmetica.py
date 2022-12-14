@@ -26,7 +26,8 @@ class Aritmetica(Expresion):
             return self.repetirCadena(entorno, izq.getValor(), der.getValor())
         if (izq.getTipo() == Tipo.STRING and der.getTipo() == Tipo.STRING and
             self.tipoOperacion == TipoOperacion.SUMA):              #"cadena"+"cadena"
-            genC3D.c
+            genC3D.nativaConcatenar()
+            return self.concatenarCadena(entorno, izq.getValor(), der.getValor())
 
 
 
@@ -48,3 +49,24 @@ class Aritmetica(Expresion):
         genC3D.getStack(tempAux, 'P')
         genC3D.retornarEntorno(entorno.getTamanio())
         return Return(tempAux, Tipo.STRING, True)
+
+    def concatenarCadena(self, entorno, cadena1, cadena2):
+        nuevaInst = GeneradorC3D()
+        genC3D = nuevaInst.getInstance()
+
+        cadTemp = genC3D.agregarTemp()      #cadena 1
+        genC3D.agregarExpresion(cadTemp, 'P', entorno.getTamanio(), '+')
+        genC3D.agregarExpresion(cadTemp, cadTemp, '1', '+')
+        genC3D.setStack(cadTemp, cadena1)
+
+        cad2Temp = genC3D.agregarTemp()     #cadena 2
+        genC3D.agregarExpresion(cad2Temp, cadTemp, '1', '+')
+        genC3D.setStack(cad2Temp, cadena2)
+
+        genC3D.nuevoEntorno(entorno.getTamanio())
+        genC3D.llamarFunc('concatenarCadena')
+
+        tmp = genC3D.agregarTemp()
+        genC3D.getStack(tmp, 'P')
+        genC3D.retornarEntorno(entorno.getTamanio())
+        return Return(tmp, Tipo.STRING, True)

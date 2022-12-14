@@ -382,7 +382,66 @@ class GeneradorC3D:
 
 
     def nativaConcatenar(self):
-        pass
+        if self.concatenarCadena:
+            return
+        self.concatenarCadena = True
+        self.enNativas = True
+        self.agregarInicioFunc("concatenarCadena")
+        tmpStr = self.agregarTemp()
+
+        tmpP = self.agregarTemp()
+        self.liberarTemp(tmpP)
+        tmpP2 = self.agregarTemp()
+        self.liberarTemp(tmpP2)
+        tmpH = self.agregarTemp()
+        self.liberarTemp(tmpH)
+
+        etiquReturn = self.nuevaEtiqueta()  #etiqueta para salir
+        etiquInicio = self.nuevaEtiqueta()
+
+        self.agregarExpresion(tmpStr, 'H', '','') #almacenando inicio de concatenacion
+        self.agregarExpresion(tmpP, 'P', '1', '+')
+        self.getStack(tmpP, tmpP)
+        self.agregarExpresion(tmpP2, 'P', '2', '+')
+        self.getStack(tmpP2, tmpP2)
+
+        self.agregarGoto(etiquInicio) #iniciando recorrido
+        self.agregarEtiqueta(etiquInicio)
+
+        self.getHeap(tmpH, tmpP)
+
+        etiquTrue = self.nuevaEtiqueta() #para la primera cadena
+        etiquFalse = self.nuevaEtiqueta()
+
+        self.agregarIf(tmpH, '-1', '==', etiquFalse)
+        self.agregarGoto(etiquTrue)
+        self.agregarEtiqueta(etiquTrue)
+
+        self.setHeap('H', tmpH)     #concatenando la cadena
+        self.siguienteHeap()
+        self.agregarExpresion(tmpP, tmpP, '1', '+')
+        self.agregarGoto(etiquInicio)
+
+        self.agregarEtiqueta(etiquFalse)
+        self.getHeap(tmpH, tmpP2)   #sacando valores del heap
+
+        etiquTrue = self.nuevaEtiqueta()    #etiqueta para la segunda cadena
+        self.agregarIf(tmpH, '-1', '==', etiquReturn)
+        self.agregarGoto(etiquTrue)
+        self.agregarEtiqueta(etiquTrue)
+
+        self.setHeap('H', tmpH)
+        self.siguienteHeap()
+        self.agregarExpresion(tmpP2, tmpP2, '1', '+')
+        self.agregarGoto(etiquFalse)
+
+        self.agregarEtiqueta(etiquReturn)
+        self.setHeap('H', '-1') #agregar simbolo para saber donde termina al cadena
+        self.siguienteHeap()
+
+        self.setStack('P', tmpStr)
+        self.agregarFinFunc()
+        self.enNativas = False
 
 
 
