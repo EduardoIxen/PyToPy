@@ -17,6 +17,7 @@ class GeneradorC3D:
         self.esPrint = False
         self.repetirString = False
         self.concatenarCadena = False
+        self.compararCadena = False
         self.potencia = False
         self.math = False
         self.excepciones = []
@@ -107,12 +108,16 @@ class GeneradorC3D:
             self.insertarCodigo(f'fmt.Printf("%{tipo}", int({valor}));\n')
 
     def imprimirTrue(self):
+        self.agregarComentario("IMPRIMIENDO TRUE")
+        self.agregarEspacio()
         self.agregarPrint("c", 84)
         self.agregarPrint("c", 114)
         self.agregarPrint("c", 117)
         self.agregarPrint("c", 101)
 
     def imprimirFalse(self):
+        self.agregarComentario("IMPRIMIENDO FALSE")
+        self.agregarEspacio()
         self.agregarPrint("c", 70)
         self.agregarPrint("c", 97)
         self.agregarPrint("c", 108)
@@ -490,6 +495,50 @@ class GeneradorC3D:
         self.agregarFinFunc()
         self.enNativas = False
 
+    def nativaCompararCad(self):
+        if self.compararCadena:
+            return
+        self.compararCadena = True
+        self.enNativas = True
+        self.agregarInicioFunc('natCompararCadena')
 
+        tmpP = self.agregarTemp()
+        self.liberarTemp(tmpP)
+        tmpP1 = self.agregarTemp()
+        self.liberarTemp(tmpP1)
+        tmpP2 = self.agregarTemp()
+        self.liberarTemp(tmpP2)
+        etiquInicio = self.nuevaEtiqueta()
+        etiquTrue = self.nuevaEtiqueta()
+        etiquFalse = self.nuevaEtiqueta()
+        etiquReturn = self.nuevaEtiqueta()
 
+        self.agregarExpresion(tmpP, 'P', '1', '+')  #cadena1
+        self.getStack(tmpP1, tmpP)
+        self.agregarExpresion(tmpP, tmpP, '1', '+')
+        self.getStack(tmpP2, tmpP)
 
+        valorTemp1 = self.agregarTemp()
+        valorTemp2 = self.agregarTemp()
+
+        self.agregarEtiqueta(etiquInicio)
+        self.getHeap(valorTemp1, tmpP1)
+        self.getHeap(valorTemp2, tmpP2)
+
+        self.agregarIf(valorTemp1, valorTemp2, '!=', etiquFalse)
+        self.agregarIf(valorTemp1, '-1', '==', etiquTrue) #compara si llega al final
+
+        self.agregarExpresion(tmpP1, tmpP1, '1', '+')
+        self.agregarExpresion(tmpP2, tmpP2, '1', '+')
+        self.agregarGoto(etiquInicio)
+
+        self.agregarEtiqueta(etiquTrue) #cuando la condicion es verdadera
+        self.setStack('P', '1') #1 es cuando son iguales (true)
+        self.agregarGoto(etiquReturn)
+
+        self.agregarEtiqueta(etiquFalse)
+        self.setStack('P', '0') # 0 cuando NO son iguales (false)
+
+        self.agregarEtiqueta(etiquReturn)
+        self.agregarFinFunc()
+        self.enNativas = False

@@ -154,6 +154,7 @@ from src.Expresion.Primitivo import Primitivo
 from src.Ast.Tipo import Tipo, TipoOperacion
 from src.Instruccion.Print import Print
 from src.Expresion.Aritmetica import Aritmetica
+from src.Expresion.Relacional import Relacional
 def p_init(t):
     'init            : ls_instr'
     t[0] = AST(t[1],0,0)
@@ -247,12 +248,26 @@ def p_aritmeticas(t):
 
 #////////////////////////////// EXPRESIONES RELACIONALES ///////////////////////////////////
 def p_relacionales(t):
-    '''expresion    : expresion IGUALIGUAL expresion
-                    | expresion MAYORQUE expresion
+    '''expresion    : expresion MAYORQUE expresion
                     | expresion MENORQUE expresion
                     | expresion MAYORIGUAL expresion
                     | expresion MENORIGUAL expresion
+                    | expresion IGUALIGUAL expresion
                     | expresion DIFERENTE expresion'''
+    if t[2] == '>':
+        t[0] = Relacional(t[1], t[3], TipoOperacion.MAYOR, t.lineno(2), find_column(t.slice[2]))
+    elif t[2] == '<':
+        t[0] = Relacional(t[1], t[3], TipoOperacion.MENOR, t.lineno(2), find_column(t.slice[2]))
+    elif t[2] == '>=':
+        t[0] = Relacional(t[1], t[3], TipoOperacion.MAYORIGUAL, t.lineno(2), find_column(t.slice[2]))
+    elif t[2] == '<=':
+        t[0] = Relacional(t[1], t[3], TipoOperacion.MENORIGUAL, t.lineno(2), find_column(t.slice[2]))
+    elif t[2] == '==':
+        t[0] = Relacional(t[1], t[3], TipoOperacion.IGUAL, t.lineno(2), find_column(t.slice[2]))
+    elif t[2] == '!=':
+        t[0] = Relacional(t[1], t[3], TipoOperacion.DIFERENTE, t.lineno(2), find_column(t.slice[2]))
+
+
 
 
 #////////////////////////////// EXPRESIONES LOGICAS ///////////////////////////////////

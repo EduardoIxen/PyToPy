@@ -35,11 +35,11 @@ Rule 17    expresion -> expresion MULTIPLICACION expresion
 Rule 18    expresion -> expresion DIVISION expresion
 Rule 19    expresion -> expresion POTENCIA expresion
 Rule 20    expresion -> expresion MODULO expresion
-Rule 21    expresion -> expresion IGUALIGUAL expresion
-Rule 22    expresion -> expresion MAYORQUE expresion
-Rule 23    expresion -> expresion MENORQUE expresion
-Rule 24    expresion -> expresion MAYORIGUAL expresion
-Rule 25    expresion -> expresion MENORIGUAL expresion
+Rule 21    expresion -> expresion MAYORQUE expresion
+Rule 22    expresion -> expresion MENORQUE expresion
+Rule 23    expresion -> expresion MAYORIGUAL expresion
+Rule 24    expresion -> expresion MENORIGUAL expresion
+Rule 25    expresion -> expresion IGUALIGUAL expresion
 Rule 26    expresion -> expresion DIFERENTE expresion
 Rule 27    expresion -> expresion RAND expresion
 Rule 28    expresion -> expresion ROR expresion
@@ -64,13 +64,13 @@ DIVISION             : 18
 ENTERO               : 32
 ID                   : 35
 IGUAL                : 
-IGUALIGUAL           : 21
+IGUALIGUAL           : 25
 LINEANUEVA           : 
 MAS                  : 15
-MAYORIGUAL           : 24
-MAYORQUE             : 22
-MENORIGUAL           : 25
-MENORQUE             : 23
+MAYORIGUAL           : 23
+MAYORQUE             : 21
+MENORIGUAL           : 24
+MENORQUE             : 22
 MENOS                : 16 30
 MODULO               : 20
 MULTIPLICACION       : 17
@@ -210,11 +210,11 @@ state 9
     (18) expresion -> . expresion DIVISION expresion
     (19) expresion -> . expresion POTENCIA expresion
     (20) expresion -> . expresion MODULO expresion
-    (21) expresion -> . expresion IGUALIGUAL expresion
-    (22) expresion -> . expresion MAYORQUE expresion
-    (23) expresion -> . expresion MENORQUE expresion
-    (24) expresion -> . expresion MAYORIGUAL expresion
-    (25) expresion -> . expresion MENORIGUAL expresion
+    (21) expresion -> . expresion MAYORQUE expresion
+    (22) expresion -> . expresion MENORQUE expresion
+    (23) expresion -> . expresion MAYORIGUAL expresion
+    (24) expresion -> . expresion MENORIGUAL expresion
+    (25) expresion -> . expresion IGUALIGUAL expresion
     (26) expresion -> . expresion DIFERENTE expresion
     (27) expresion -> . expresion RAND expresion
     (28) expresion -> . expresion ROR expresion
@@ -253,11 +253,11 @@ state 10
     (18) expresion -> . expresion DIVISION expresion
     (19) expresion -> . expresion POTENCIA expresion
     (20) expresion -> . expresion MODULO expresion
-    (21) expresion -> . expresion IGUALIGUAL expresion
-    (22) expresion -> . expresion MAYORQUE expresion
-    (23) expresion -> . expresion MENORQUE expresion
-    (24) expresion -> . expresion MAYORIGUAL expresion
-    (25) expresion -> . expresion MENORIGUAL expresion
+    (21) expresion -> . expresion MAYORQUE expresion
+    (22) expresion -> . expresion MENORQUE expresion
+    (23) expresion -> . expresion MAYORIGUAL expresion
+    (24) expresion -> . expresion MENORIGUAL expresion
+    (25) expresion -> . expresion IGUALIGUAL expresion
     (26) expresion -> . expresion DIFERENTE expresion
     (27) expresion -> . expresion RAND expresion
     (28) expresion -> . expresion ROR expresion
@@ -311,11 +311,11 @@ state 13
     (18) expresion -> expresion . DIVISION expresion
     (19) expresion -> expresion . POTENCIA expresion
     (20) expresion -> expresion . MODULO expresion
-    (21) expresion -> expresion . IGUALIGUAL expresion
-    (22) expresion -> expresion . MAYORQUE expresion
-    (23) expresion -> expresion . MENORQUE expresion
-    (24) expresion -> expresion . MAYORIGUAL expresion
-    (25) expresion -> expresion . MENORIGUAL expresion
+    (21) expresion -> expresion . MAYORQUE expresion
+    (22) expresion -> expresion . MENORQUE expresion
+    (23) expresion -> expresion . MAYORIGUAL expresion
+    (24) expresion -> expresion . MENORIGUAL expresion
+    (25) expresion -> expresion . IGUALIGUAL expresion
     (26) expresion -> expresion . DIFERENTE expresion
     (27) expresion -> expresion . RAND expresion
     (28) expresion -> expresion . ROR expresion
@@ -328,11 +328,11 @@ state 13
     DIVISION        shift and go to state 29
     POTENCIA        shift and go to state 30
     MODULO          shift and go to state 31
-    IGUALIGUAL      shift and go to state 32
-    MAYORQUE        shift and go to state 33
-    MENORQUE        shift and go to state 34
-    MAYORIGUAL      shift and go to state 35
-    MENORIGUAL      shift and go to state 36
+    MAYORQUE        shift and go to state 32
+    MENORQUE        shift and go to state 33
+    MAYORIGUAL      shift and go to state 34
+    MENORIGUAL      shift and go to state 35
+    IGUALIGUAL      shift and go to state 36
     DIFERENTE       shift and go to state 37
     RAND            shift and go to state 38
     ROR             shift and go to state 39
@@ -347,11 +347,11 @@ state 14
     (18) expresion -> . expresion DIVISION expresion
     (19) expresion -> . expresion POTENCIA expresion
     (20) expresion -> . expresion MODULO expresion
-    (21) expresion -> . expresion IGUALIGUAL expresion
-    (22) expresion -> . expresion MAYORQUE expresion
-    (23) expresion -> . expresion MENORQUE expresion
-    (24) expresion -> . expresion MAYORIGUAL expresion
-    (25) expresion -> . expresion MENORIGUAL expresion
+    (21) expresion -> . expresion MAYORQUE expresion
+    (22) expresion -> . expresion MENORQUE expresion
+    (23) expresion -> . expresion MAYORIGUAL expresion
+    (24) expresion -> . expresion MENORIGUAL expresion
+    (25) expresion -> . expresion IGUALIGUAL expresion
     (26) expresion -> . expresion DIFERENTE expresion
     (27) expresion -> . expresion RAND expresion
     (28) expresion -> . expresion ROR expresion
@@ -388,11 +388,11 @@ state 15
     (18) expresion -> . expresion DIVISION expresion
     (19) expresion -> . expresion POTENCIA expresion
     (20) expresion -> . expresion MODULO expresion
-    (21) expresion -> . expresion IGUALIGUAL expresion
-    (22) expresion -> . expresion MAYORQUE expresion
-    (23) expresion -> . expresion MENORQUE expresion
-    (24) expresion -> . expresion MAYORIGUAL expresion
-    (25) expresion -> . expresion MENORIGUAL expresion
+    (21) expresion -> . expresion MAYORQUE expresion
+    (22) expresion -> . expresion MENORQUE expresion
+    (23) expresion -> . expresion MAYORIGUAL expresion
+    (24) expresion -> . expresion MENORIGUAL expresion
+    (25) expresion -> . expresion IGUALIGUAL expresion
     (26) expresion -> . expresion DIFERENTE expresion
     (27) expresion -> . expresion RAND expresion
     (28) expresion -> . expresion ROR expresion
@@ -430,11 +430,11 @@ state 16
     DIVISION        reduce using rule 32 (expresion -> ENTERO .)
     POTENCIA        reduce using rule 32 (expresion -> ENTERO .)
     MODULO          reduce using rule 32 (expresion -> ENTERO .)
-    IGUALIGUAL      reduce using rule 32 (expresion -> ENTERO .)
     MAYORQUE        reduce using rule 32 (expresion -> ENTERO .)
     MENORQUE        reduce using rule 32 (expresion -> ENTERO .)
     MAYORIGUAL      reduce using rule 32 (expresion -> ENTERO .)
     MENORIGUAL      reduce using rule 32 (expresion -> ENTERO .)
+    IGUALIGUAL      reduce using rule 32 (expresion -> ENTERO .)
     DIFERENTE       reduce using rule 32 (expresion -> ENTERO .)
     RAND            reduce using rule 32 (expresion -> ENTERO .)
     ROR             reduce using rule 32 (expresion -> ENTERO .)
@@ -452,11 +452,11 @@ state 17
     DIVISION        reduce using rule 33 (expresion -> DECIMAL .)
     POTENCIA        reduce using rule 33 (expresion -> DECIMAL .)
     MODULO          reduce using rule 33 (expresion -> DECIMAL .)
-    IGUALIGUAL      reduce using rule 33 (expresion -> DECIMAL .)
     MAYORQUE        reduce using rule 33 (expresion -> DECIMAL .)
     MENORQUE        reduce using rule 33 (expresion -> DECIMAL .)
     MAYORIGUAL      reduce using rule 33 (expresion -> DECIMAL .)
     MENORIGUAL      reduce using rule 33 (expresion -> DECIMAL .)
+    IGUALIGUAL      reduce using rule 33 (expresion -> DECIMAL .)
     DIFERENTE       reduce using rule 33 (expresion -> DECIMAL .)
     RAND            reduce using rule 33 (expresion -> DECIMAL .)
     ROR             reduce using rule 33 (expresion -> DECIMAL .)
@@ -474,11 +474,11 @@ state 18
     DIVISION        reduce using rule 34 (expresion -> CADENA .)
     POTENCIA        reduce using rule 34 (expresion -> CADENA .)
     MODULO          reduce using rule 34 (expresion -> CADENA .)
-    IGUALIGUAL      reduce using rule 34 (expresion -> CADENA .)
     MAYORQUE        reduce using rule 34 (expresion -> CADENA .)
     MENORQUE        reduce using rule 34 (expresion -> CADENA .)
     MAYORIGUAL      reduce using rule 34 (expresion -> CADENA .)
     MENORIGUAL      reduce using rule 34 (expresion -> CADENA .)
+    IGUALIGUAL      reduce using rule 34 (expresion -> CADENA .)
     DIFERENTE       reduce using rule 34 (expresion -> CADENA .)
     RAND            reduce using rule 34 (expresion -> CADENA .)
     ROR             reduce using rule 34 (expresion -> CADENA .)
@@ -496,11 +496,11 @@ state 19
     DIVISION        reduce using rule 35 (expresion -> ID .)
     POTENCIA        reduce using rule 35 (expresion -> ID .)
     MODULO          reduce using rule 35 (expresion -> ID .)
-    IGUALIGUAL      reduce using rule 35 (expresion -> ID .)
     MAYORQUE        reduce using rule 35 (expresion -> ID .)
     MENORQUE        reduce using rule 35 (expresion -> ID .)
     MAYORIGUAL      reduce using rule 35 (expresion -> ID .)
     MENORIGUAL      reduce using rule 35 (expresion -> ID .)
+    IGUALIGUAL      reduce using rule 35 (expresion -> ID .)
     DIFERENTE       reduce using rule 35 (expresion -> ID .)
     RAND            reduce using rule 35 (expresion -> ID .)
     ROR             reduce using rule 35 (expresion -> ID .)
@@ -518,11 +518,11 @@ state 20
     DIVISION        reduce using rule 36 (expresion -> RTRUE .)
     POTENCIA        reduce using rule 36 (expresion -> RTRUE .)
     MODULO          reduce using rule 36 (expresion -> RTRUE .)
-    IGUALIGUAL      reduce using rule 36 (expresion -> RTRUE .)
     MAYORQUE        reduce using rule 36 (expresion -> RTRUE .)
     MENORQUE        reduce using rule 36 (expresion -> RTRUE .)
     MAYORIGUAL      reduce using rule 36 (expresion -> RTRUE .)
     MENORIGUAL      reduce using rule 36 (expresion -> RTRUE .)
+    IGUALIGUAL      reduce using rule 36 (expresion -> RTRUE .)
     DIFERENTE       reduce using rule 36 (expresion -> RTRUE .)
     RAND            reduce using rule 36 (expresion -> RTRUE .)
     ROR             reduce using rule 36 (expresion -> RTRUE .)
@@ -540,11 +540,11 @@ state 21
     DIVISION        reduce using rule 37 (expresion -> RFALSE .)
     POTENCIA        reduce using rule 37 (expresion -> RFALSE .)
     MODULO          reduce using rule 37 (expresion -> RFALSE .)
-    IGUALIGUAL      reduce using rule 37 (expresion -> RFALSE .)
     MAYORQUE        reduce using rule 37 (expresion -> RFALSE .)
     MENORQUE        reduce using rule 37 (expresion -> RFALSE .)
     MAYORIGUAL      reduce using rule 37 (expresion -> RFALSE .)
     MENORIGUAL      reduce using rule 37 (expresion -> RFALSE .)
+    IGUALIGUAL      reduce using rule 37 (expresion -> RFALSE .)
     DIFERENTE       reduce using rule 37 (expresion -> RFALSE .)
     RAND            reduce using rule 37 (expresion -> RFALSE .)
     ROR             reduce using rule 37 (expresion -> RFALSE .)
@@ -562,11 +562,11 @@ state 22
     DIVISION        reduce using rule 38 (expresion -> RNULO .)
     POTENCIA        reduce using rule 38 (expresion -> RNULO .)
     MODULO          reduce using rule 38 (expresion -> RNULO .)
-    IGUALIGUAL      reduce using rule 38 (expresion -> RNULO .)
     MAYORQUE        reduce using rule 38 (expresion -> RNULO .)
     MENORQUE        reduce using rule 38 (expresion -> RNULO .)
     MAYORIGUAL      reduce using rule 38 (expresion -> RNULO .)
     MENORIGUAL      reduce using rule 38 (expresion -> RNULO .)
+    IGUALIGUAL      reduce using rule 38 (expresion -> RNULO .)
     DIFERENTE       reduce using rule 38 (expresion -> RNULO .)
     RAND            reduce using rule 38 (expresion -> RNULO .)
     ROR             reduce using rule 38 (expresion -> RNULO .)
@@ -583,11 +583,11 @@ state 23
     (18) expresion -> expresion . DIVISION expresion
     (19) expresion -> expresion . POTENCIA expresion
     (20) expresion -> expresion . MODULO expresion
-    (21) expresion -> expresion . IGUALIGUAL expresion
-    (22) expresion -> expresion . MAYORQUE expresion
-    (23) expresion -> expresion . MENORQUE expresion
-    (24) expresion -> expresion . MAYORIGUAL expresion
-    (25) expresion -> expresion . MENORIGUAL expresion
+    (21) expresion -> expresion . MAYORQUE expresion
+    (22) expresion -> expresion . MENORQUE expresion
+    (23) expresion -> expresion . MAYORIGUAL expresion
+    (24) expresion -> expresion . MENORIGUAL expresion
+    (25) expresion -> expresion . IGUALIGUAL expresion
     (26) expresion -> expresion . DIFERENTE expresion
     (27) expresion -> expresion . RAND expresion
     (28) expresion -> expresion . ROR expresion
@@ -599,11 +599,11 @@ state 23
     DIVISION        shift and go to state 29
     POTENCIA        shift and go to state 30
     MODULO          shift and go to state 31
-    IGUALIGUAL      shift and go to state 32
-    MAYORQUE        shift and go to state 33
-    MENORQUE        shift and go to state 34
-    MAYORIGUAL      shift and go to state 35
-    MENORIGUAL      shift and go to state 36
+    MAYORQUE        shift and go to state 32
+    MENORQUE        shift and go to state 33
+    MAYORIGUAL      shift and go to state 34
+    MENORIGUAL      shift and go to state 35
+    IGUALIGUAL      shift and go to state 36
     DIFERENTE       shift and go to state 37
     RAND            shift and go to state 38
     ROR             shift and go to state 39
@@ -627,11 +627,11 @@ state 25
     (18) expresion -> . expresion DIVISION expresion
     (19) expresion -> . expresion POTENCIA expresion
     (20) expresion -> . expresion MODULO expresion
-    (21) expresion -> . expresion IGUALIGUAL expresion
-    (22) expresion -> . expresion MAYORQUE expresion
-    (23) expresion -> . expresion MENORQUE expresion
-    (24) expresion -> . expresion MAYORIGUAL expresion
-    (25) expresion -> . expresion MENORIGUAL expresion
+    (21) expresion -> . expresion MAYORQUE expresion
+    (22) expresion -> . expresion MENORQUE expresion
+    (23) expresion -> . expresion MAYORIGUAL expresion
+    (24) expresion -> . expresion MENORIGUAL expresion
+    (25) expresion -> . expresion IGUALIGUAL expresion
     (26) expresion -> . expresion DIFERENTE expresion
     (27) expresion -> . expresion RAND expresion
     (28) expresion -> . expresion ROR expresion
@@ -669,11 +669,11 @@ state 26
     (18) expresion -> . expresion DIVISION expresion
     (19) expresion -> . expresion POTENCIA expresion
     (20) expresion -> . expresion MODULO expresion
-    (21) expresion -> . expresion IGUALIGUAL expresion
-    (22) expresion -> . expresion MAYORQUE expresion
-    (23) expresion -> . expresion MENORQUE expresion
-    (24) expresion -> . expresion MAYORIGUAL expresion
-    (25) expresion -> . expresion MENORIGUAL expresion
+    (21) expresion -> . expresion MAYORQUE expresion
+    (22) expresion -> . expresion MENORQUE expresion
+    (23) expresion -> . expresion MAYORIGUAL expresion
+    (24) expresion -> . expresion MENORIGUAL expresion
+    (25) expresion -> . expresion IGUALIGUAL expresion
     (26) expresion -> . expresion DIFERENTE expresion
     (27) expresion -> . expresion RAND expresion
     (28) expresion -> . expresion ROR expresion
@@ -710,11 +710,11 @@ state 27
     (18) expresion -> . expresion DIVISION expresion
     (19) expresion -> . expresion POTENCIA expresion
     (20) expresion -> . expresion MODULO expresion
-    (21) expresion -> . expresion IGUALIGUAL expresion
-    (22) expresion -> . expresion MAYORQUE expresion
-    (23) expresion -> . expresion MENORQUE expresion
-    (24) expresion -> . expresion MAYORIGUAL expresion
-    (25) expresion -> . expresion MENORIGUAL expresion
+    (21) expresion -> . expresion MAYORQUE expresion
+    (22) expresion -> . expresion MENORQUE expresion
+    (23) expresion -> . expresion MAYORIGUAL expresion
+    (24) expresion -> . expresion MENORIGUAL expresion
+    (25) expresion -> . expresion IGUALIGUAL expresion
     (26) expresion -> . expresion DIFERENTE expresion
     (27) expresion -> . expresion RAND expresion
     (28) expresion -> . expresion ROR expresion
@@ -751,11 +751,11 @@ state 28
     (18) expresion -> . expresion DIVISION expresion
     (19) expresion -> . expresion POTENCIA expresion
     (20) expresion -> . expresion MODULO expresion
-    (21) expresion -> . expresion IGUALIGUAL expresion
-    (22) expresion -> . expresion MAYORQUE expresion
-    (23) expresion -> . expresion MENORQUE expresion
-    (24) expresion -> . expresion MAYORIGUAL expresion
-    (25) expresion -> . expresion MENORIGUAL expresion
+    (21) expresion -> . expresion MAYORQUE expresion
+    (22) expresion -> . expresion MENORQUE expresion
+    (23) expresion -> . expresion MAYORIGUAL expresion
+    (24) expresion -> . expresion MENORIGUAL expresion
+    (25) expresion -> . expresion IGUALIGUAL expresion
     (26) expresion -> . expresion DIFERENTE expresion
     (27) expresion -> . expresion RAND expresion
     (28) expresion -> . expresion ROR expresion
@@ -792,11 +792,11 @@ state 29
     (18) expresion -> . expresion DIVISION expresion
     (19) expresion -> . expresion POTENCIA expresion
     (20) expresion -> . expresion MODULO expresion
-    (21) expresion -> . expresion IGUALIGUAL expresion
-    (22) expresion -> . expresion MAYORQUE expresion
-    (23) expresion -> . expresion MENORQUE expresion
-    (24) expresion -> . expresion MAYORIGUAL expresion
-    (25) expresion -> . expresion MENORIGUAL expresion
+    (21) expresion -> . expresion MAYORQUE expresion
+    (22) expresion -> . expresion MENORQUE expresion
+    (23) expresion -> . expresion MAYORIGUAL expresion
+    (24) expresion -> . expresion MENORIGUAL expresion
+    (25) expresion -> . expresion IGUALIGUAL expresion
     (26) expresion -> . expresion DIFERENTE expresion
     (27) expresion -> . expresion RAND expresion
     (28) expresion -> . expresion ROR expresion
@@ -833,11 +833,11 @@ state 30
     (18) expresion -> . expresion DIVISION expresion
     (19) expresion -> . expresion POTENCIA expresion
     (20) expresion -> . expresion MODULO expresion
-    (21) expresion -> . expresion IGUALIGUAL expresion
-    (22) expresion -> . expresion MAYORQUE expresion
-    (23) expresion -> . expresion MENORQUE expresion
-    (24) expresion -> . expresion MAYORIGUAL expresion
-    (25) expresion -> . expresion MENORIGUAL expresion
+    (21) expresion -> . expresion MAYORQUE expresion
+    (22) expresion -> . expresion MENORQUE expresion
+    (23) expresion -> . expresion MAYORIGUAL expresion
+    (24) expresion -> . expresion MENORIGUAL expresion
+    (25) expresion -> . expresion IGUALIGUAL expresion
     (26) expresion -> . expresion DIFERENTE expresion
     (27) expresion -> . expresion RAND expresion
     (28) expresion -> . expresion ROR expresion
@@ -874,11 +874,11 @@ state 31
     (18) expresion -> . expresion DIVISION expresion
     (19) expresion -> . expresion POTENCIA expresion
     (20) expresion -> . expresion MODULO expresion
-    (21) expresion -> . expresion IGUALIGUAL expresion
-    (22) expresion -> . expresion MAYORQUE expresion
-    (23) expresion -> . expresion MENORQUE expresion
-    (24) expresion -> . expresion MAYORIGUAL expresion
-    (25) expresion -> . expresion MENORIGUAL expresion
+    (21) expresion -> . expresion MAYORQUE expresion
+    (22) expresion -> . expresion MENORQUE expresion
+    (23) expresion -> . expresion MAYORIGUAL expresion
+    (24) expresion -> . expresion MENORIGUAL expresion
+    (25) expresion -> . expresion IGUALIGUAL expresion
     (26) expresion -> . expresion DIFERENTE expresion
     (27) expresion -> . expresion RAND expresion
     (28) expresion -> . expresion ROR expresion
@@ -908,18 +908,18 @@ state 31
 
 state 32
 
-    (21) expresion -> expresion IGUALIGUAL . expresion
+    (21) expresion -> expresion MAYORQUE . expresion
     (15) expresion -> . expresion MAS expresion
     (16) expresion -> . expresion MENOS expresion
     (17) expresion -> . expresion MULTIPLICACION expresion
     (18) expresion -> . expresion DIVISION expresion
     (19) expresion -> . expresion POTENCIA expresion
     (20) expresion -> . expresion MODULO expresion
-    (21) expresion -> . expresion IGUALIGUAL expresion
-    (22) expresion -> . expresion MAYORQUE expresion
-    (23) expresion -> . expresion MENORQUE expresion
-    (24) expresion -> . expresion MAYORIGUAL expresion
-    (25) expresion -> . expresion MENORIGUAL expresion
+    (21) expresion -> . expresion MAYORQUE expresion
+    (22) expresion -> . expresion MENORQUE expresion
+    (23) expresion -> . expresion MAYORIGUAL expresion
+    (24) expresion -> . expresion MENORIGUAL expresion
+    (25) expresion -> . expresion IGUALIGUAL expresion
     (26) expresion -> . expresion DIFERENTE expresion
     (27) expresion -> . expresion RAND expresion
     (28) expresion -> . expresion ROR expresion
@@ -949,18 +949,18 @@ state 32
 
 state 33
 
-    (22) expresion -> expresion MAYORQUE . expresion
+    (22) expresion -> expresion MENORQUE . expresion
     (15) expresion -> . expresion MAS expresion
     (16) expresion -> . expresion MENOS expresion
     (17) expresion -> . expresion MULTIPLICACION expresion
     (18) expresion -> . expresion DIVISION expresion
     (19) expresion -> . expresion POTENCIA expresion
     (20) expresion -> . expresion MODULO expresion
-    (21) expresion -> . expresion IGUALIGUAL expresion
-    (22) expresion -> . expresion MAYORQUE expresion
-    (23) expresion -> . expresion MENORQUE expresion
-    (24) expresion -> . expresion MAYORIGUAL expresion
-    (25) expresion -> . expresion MENORIGUAL expresion
+    (21) expresion -> . expresion MAYORQUE expresion
+    (22) expresion -> . expresion MENORQUE expresion
+    (23) expresion -> . expresion MAYORIGUAL expresion
+    (24) expresion -> . expresion MENORIGUAL expresion
+    (25) expresion -> . expresion IGUALIGUAL expresion
     (26) expresion -> . expresion DIFERENTE expresion
     (27) expresion -> . expresion RAND expresion
     (28) expresion -> . expresion ROR expresion
@@ -990,18 +990,18 @@ state 33
 
 state 34
 
-    (23) expresion -> expresion MENORQUE . expresion
+    (23) expresion -> expresion MAYORIGUAL . expresion
     (15) expresion -> . expresion MAS expresion
     (16) expresion -> . expresion MENOS expresion
     (17) expresion -> . expresion MULTIPLICACION expresion
     (18) expresion -> . expresion DIVISION expresion
     (19) expresion -> . expresion POTENCIA expresion
     (20) expresion -> . expresion MODULO expresion
-    (21) expresion -> . expresion IGUALIGUAL expresion
-    (22) expresion -> . expresion MAYORQUE expresion
-    (23) expresion -> . expresion MENORQUE expresion
-    (24) expresion -> . expresion MAYORIGUAL expresion
-    (25) expresion -> . expresion MENORIGUAL expresion
+    (21) expresion -> . expresion MAYORQUE expresion
+    (22) expresion -> . expresion MENORQUE expresion
+    (23) expresion -> . expresion MAYORIGUAL expresion
+    (24) expresion -> . expresion MENORIGUAL expresion
+    (25) expresion -> . expresion IGUALIGUAL expresion
     (26) expresion -> . expresion DIFERENTE expresion
     (27) expresion -> . expresion RAND expresion
     (28) expresion -> . expresion ROR expresion
@@ -1031,18 +1031,18 @@ state 34
 
 state 35
 
-    (24) expresion -> expresion MAYORIGUAL . expresion
+    (24) expresion -> expresion MENORIGUAL . expresion
     (15) expresion -> . expresion MAS expresion
     (16) expresion -> . expresion MENOS expresion
     (17) expresion -> . expresion MULTIPLICACION expresion
     (18) expresion -> . expresion DIVISION expresion
     (19) expresion -> . expresion POTENCIA expresion
     (20) expresion -> . expresion MODULO expresion
-    (21) expresion -> . expresion IGUALIGUAL expresion
-    (22) expresion -> . expresion MAYORQUE expresion
-    (23) expresion -> . expresion MENORQUE expresion
-    (24) expresion -> . expresion MAYORIGUAL expresion
-    (25) expresion -> . expresion MENORIGUAL expresion
+    (21) expresion -> . expresion MAYORQUE expresion
+    (22) expresion -> . expresion MENORQUE expresion
+    (23) expresion -> . expresion MAYORIGUAL expresion
+    (24) expresion -> . expresion MENORIGUAL expresion
+    (25) expresion -> . expresion IGUALIGUAL expresion
     (26) expresion -> . expresion DIFERENTE expresion
     (27) expresion -> . expresion RAND expresion
     (28) expresion -> . expresion ROR expresion
@@ -1072,18 +1072,18 @@ state 35
 
 state 36
 
-    (25) expresion -> expresion MENORIGUAL . expresion
+    (25) expresion -> expresion IGUALIGUAL . expresion
     (15) expresion -> . expresion MAS expresion
     (16) expresion -> . expresion MENOS expresion
     (17) expresion -> . expresion MULTIPLICACION expresion
     (18) expresion -> . expresion DIVISION expresion
     (19) expresion -> . expresion POTENCIA expresion
     (20) expresion -> . expresion MODULO expresion
-    (21) expresion -> . expresion IGUALIGUAL expresion
-    (22) expresion -> . expresion MAYORQUE expresion
-    (23) expresion -> . expresion MENORQUE expresion
-    (24) expresion -> . expresion MAYORIGUAL expresion
-    (25) expresion -> . expresion MENORIGUAL expresion
+    (21) expresion -> . expresion MAYORQUE expresion
+    (22) expresion -> . expresion MENORQUE expresion
+    (23) expresion -> . expresion MAYORIGUAL expresion
+    (24) expresion -> . expresion MENORIGUAL expresion
+    (25) expresion -> . expresion IGUALIGUAL expresion
     (26) expresion -> . expresion DIFERENTE expresion
     (27) expresion -> . expresion RAND expresion
     (28) expresion -> . expresion ROR expresion
@@ -1120,11 +1120,11 @@ state 37
     (18) expresion -> . expresion DIVISION expresion
     (19) expresion -> . expresion POTENCIA expresion
     (20) expresion -> . expresion MODULO expresion
-    (21) expresion -> . expresion IGUALIGUAL expresion
-    (22) expresion -> . expresion MAYORQUE expresion
-    (23) expresion -> . expresion MENORQUE expresion
-    (24) expresion -> . expresion MAYORIGUAL expresion
-    (25) expresion -> . expresion MENORIGUAL expresion
+    (21) expresion -> . expresion MAYORQUE expresion
+    (22) expresion -> . expresion MENORQUE expresion
+    (23) expresion -> . expresion MAYORIGUAL expresion
+    (24) expresion -> . expresion MENORIGUAL expresion
+    (25) expresion -> . expresion IGUALIGUAL expresion
     (26) expresion -> . expresion DIFERENTE expresion
     (27) expresion -> . expresion RAND expresion
     (28) expresion -> . expresion ROR expresion
@@ -1161,11 +1161,11 @@ state 38
     (18) expresion -> . expresion DIVISION expresion
     (19) expresion -> . expresion POTENCIA expresion
     (20) expresion -> . expresion MODULO expresion
-    (21) expresion -> . expresion IGUALIGUAL expresion
-    (22) expresion -> . expresion MAYORQUE expresion
-    (23) expresion -> . expresion MENORQUE expresion
-    (24) expresion -> . expresion MAYORIGUAL expresion
-    (25) expresion -> . expresion MENORIGUAL expresion
+    (21) expresion -> . expresion MAYORQUE expresion
+    (22) expresion -> . expresion MENORQUE expresion
+    (23) expresion -> . expresion MAYORIGUAL expresion
+    (24) expresion -> . expresion MENORIGUAL expresion
+    (25) expresion -> . expresion IGUALIGUAL expresion
     (26) expresion -> . expresion DIFERENTE expresion
     (27) expresion -> . expresion RAND expresion
     (28) expresion -> . expresion ROR expresion
@@ -1202,11 +1202,11 @@ state 39
     (18) expresion -> . expresion DIVISION expresion
     (19) expresion -> . expresion POTENCIA expresion
     (20) expresion -> . expresion MODULO expresion
-    (21) expresion -> . expresion IGUALIGUAL expresion
-    (22) expresion -> . expresion MAYORQUE expresion
-    (23) expresion -> . expresion MENORQUE expresion
-    (24) expresion -> . expresion MAYORIGUAL expresion
-    (25) expresion -> . expresion MENORIGUAL expresion
+    (21) expresion -> . expresion MAYORQUE expresion
+    (22) expresion -> . expresion MENORQUE expresion
+    (23) expresion -> . expresion MAYORIGUAL expresion
+    (24) expresion -> . expresion MENORIGUAL expresion
+    (25) expresion -> . expresion IGUALIGUAL expresion
     (26) expresion -> . expresion DIFERENTE expresion
     (27) expresion -> . expresion RAND expresion
     (28) expresion -> . expresion ROR expresion
@@ -1243,11 +1243,11 @@ state 40
     (18) expresion -> expresion . DIVISION expresion
     (19) expresion -> expresion . POTENCIA expresion
     (20) expresion -> expresion . MODULO expresion
-    (21) expresion -> expresion . IGUALIGUAL expresion
-    (22) expresion -> expresion . MAYORQUE expresion
-    (23) expresion -> expresion . MENORQUE expresion
-    (24) expresion -> expresion . MAYORIGUAL expresion
-    (25) expresion -> expresion . MENORIGUAL expresion
+    (21) expresion -> expresion . MAYORQUE expresion
+    (22) expresion -> expresion . MENORQUE expresion
+    (23) expresion -> expresion . MAYORIGUAL expresion
+    (24) expresion -> expresion . MENORIGUAL expresion
+    (25) expresion -> expresion . IGUALIGUAL expresion
     (26) expresion -> expresion . DIFERENTE expresion
     (27) expresion -> expresion . RAND expresion
     (28) expresion -> expresion . ROR expresion
@@ -1258,11 +1258,11 @@ state 40
     DIVISION        reduce using rule 30 (expresion -> MENOS expresion .)
     POTENCIA        reduce using rule 30 (expresion -> MENOS expresion .)
     MODULO          reduce using rule 30 (expresion -> MENOS expresion .)
-    IGUALIGUAL      reduce using rule 30 (expresion -> MENOS expresion .)
     MAYORQUE        reduce using rule 30 (expresion -> MENOS expresion .)
     MENORQUE        reduce using rule 30 (expresion -> MENOS expresion .)
     MAYORIGUAL      reduce using rule 30 (expresion -> MENOS expresion .)
     MENORIGUAL      reduce using rule 30 (expresion -> MENOS expresion .)
+    IGUALIGUAL      reduce using rule 30 (expresion -> MENOS expresion .)
     DIFERENTE       reduce using rule 30 (expresion -> MENOS expresion .)
     RAND            reduce using rule 30 (expresion -> MENOS expresion .)
     ROR             reduce using rule 30 (expresion -> MENOS expresion .)
@@ -1275,11 +1275,11 @@ state 40
   ! DIVISION        [ shift and go to state 29 ]
   ! POTENCIA        [ shift and go to state 30 ]
   ! MODULO          [ shift and go to state 31 ]
-  ! IGUALIGUAL      [ shift and go to state 32 ]
-  ! MAYORQUE        [ shift and go to state 33 ]
-  ! MENORQUE        [ shift and go to state 34 ]
-  ! MAYORIGUAL      [ shift and go to state 35 ]
-  ! MENORIGUAL      [ shift and go to state 36 ]
+  ! MAYORQUE        [ shift and go to state 32 ]
+  ! MENORQUE        [ shift and go to state 33 ]
+  ! MAYORIGUAL      [ shift and go to state 34 ]
+  ! MENORIGUAL      [ shift and go to state 35 ]
+  ! IGUALIGUAL      [ shift and go to state 36 ]
   ! DIFERENTE       [ shift and go to state 37 ]
   ! RAND            [ shift and go to state 38 ]
   ! ROR             [ shift and go to state 39 ]
@@ -1294,11 +1294,11 @@ state 41
     (18) expresion -> expresion . DIVISION expresion
     (19) expresion -> expresion . POTENCIA expresion
     (20) expresion -> expresion . MODULO expresion
-    (21) expresion -> expresion . IGUALIGUAL expresion
-    (22) expresion -> expresion . MAYORQUE expresion
-    (23) expresion -> expresion . MENORQUE expresion
-    (24) expresion -> expresion . MAYORIGUAL expresion
-    (25) expresion -> expresion . MENORIGUAL expresion
+    (21) expresion -> expresion . MAYORQUE expresion
+    (22) expresion -> expresion . MENORQUE expresion
+    (23) expresion -> expresion . MAYORIGUAL expresion
+    (24) expresion -> expresion . MENORIGUAL expresion
+    (25) expresion -> expresion . IGUALIGUAL expresion
     (26) expresion -> expresion . DIFERENTE expresion
     (27) expresion -> expresion . RAND expresion
     (28) expresion -> expresion . ROR expresion
@@ -1313,11 +1313,11 @@ state 41
     DIVISION        shift and go to state 29
     POTENCIA        shift and go to state 30
     MODULO          shift and go to state 31
-    IGUALIGUAL      shift and go to state 32
-    MAYORQUE        shift and go to state 33
-    MENORQUE        shift and go to state 34
-    MAYORIGUAL      shift and go to state 35
-    MENORIGUAL      shift and go to state 36
+    MAYORQUE        shift and go to state 32
+    MENORQUE        shift and go to state 33
+    MAYORIGUAL      shift and go to state 34
+    MENORIGUAL      shift and go to state 35
+    IGUALIGUAL      shift and go to state 36
     DIFERENTE       shift and go to state 37
 
   ! MAS             [ reduce using rule 29 (expresion -> RNOT expresion .) ]
@@ -1326,11 +1326,11 @@ state 41
   ! DIVISION        [ reduce using rule 29 (expresion -> RNOT expresion .) ]
   ! POTENCIA        [ reduce using rule 29 (expresion -> RNOT expresion .) ]
   ! MODULO          [ reduce using rule 29 (expresion -> RNOT expresion .) ]
-  ! IGUALIGUAL      [ reduce using rule 29 (expresion -> RNOT expresion .) ]
   ! MAYORQUE        [ reduce using rule 29 (expresion -> RNOT expresion .) ]
   ! MENORQUE        [ reduce using rule 29 (expresion -> RNOT expresion .) ]
   ! MAYORIGUAL      [ reduce using rule 29 (expresion -> RNOT expresion .) ]
   ! MENORIGUAL      [ reduce using rule 29 (expresion -> RNOT expresion .) ]
+  ! IGUALIGUAL      [ reduce using rule 29 (expresion -> RNOT expresion .) ]
   ! DIFERENTE       [ reduce using rule 29 (expresion -> RNOT expresion .) ]
   ! RAND            [ shift and go to state 38 ]
   ! ROR             [ shift and go to state 39 ]
@@ -1346,11 +1346,11 @@ state 42
     DIVISION        reduce using rule 31 (expresion -> PARA expresion PARC .)
     POTENCIA        reduce using rule 31 (expresion -> PARA expresion PARC .)
     MODULO          reduce using rule 31 (expresion -> PARA expresion PARC .)
-    IGUALIGUAL      reduce using rule 31 (expresion -> PARA expresion PARC .)
     MAYORQUE        reduce using rule 31 (expresion -> PARA expresion PARC .)
     MENORQUE        reduce using rule 31 (expresion -> PARA expresion PARC .)
     MAYORIGUAL      reduce using rule 31 (expresion -> PARA expresion PARC .)
     MENORIGUAL      reduce using rule 31 (expresion -> PARA expresion PARC .)
+    IGUALIGUAL      reduce using rule 31 (expresion -> PARA expresion PARC .)
     DIFERENTE       reduce using rule 31 (expresion -> PARA expresion PARC .)
     RAND            reduce using rule 31 (expresion -> PARA expresion PARC .)
     ROR             reduce using rule 31 (expresion -> PARA expresion PARC .)
@@ -1375,22 +1375,22 @@ state 44
     (18) expresion -> expresion . DIVISION expresion
     (19) expresion -> expresion . POTENCIA expresion
     (20) expresion -> expresion . MODULO expresion
-    (21) expresion -> expresion . IGUALIGUAL expresion
-    (22) expresion -> expresion . MAYORQUE expresion
-    (23) expresion -> expresion . MENORQUE expresion
-    (24) expresion -> expresion . MAYORIGUAL expresion
-    (25) expresion -> expresion . MENORIGUAL expresion
+    (21) expresion -> expresion . MAYORQUE expresion
+    (22) expresion -> expresion . MENORQUE expresion
+    (23) expresion -> expresion . MAYORIGUAL expresion
+    (24) expresion -> expresion . MENORIGUAL expresion
+    (25) expresion -> expresion . IGUALIGUAL expresion
     (26) expresion -> expresion . DIFERENTE expresion
     (27) expresion -> expresion . RAND expresion
     (28) expresion -> expresion . ROR expresion
 
     MAS             reduce using rule 15 (expresion -> expresion MAS expresion .)
     MENOS           reduce using rule 15 (expresion -> expresion MAS expresion .)
-    IGUALIGUAL      reduce using rule 15 (expresion -> expresion MAS expresion .)
     MAYORQUE        reduce using rule 15 (expresion -> expresion MAS expresion .)
     MENORQUE        reduce using rule 15 (expresion -> expresion MAS expresion .)
     MAYORIGUAL      reduce using rule 15 (expresion -> expresion MAS expresion .)
     MENORIGUAL      reduce using rule 15 (expresion -> expresion MAS expresion .)
+    IGUALIGUAL      reduce using rule 15 (expresion -> expresion MAS expresion .)
     DIFERENTE       reduce using rule 15 (expresion -> expresion MAS expresion .)
     RAND            reduce using rule 15 (expresion -> expresion MAS expresion .)
     ROR             reduce using rule 15 (expresion -> expresion MAS expresion .)
@@ -1407,11 +1407,11 @@ state 44
   ! MODULO          [ reduce using rule 15 (expresion -> expresion MAS expresion .) ]
   ! MAS             [ shift and go to state 26 ]
   ! MENOS           [ shift and go to state 27 ]
-  ! IGUALIGUAL      [ shift and go to state 32 ]
-  ! MAYORQUE        [ shift and go to state 33 ]
-  ! MENORQUE        [ shift and go to state 34 ]
-  ! MAYORIGUAL      [ shift and go to state 35 ]
-  ! MENORIGUAL      [ shift and go to state 36 ]
+  ! MAYORQUE        [ shift and go to state 32 ]
+  ! MENORQUE        [ shift and go to state 33 ]
+  ! MAYORIGUAL      [ shift and go to state 34 ]
+  ! MENORIGUAL      [ shift and go to state 35 ]
+  ! IGUALIGUAL      [ shift and go to state 36 ]
   ! DIFERENTE       [ shift and go to state 37 ]
   ! RAND            [ shift and go to state 38 ]
   ! ROR             [ shift and go to state 39 ]
@@ -1426,22 +1426,22 @@ state 45
     (18) expresion -> expresion . DIVISION expresion
     (19) expresion -> expresion . POTENCIA expresion
     (20) expresion -> expresion . MODULO expresion
-    (21) expresion -> expresion . IGUALIGUAL expresion
-    (22) expresion -> expresion . MAYORQUE expresion
-    (23) expresion -> expresion . MENORQUE expresion
-    (24) expresion -> expresion . MAYORIGUAL expresion
-    (25) expresion -> expresion . MENORIGUAL expresion
+    (21) expresion -> expresion . MAYORQUE expresion
+    (22) expresion -> expresion . MENORQUE expresion
+    (23) expresion -> expresion . MAYORIGUAL expresion
+    (24) expresion -> expresion . MENORIGUAL expresion
+    (25) expresion -> expresion . IGUALIGUAL expresion
     (26) expresion -> expresion . DIFERENTE expresion
     (27) expresion -> expresion . RAND expresion
     (28) expresion -> expresion . ROR expresion
 
     MAS             reduce using rule 16 (expresion -> expresion MENOS expresion .)
     MENOS           reduce using rule 16 (expresion -> expresion MENOS expresion .)
-    IGUALIGUAL      reduce using rule 16 (expresion -> expresion MENOS expresion .)
     MAYORQUE        reduce using rule 16 (expresion -> expresion MENOS expresion .)
     MENORQUE        reduce using rule 16 (expresion -> expresion MENOS expresion .)
     MAYORIGUAL      reduce using rule 16 (expresion -> expresion MENOS expresion .)
     MENORIGUAL      reduce using rule 16 (expresion -> expresion MENOS expresion .)
+    IGUALIGUAL      reduce using rule 16 (expresion -> expresion MENOS expresion .)
     DIFERENTE       reduce using rule 16 (expresion -> expresion MENOS expresion .)
     RAND            reduce using rule 16 (expresion -> expresion MENOS expresion .)
     ROR             reduce using rule 16 (expresion -> expresion MENOS expresion .)
@@ -1458,11 +1458,11 @@ state 45
   ! MODULO          [ reduce using rule 16 (expresion -> expresion MENOS expresion .) ]
   ! MAS             [ shift and go to state 26 ]
   ! MENOS           [ shift and go to state 27 ]
-  ! IGUALIGUAL      [ shift and go to state 32 ]
-  ! MAYORQUE        [ shift and go to state 33 ]
-  ! MENORQUE        [ shift and go to state 34 ]
-  ! MAYORIGUAL      [ shift and go to state 35 ]
-  ! MENORIGUAL      [ shift and go to state 36 ]
+  ! MAYORQUE        [ shift and go to state 32 ]
+  ! MENORQUE        [ shift and go to state 33 ]
+  ! MAYORIGUAL      [ shift and go to state 34 ]
+  ! MENORIGUAL      [ shift and go to state 35 ]
+  ! IGUALIGUAL      [ shift and go to state 36 ]
   ! DIFERENTE       [ shift and go to state 37 ]
   ! RAND            [ shift and go to state 38 ]
   ! ROR             [ shift and go to state 39 ]
@@ -1477,11 +1477,11 @@ state 46
     (18) expresion -> expresion . DIVISION expresion
     (19) expresion -> expresion . POTENCIA expresion
     (20) expresion -> expresion . MODULO expresion
-    (21) expresion -> expresion . IGUALIGUAL expresion
-    (22) expresion -> expresion . MAYORQUE expresion
-    (23) expresion -> expresion . MENORQUE expresion
-    (24) expresion -> expresion . MAYORIGUAL expresion
-    (25) expresion -> expresion . MENORIGUAL expresion
+    (21) expresion -> expresion . MAYORQUE expresion
+    (22) expresion -> expresion . MENORQUE expresion
+    (23) expresion -> expresion . MAYORIGUAL expresion
+    (24) expresion -> expresion . MENORIGUAL expresion
+    (25) expresion -> expresion . IGUALIGUAL expresion
     (26) expresion -> expresion . DIFERENTE expresion
     (27) expresion -> expresion . RAND expresion
     (28) expresion -> expresion . ROR expresion
@@ -1491,11 +1491,11 @@ state 46
     MULTIPLICACION  reduce using rule 17 (expresion -> expresion MULTIPLICACION expresion .)
     DIVISION        reduce using rule 17 (expresion -> expresion MULTIPLICACION expresion .)
     MODULO          reduce using rule 17 (expresion -> expresion MULTIPLICACION expresion .)
-    IGUALIGUAL      reduce using rule 17 (expresion -> expresion MULTIPLICACION expresion .)
     MAYORQUE        reduce using rule 17 (expresion -> expresion MULTIPLICACION expresion .)
     MENORQUE        reduce using rule 17 (expresion -> expresion MULTIPLICACION expresion .)
     MAYORIGUAL      reduce using rule 17 (expresion -> expresion MULTIPLICACION expresion .)
     MENORIGUAL      reduce using rule 17 (expresion -> expresion MULTIPLICACION expresion .)
+    IGUALIGUAL      reduce using rule 17 (expresion -> expresion MULTIPLICACION expresion .)
     DIFERENTE       reduce using rule 17 (expresion -> expresion MULTIPLICACION expresion .)
     RAND            reduce using rule 17 (expresion -> expresion MULTIPLICACION expresion .)
     ROR             reduce using rule 17 (expresion -> expresion MULTIPLICACION expresion .)
@@ -1509,11 +1509,11 @@ state 46
   ! MULTIPLICACION  [ shift and go to state 28 ]
   ! DIVISION        [ shift and go to state 29 ]
   ! MODULO          [ shift and go to state 31 ]
-  ! IGUALIGUAL      [ shift and go to state 32 ]
-  ! MAYORQUE        [ shift and go to state 33 ]
-  ! MENORQUE        [ shift and go to state 34 ]
-  ! MAYORIGUAL      [ shift and go to state 35 ]
-  ! MENORIGUAL      [ shift and go to state 36 ]
+  ! MAYORQUE        [ shift and go to state 32 ]
+  ! MENORQUE        [ shift and go to state 33 ]
+  ! MAYORIGUAL      [ shift and go to state 34 ]
+  ! MENORIGUAL      [ shift and go to state 35 ]
+  ! IGUALIGUAL      [ shift and go to state 36 ]
   ! DIFERENTE       [ shift and go to state 37 ]
   ! RAND            [ shift and go to state 38 ]
   ! ROR             [ shift and go to state 39 ]
@@ -1528,11 +1528,11 @@ state 47
     (18) expresion -> expresion . DIVISION expresion
     (19) expresion -> expresion . POTENCIA expresion
     (20) expresion -> expresion . MODULO expresion
-    (21) expresion -> expresion . IGUALIGUAL expresion
-    (22) expresion -> expresion . MAYORQUE expresion
-    (23) expresion -> expresion . MENORQUE expresion
-    (24) expresion -> expresion . MAYORIGUAL expresion
-    (25) expresion -> expresion . MENORIGUAL expresion
+    (21) expresion -> expresion . MAYORQUE expresion
+    (22) expresion -> expresion . MENORQUE expresion
+    (23) expresion -> expresion . MAYORIGUAL expresion
+    (24) expresion -> expresion . MENORIGUAL expresion
+    (25) expresion -> expresion . IGUALIGUAL expresion
     (26) expresion -> expresion . DIFERENTE expresion
     (27) expresion -> expresion . RAND expresion
     (28) expresion -> expresion . ROR expresion
@@ -1542,11 +1542,11 @@ state 47
     MULTIPLICACION  reduce using rule 18 (expresion -> expresion DIVISION expresion .)
     DIVISION        reduce using rule 18 (expresion -> expresion DIVISION expresion .)
     MODULO          reduce using rule 18 (expresion -> expresion DIVISION expresion .)
-    IGUALIGUAL      reduce using rule 18 (expresion -> expresion DIVISION expresion .)
     MAYORQUE        reduce using rule 18 (expresion -> expresion DIVISION expresion .)
     MENORQUE        reduce using rule 18 (expresion -> expresion DIVISION expresion .)
     MAYORIGUAL      reduce using rule 18 (expresion -> expresion DIVISION expresion .)
     MENORIGUAL      reduce using rule 18 (expresion -> expresion DIVISION expresion .)
+    IGUALIGUAL      reduce using rule 18 (expresion -> expresion DIVISION expresion .)
     DIFERENTE       reduce using rule 18 (expresion -> expresion DIVISION expresion .)
     RAND            reduce using rule 18 (expresion -> expresion DIVISION expresion .)
     ROR             reduce using rule 18 (expresion -> expresion DIVISION expresion .)
@@ -1560,11 +1560,11 @@ state 47
   ! MULTIPLICACION  [ shift and go to state 28 ]
   ! DIVISION        [ shift and go to state 29 ]
   ! MODULO          [ shift and go to state 31 ]
-  ! IGUALIGUAL      [ shift and go to state 32 ]
-  ! MAYORQUE        [ shift and go to state 33 ]
-  ! MENORQUE        [ shift and go to state 34 ]
-  ! MAYORIGUAL      [ shift and go to state 35 ]
-  ! MENORIGUAL      [ shift and go to state 36 ]
+  ! MAYORQUE        [ shift and go to state 32 ]
+  ! MENORQUE        [ shift and go to state 33 ]
+  ! MAYORIGUAL      [ shift and go to state 34 ]
+  ! MENORIGUAL      [ shift and go to state 35 ]
+  ! IGUALIGUAL      [ shift and go to state 36 ]
   ! DIFERENTE       [ shift and go to state 37 ]
   ! RAND            [ shift and go to state 38 ]
   ! ROR             [ shift and go to state 39 ]
@@ -1579,11 +1579,11 @@ state 48
     (18) expresion -> expresion . DIVISION expresion
     (19) expresion -> expresion . POTENCIA expresion
     (20) expresion -> expresion . MODULO expresion
-    (21) expresion -> expresion . IGUALIGUAL expresion
-    (22) expresion -> expresion . MAYORQUE expresion
-    (23) expresion -> expresion . MENORQUE expresion
-    (24) expresion -> expresion . MAYORIGUAL expresion
-    (25) expresion -> expresion . MENORIGUAL expresion
+    (21) expresion -> expresion . MAYORQUE expresion
+    (22) expresion -> expresion . MENORQUE expresion
+    (23) expresion -> expresion . MAYORIGUAL expresion
+    (24) expresion -> expresion . MENORIGUAL expresion
+    (25) expresion -> expresion . IGUALIGUAL expresion
     (26) expresion -> expresion . DIFERENTE expresion
     (27) expresion -> expresion . RAND expresion
     (28) expresion -> expresion . ROR expresion
@@ -1594,11 +1594,11 @@ state 48
     DIVISION        reduce using rule 19 (expresion -> expresion POTENCIA expresion .)
     POTENCIA        reduce using rule 19 (expresion -> expresion POTENCIA expresion .)
     MODULO          reduce using rule 19 (expresion -> expresion POTENCIA expresion .)
-    IGUALIGUAL      reduce using rule 19 (expresion -> expresion POTENCIA expresion .)
     MAYORQUE        reduce using rule 19 (expresion -> expresion POTENCIA expresion .)
     MENORQUE        reduce using rule 19 (expresion -> expresion POTENCIA expresion .)
     MAYORIGUAL      reduce using rule 19 (expresion -> expresion POTENCIA expresion .)
     MENORIGUAL      reduce using rule 19 (expresion -> expresion POTENCIA expresion .)
+    IGUALIGUAL      reduce using rule 19 (expresion -> expresion POTENCIA expresion .)
     DIFERENTE       reduce using rule 19 (expresion -> expresion POTENCIA expresion .)
     RAND            reduce using rule 19 (expresion -> expresion POTENCIA expresion .)
     ROR             reduce using rule 19 (expresion -> expresion POTENCIA expresion .)
@@ -1611,11 +1611,11 @@ state 48
   ! DIVISION        [ shift and go to state 29 ]
   ! POTENCIA        [ shift and go to state 30 ]
   ! MODULO          [ shift and go to state 31 ]
-  ! IGUALIGUAL      [ shift and go to state 32 ]
-  ! MAYORQUE        [ shift and go to state 33 ]
-  ! MENORQUE        [ shift and go to state 34 ]
-  ! MAYORIGUAL      [ shift and go to state 35 ]
-  ! MENORIGUAL      [ shift and go to state 36 ]
+  ! MAYORQUE        [ shift and go to state 32 ]
+  ! MENORQUE        [ shift and go to state 33 ]
+  ! MAYORIGUAL      [ shift and go to state 34 ]
+  ! MENORIGUAL      [ shift and go to state 35 ]
+  ! IGUALIGUAL      [ shift and go to state 36 ]
   ! DIFERENTE       [ shift and go to state 37 ]
   ! RAND            [ shift and go to state 38 ]
   ! ROR             [ shift and go to state 39 ]
@@ -1630,11 +1630,11 @@ state 49
     (18) expresion -> expresion . DIVISION expresion
     (19) expresion -> expresion . POTENCIA expresion
     (20) expresion -> expresion . MODULO expresion
-    (21) expresion -> expresion . IGUALIGUAL expresion
-    (22) expresion -> expresion . MAYORQUE expresion
-    (23) expresion -> expresion . MENORQUE expresion
-    (24) expresion -> expresion . MAYORIGUAL expresion
-    (25) expresion -> expresion . MENORIGUAL expresion
+    (21) expresion -> expresion . MAYORQUE expresion
+    (22) expresion -> expresion . MENORQUE expresion
+    (23) expresion -> expresion . MAYORIGUAL expresion
+    (24) expresion -> expresion . MENORIGUAL expresion
+    (25) expresion -> expresion . IGUALIGUAL expresion
     (26) expresion -> expresion . DIFERENTE expresion
     (27) expresion -> expresion . RAND expresion
     (28) expresion -> expresion . ROR expresion
@@ -1644,11 +1644,11 @@ state 49
     MULTIPLICACION  reduce using rule 20 (expresion -> expresion MODULO expresion .)
     DIVISION        reduce using rule 20 (expresion -> expresion MODULO expresion .)
     MODULO          reduce using rule 20 (expresion -> expresion MODULO expresion .)
-    IGUALIGUAL      reduce using rule 20 (expresion -> expresion MODULO expresion .)
     MAYORQUE        reduce using rule 20 (expresion -> expresion MODULO expresion .)
     MENORQUE        reduce using rule 20 (expresion -> expresion MODULO expresion .)
     MAYORIGUAL      reduce using rule 20 (expresion -> expresion MODULO expresion .)
     MENORIGUAL      reduce using rule 20 (expresion -> expresion MODULO expresion .)
+    IGUALIGUAL      reduce using rule 20 (expresion -> expresion MODULO expresion .)
     DIFERENTE       reduce using rule 20 (expresion -> expresion MODULO expresion .)
     RAND            reduce using rule 20 (expresion -> expresion MODULO expresion .)
     ROR             reduce using rule 20 (expresion -> expresion MODULO expresion .)
@@ -1662,11 +1662,11 @@ state 49
   ! MULTIPLICACION  [ shift and go to state 28 ]
   ! DIVISION        [ shift and go to state 29 ]
   ! MODULO          [ shift and go to state 31 ]
-  ! IGUALIGUAL      [ shift and go to state 32 ]
-  ! MAYORQUE        [ shift and go to state 33 ]
-  ! MENORQUE        [ shift and go to state 34 ]
-  ! MAYORIGUAL      [ shift and go to state 35 ]
-  ! MENORIGUAL      [ shift and go to state 36 ]
+  ! MAYORQUE        [ shift and go to state 32 ]
+  ! MENORQUE        [ shift and go to state 33 ]
+  ! MAYORIGUAL      [ shift and go to state 34 ]
+  ! MENORIGUAL      [ shift and go to state 35 ]
+  ! IGUALIGUAL      [ shift and go to state 36 ]
   ! DIFERENTE       [ shift and go to state 37 ]
   ! RAND            [ shift and go to state 38 ]
   ! ROR             [ shift and go to state 39 ]
@@ -1674,32 +1674,32 @@ state 49
 
 state 50
 
-    (21) expresion -> expresion IGUALIGUAL expresion .
+    (21) expresion -> expresion MAYORQUE expresion .
     (15) expresion -> expresion . MAS expresion
     (16) expresion -> expresion . MENOS expresion
     (17) expresion -> expresion . MULTIPLICACION expresion
     (18) expresion -> expresion . DIVISION expresion
     (19) expresion -> expresion . POTENCIA expresion
     (20) expresion -> expresion . MODULO expresion
-    (21) expresion -> expresion . IGUALIGUAL expresion
-    (22) expresion -> expresion . MAYORQUE expresion
-    (23) expresion -> expresion . MENORQUE expresion
-    (24) expresion -> expresion . MAYORIGUAL expresion
-    (25) expresion -> expresion . MENORIGUAL expresion
+    (21) expresion -> expresion . MAYORQUE expresion
+    (22) expresion -> expresion . MENORQUE expresion
+    (23) expresion -> expresion . MAYORIGUAL expresion
+    (24) expresion -> expresion . MENORIGUAL expresion
+    (25) expresion -> expresion . IGUALIGUAL expresion
     (26) expresion -> expresion . DIFERENTE expresion
     (27) expresion -> expresion . RAND expresion
     (28) expresion -> expresion . ROR expresion
 
-    IGUALIGUAL      reduce using rule 21 (expresion -> expresion IGUALIGUAL expresion .)
-    MAYORQUE        reduce using rule 21 (expresion -> expresion IGUALIGUAL expresion .)
-    MENORQUE        reduce using rule 21 (expresion -> expresion IGUALIGUAL expresion .)
-    MAYORIGUAL      reduce using rule 21 (expresion -> expresion IGUALIGUAL expresion .)
-    MENORIGUAL      reduce using rule 21 (expresion -> expresion IGUALIGUAL expresion .)
-    DIFERENTE       reduce using rule 21 (expresion -> expresion IGUALIGUAL expresion .)
-    RAND            reduce using rule 21 (expresion -> expresion IGUALIGUAL expresion .)
-    ROR             reduce using rule 21 (expresion -> expresion IGUALIGUAL expresion .)
-    PARC            reduce using rule 21 (expresion -> expresion IGUALIGUAL expresion .)
-    COMA            reduce using rule 21 (expresion -> expresion IGUALIGUAL expresion .)
+    MAYORQUE        reduce using rule 21 (expresion -> expresion MAYORQUE expresion .)
+    MENORQUE        reduce using rule 21 (expresion -> expresion MAYORQUE expresion .)
+    MAYORIGUAL      reduce using rule 21 (expresion -> expresion MAYORQUE expresion .)
+    MENORIGUAL      reduce using rule 21 (expresion -> expresion MAYORQUE expresion .)
+    IGUALIGUAL      reduce using rule 21 (expresion -> expresion MAYORQUE expresion .)
+    DIFERENTE       reduce using rule 21 (expresion -> expresion MAYORQUE expresion .)
+    RAND            reduce using rule 21 (expresion -> expresion MAYORQUE expresion .)
+    ROR             reduce using rule 21 (expresion -> expresion MAYORQUE expresion .)
+    PARC            reduce using rule 21 (expresion -> expresion MAYORQUE expresion .)
+    COMA            reduce using rule 21 (expresion -> expresion MAYORQUE expresion .)
     MAS             shift and go to state 26
     MENOS           shift and go to state 27
     MULTIPLICACION  shift and go to state 28
@@ -1707,17 +1707,17 @@ state 50
     POTENCIA        shift and go to state 30
     MODULO          shift and go to state 31
 
-  ! MAS             [ reduce using rule 21 (expresion -> expresion IGUALIGUAL expresion .) ]
-  ! MENOS           [ reduce using rule 21 (expresion -> expresion IGUALIGUAL expresion .) ]
-  ! MULTIPLICACION  [ reduce using rule 21 (expresion -> expresion IGUALIGUAL expresion .) ]
-  ! DIVISION        [ reduce using rule 21 (expresion -> expresion IGUALIGUAL expresion .) ]
-  ! POTENCIA        [ reduce using rule 21 (expresion -> expresion IGUALIGUAL expresion .) ]
-  ! MODULO          [ reduce using rule 21 (expresion -> expresion IGUALIGUAL expresion .) ]
-  ! IGUALIGUAL      [ shift and go to state 32 ]
-  ! MAYORQUE        [ shift and go to state 33 ]
-  ! MENORQUE        [ shift and go to state 34 ]
-  ! MAYORIGUAL      [ shift and go to state 35 ]
-  ! MENORIGUAL      [ shift and go to state 36 ]
+  ! MAS             [ reduce using rule 21 (expresion -> expresion MAYORQUE expresion .) ]
+  ! MENOS           [ reduce using rule 21 (expresion -> expresion MAYORQUE expresion .) ]
+  ! MULTIPLICACION  [ reduce using rule 21 (expresion -> expresion MAYORQUE expresion .) ]
+  ! DIVISION        [ reduce using rule 21 (expresion -> expresion MAYORQUE expresion .) ]
+  ! POTENCIA        [ reduce using rule 21 (expresion -> expresion MAYORQUE expresion .) ]
+  ! MODULO          [ reduce using rule 21 (expresion -> expresion MAYORQUE expresion .) ]
+  ! MAYORQUE        [ shift and go to state 32 ]
+  ! MENORQUE        [ shift and go to state 33 ]
+  ! MAYORIGUAL      [ shift and go to state 34 ]
+  ! MENORIGUAL      [ shift and go to state 35 ]
+  ! IGUALIGUAL      [ shift and go to state 36 ]
   ! DIFERENTE       [ shift and go to state 37 ]
   ! RAND            [ shift and go to state 38 ]
   ! ROR             [ shift and go to state 39 ]
@@ -1725,32 +1725,32 @@ state 50
 
 state 51
 
-    (22) expresion -> expresion MAYORQUE expresion .
+    (22) expresion -> expresion MENORQUE expresion .
     (15) expresion -> expresion . MAS expresion
     (16) expresion -> expresion . MENOS expresion
     (17) expresion -> expresion . MULTIPLICACION expresion
     (18) expresion -> expresion . DIVISION expresion
     (19) expresion -> expresion . POTENCIA expresion
     (20) expresion -> expresion . MODULO expresion
-    (21) expresion -> expresion . IGUALIGUAL expresion
-    (22) expresion -> expresion . MAYORQUE expresion
-    (23) expresion -> expresion . MENORQUE expresion
-    (24) expresion -> expresion . MAYORIGUAL expresion
-    (25) expresion -> expresion . MENORIGUAL expresion
+    (21) expresion -> expresion . MAYORQUE expresion
+    (22) expresion -> expresion . MENORQUE expresion
+    (23) expresion -> expresion . MAYORIGUAL expresion
+    (24) expresion -> expresion . MENORIGUAL expresion
+    (25) expresion -> expresion . IGUALIGUAL expresion
     (26) expresion -> expresion . DIFERENTE expresion
     (27) expresion -> expresion . RAND expresion
     (28) expresion -> expresion . ROR expresion
 
-    IGUALIGUAL      reduce using rule 22 (expresion -> expresion MAYORQUE expresion .)
-    MAYORQUE        reduce using rule 22 (expresion -> expresion MAYORQUE expresion .)
-    MENORQUE        reduce using rule 22 (expresion -> expresion MAYORQUE expresion .)
-    MAYORIGUAL      reduce using rule 22 (expresion -> expresion MAYORQUE expresion .)
-    MENORIGUAL      reduce using rule 22 (expresion -> expresion MAYORQUE expresion .)
-    DIFERENTE       reduce using rule 22 (expresion -> expresion MAYORQUE expresion .)
-    RAND            reduce using rule 22 (expresion -> expresion MAYORQUE expresion .)
-    ROR             reduce using rule 22 (expresion -> expresion MAYORQUE expresion .)
-    PARC            reduce using rule 22 (expresion -> expresion MAYORQUE expresion .)
-    COMA            reduce using rule 22 (expresion -> expresion MAYORQUE expresion .)
+    MAYORQUE        reduce using rule 22 (expresion -> expresion MENORQUE expresion .)
+    MENORQUE        reduce using rule 22 (expresion -> expresion MENORQUE expresion .)
+    MAYORIGUAL      reduce using rule 22 (expresion -> expresion MENORQUE expresion .)
+    MENORIGUAL      reduce using rule 22 (expresion -> expresion MENORQUE expresion .)
+    IGUALIGUAL      reduce using rule 22 (expresion -> expresion MENORQUE expresion .)
+    DIFERENTE       reduce using rule 22 (expresion -> expresion MENORQUE expresion .)
+    RAND            reduce using rule 22 (expresion -> expresion MENORQUE expresion .)
+    ROR             reduce using rule 22 (expresion -> expresion MENORQUE expresion .)
+    PARC            reduce using rule 22 (expresion -> expresion MENORQUE expresion .)
+    COMA            reduce using rule 22 (expresion -> expresion MENORQUE expresion .)
     MAS             shift and go to state 26
     MENOS           shift and go to state 27
     MULTIPLICACION  shift and go to state 28
@@ -1758,17 +1758,17 @@ state 51
     POTENCIA        shift and go to state 30
     MODULO          shift and go to state 31
 
-  ! MAS             [ reduce using rule 22 (expresion -> expresion MAYORQUE expresion .) ]
-  ! MENOS           [ reduce using rule 22 (expresion -> expresion MAYORQUE expresion .) ]
-  ! MULTIPLICACION  [ reduce using rule 22 (expresion -> expresion MAYORQUE expresion .) ]
-  ! DIVISION        [ reduce using rule 22 (expresion -> expresion MAYORQUE expresion .) ]
-  ! POTENCIA        [ reduce using rule 22 (expresion -> expresion MAYORQUE expresion .) ]
-  ! MODULO          [ reduce using rule 22 (expresion -> expresion MAYORQUE expresion .) ]
-  ! IGUALIGUAL      [ shift and go to state 32 ]
-  ! MAYORQUE        [ shift and go to state 33 ]
-  ! MENORQUE        [ shift and go to state 34 ]
-  ! MAYORIGUAL      [ shift and go to state 35 ]
-  ! MENORIGUAL      [ shift and go to state 36 ]
+  ! MAS             [ reduce using rule 22 (expresion -> expresion MENORQUE expresion .) ]
+  ! MENOS           [ reduce using rule 22 (expresion -> expresion MENORQUE expresion .) ]
+  ! MULTIPLICACION  [ reduce using rule 22 (expresion -> expresion MENORQUE expresion .) ]
+  ! DIVISION        [ reduce using rule 22 (expresion -> expresion MENORQUE expresion .) ]
+  ! POTENCIA        [ reduce using rule 22 (expresion -> expresion MENORQUE expresion .) ]
+  ! MODULO          [ reduce using rule 22 (expresion -> expresion MENORQUE expresion .) ]
+  ! MAYORQUE        [ shift and go to state 32 ]
+  ! MENORQUE        [ shift and go to state 33 ]
+  ! MAYORIGUAL      [ shift and go to state 34 ]
+  ! MENORIGUAL      [ shift and go to state 35 ]
+  ! IGUALIGUAL      [ shift and go to state 36 ]
   ! DIFERENTE       [ shift and go to state 37 ]
   ! RAND            [ shift and go to state 38 ]
   ! ROR             [ shift and go to state 39 ]
@@ -1776,32 +1776,32 @@ state 51
 
 state 52
 
-    (23) expresion -> expresion MENORQUE expresion .
+    (23) expresion -> expresion MAYORIGUAL expresion .
     (15) expresion -> expresion . MAS expresion
     (16) expresion -> expresion . MENOS expresion
     (17) expresion -> expresion . MULTIPLICACION expresion
     (18) expresion -> expresion . DIVISION expresion
     (19) expresion -> expresion . POTENCIA expresion
     (20) expresion -> expresion . MODULO expresion
-    (21) expresion -> expresion . IGUALIGUAL expresion
-    (22) expresion -> expresion . MAYORQUE expresion
-    (23) expresion -> expresion . MENORQUE expresion
-    (24) expresion -> expresion . MAYORIGUAL expresion
-    (25) expresion -> expresion . MENORIGUAL expresion
+    (21) expresion -> expresion . MAYORQUE expresion
+    (22) expresion -> expresion . MENORQUE expresion
+    (23) expresion -> expresion . MAYORIGUAL expresion
+    (24) expresion -> expresion . MENORIGUAL expresion
+    (25) expresion -> expresion . IGUALIGUAL expresion
     (26) expresion -> expresion . DIFERENTE expresion
     (27) expresion -> expresion . RAND expresion
     (28) expresion -> expresion . ROR expresion
 
-    IGUALIGUAL      reduce using rule 23 (expresion -> expresion MENORQUE expresion .)
-    MAYORQUE        reduce using rule 23 (expresion -> expresion MENORQUE expresion .)
-    MENORQUE        reduce using rule 23 (expresion -> expresion MENORQUE expresion .)
-    MAYORIGUAL      reduce using rule 23 (expresion -> expresion MENORQUE expresion .)
-    MENORIGUAL      reduce using rule 23 (expresion -> expresion MENORQUE expresion .)
-    DIFERENTE       reduce using rule 23 (expresion -> expresion MENORQUE expresion .)
-    RAND            reduce using rule 23 (expresion -> expresion MENORQUE expresion .)
-    ROR             reduce using rule 23 (expresion -> expresion MENORQUE expresion .)
-    PARC            reduce using rule 23 (expresion -> expresion MENORQUE expresion .)
-    COMA            reduce using rule 23 (expresion -> expresion MENORQUE expresion .)
+    MAYORQUE        reduce using rule 23 (expresion -> expresion MAYORIGUAL expresion .)
+    MENORQUE        reduce using rule 23 (expresion -> expresion MAYORIGUAL expresion .)
+    MAYORIGUAL      reduce using rule 23 (expresion -> expresion MAYORIGUAL expresion .)
+    MENORIGUAL      reduce using rule 23 (expresion -> expresion MAYORIGUAL expresion .)
+    IGUALIGUAL      reduce using rule 23 (expresion -> expresion MAYORIGUAL expresion .)
+    DIFERENTE       reduce using rule 23 (expresion -> expresion MAYORIGUAL expresion .)
+    RAND            reduce using rule 23 (expresion -> expresion MAYORIGUAL expresion .)
+    ROR             reduce using rule 23 (expresion -> expresion MAYORIGUAL expresion .)
+    PARC            reduce using rule 23 (expresion -> expresion MAYORIGUAL expresion .)
+    COMA            reduce using rule 23 (expresion -> expresion MAYORIGUAL expresion .)
     MAS             shift and go to state 26
     MENOS           shift and go to state 27
     MULTIPLICACION  shift and go to state 28
@@ -1809,17 +1809,17 @@ state 52
     POTENCIA        shift and go to state 30
     MODULO          shift and go to state 31
 
-  ! MAS             [ reduce using rule 23 (expresion -> expresion MENORQUE expresion .) ]
-  ! MENOS           [ reduce using rule 23 (expresion -> expresion MENORQUE expresion .) ]
-  ! MULTIPLICACION  [ reduce using rule 23 (expresion -> expresion MENORQUE expresion .) ]
-  ! DIVISION        [ reduce using rule 23 (expresion -> expresion MENORQUE expresion .) ]
-  ! POTENCIA        [ reduce using rule 23 (expresion -> expresion MENORQUE expresion .) ]
-  ! MODULO          [ reduce using rule 23 (expresion -> expresion MENORQUE expresion .) ]
-  ! IGUALIGUAL      [ shift and go to state 32 ]
-  ! MAYORQUE        [ shift and go to state 33 ]
-  ! MENORQUE        [ shift and go to state 34 ]
-  ! MAYORIGUAL      [ shift and go to state 35 ]
-  ! MENORIGUAL      [ shift and go to state 36 ]
+  ! MAS             [ reduce using rule 23 (expresion -> expresion MAYORIGUAL expresion .) ]
+  ! MENOS           [ reduce using rule 23 (expresion -> expresion MAYORIGUAL expresion .) ]
+  ! MULTIPLICACION  [ reduce using rule 23 (expresion -> expresion MAYORIGUAL expresion .) ]
+  ! DIVISION        [ reduce using rule 23 (expresion -> expresion MAYORIGUAL expresion .) ]
+  ! POTENCIA        [ reduce using rule 23 (expresion -> expresion MAYORIGUAL expresion .) ]
+  ! MODULO          [ reduce using rule 23 (expresion -> expresion MAYORIGUAL expresion .) ]
+  ! MAYORQUE        [ shift and go to state 32 ]
+  ! MENORQUE        [ shift and go to state 33 ]
+  ! MAYORIGUAL      [ shift and go to state 34 ]
+  ! MENORIGUAL      [ shift and go to state 35 ]
+  ! IGUALIGUAL      [ shift and go to state 36 ]
   ! DIFERENTE       [ shift and go to state 37 ]
   ! RAND            [ shift and go to state 38 ]
   ! ROR             [ shift and go to state 39 ]
@@ -1827,32 +1827,32 @@ state 52
 
 state 53
 
-    (24) expresion -> expresion MAYORIGUAL expresion .
+    (24) expresion -> expresion MENORIGUAL expresion .
     (15) expresion -> expresion . MAS expresion
     (16) expresion -> expresion . MENOS expresion
     (17) expresion -> expresion . MULTIPLICACION expresion
     (18) expresion -> expresion . DIVISION expresion
     (19) expresion -> expresion . POTENCIA expresion
     (20) expresion -> expresion . MODULO expresion
-    (21) expresion -> expresion . IGUALIGUAL expresion
-    (22) expresion -> expresion . MAYORQUE expresion
-    (23) expresion -> expresion . MENORQUE expresion
-    (24) expresion -> expresion . MAYORIGUAL expresion
-    (25) expresion -> expresion . MENORIGUAL expresion
+    (21) expresion -> expresion . MAYORQUE expresion
+    (22) expresion -> expresion . MENORQUE expresion
+    (23) expresion -> expresion . MAYORIGUAL expresion
+    (24) expresion -> expresion . MENORIGUAL expresion
+    (25) expresion -> expresion . IGUALIGUAL expresion
     (26) expresion -> expresion . DIFERENTE expresion
     (27) expresion -> expresion . RAND expresion
     (28) expresion -> expresion . ROR expresion
 
-    IGUALIGUAL      reduce using rule 24 (expresion -> expresion MAYORIGUAL expresion .)
-    MAYORQUE        reduce using rule 24 (expresion -> expresion MAYORIGUAL expresion .)
-    MENORQUE        reduce using rule 24 (expresion -> expresion MAYORIGUAL expresion .)
-    MAYORIGUAL      reduce using rule 24 (expresion -> expresion MAYORIGUAL expresion .)
-    MENORIGUAL      reduce using rule 24 (expresion -> expresion MAYORIGUAL expresion .)
-    DIFERENTE       reduce using rule 24 (expresion -> expresion MAYORIGUAL expresion .)
-    RAND            reduce using rule 24 (expresion -> expresion MAYORIGUAL expresion .)
-    ROR             reduce using rule 24 (expresion -> expresion MAYORIGUAL expresion .)
-    PARC            reduce using rule 24 (expresion -> expresion MAYORIGUAL expresion .)
-    COMA            reduce using rule 24 (expresion -> expresion MAYORIGUAL expresion .)
+    MAYORQUE        reduce using rule 24 (expresion -> expresion MENORIGUAL expresion .)
+    MENORQUE        reduce using rule 24 (expresion -> expresion MENORIGUAL expresion .)
+    MAYORIGUAL      reduce using rule 24 (expresion -> expresion MENORIGUAL expresion .)
+    MENORIGUAL      reduce using rule 24 (expresion -> expresion MENORIGUAL expresion .)
+    IGUALIGUAL      reduce using rule 24 (expresion -> expresion MENORIGUAL expresion .)
+    DIFERENTE       reduce using rule 24 (expresion -> expresion MENORIGUAL expresion .)
+    RAND            reduce using rule 24 (expresion -> expresion MENORIGUAL expresion .)
+    ROR             reduce using rule 24 (expresion -> expresion MENORIGUAL expresion .)
+    PARC            reduce using rule 24 (expresion -> expresion MENORIGUAL expresion .)
+    COMA            reduce using rule 24 (expresion -> expresion MENORIGUAL expresion .)
     MAS             shift and go to state 26
     MENOS           shift and go to state 27
     MULTIPLICACION  shift and go to state 28
@@ -1860,17 +1860,17 @@ state 53
     POTENCIA        shift and go to state 30
     MODULO          shift and go to state 31
 
-  ! MAS             [ reduce using rule 24 (expresion -> expresion MAYORIGUAL expresion .) ]
-  ! MENOS           [ reduce using rule 24 (expresion -> expresion MAYORIGUAL expresion .) ]
-  ! MULTIPLICACION  [ reduce using rule 24 (expresion -> expresion MAYORIGUAL expresion .) ]
-  ! DIVISION        [ reduce using rule 24 (expresion -> expresion MAYORIGUAL expresion .) ]
-  ! POTENCIA        [ reduce using rule 24 (expresion -> expresion MAYORIGUAL expresion .) ]
-  ! MODULO          [ reduce using rule 24 (expresion -> expresion MAYORIGUAL expresion .) ]
-  ! IGUALIGUAL      [ shift and go to state 32 ]
-  ! MAYORQUE        [ shift and go to state 33 ]
-  ! MENORQUE        [ shift and go to state 34 ]
-  ! MAYORIGUAL      [ shift and go to state 35 ]
-  ! MENORIGUAL      [ shift and go to state 36 ]
+  ! MAS             [ reduce using rule 24 (expresion -> expresion MENORIGUAL expresion .) ]
+  ! MENOS           [ reduce using rule 24 (expresion -> expresion MENORIGUAL expresion .) ]
+  ! MULTIPLICACION  [ reduce using rule 24 (expresion -> expresion MENORIGUAL expresion .) ]
+  ! DIVISION        [ reduce using rule 24 (expresion -> expresion MENORIGUAL expresion .) ]
+  ! POTENCIA        [ reduce using rule 24 (expresion -> expresion MENORIGUAL expresion .) ]
+  ! MODULO          [ reduce using rule 24 (expresion -> expresion MENORIGUAL expresion .) ]
+  ! MAYORQUE        [ shift and go to state 32 ]
+  ! MENORQUE        [ shift and go to state 33 ]
+  ! MAYORIGUAL      [ shift and go to state 34 ]
+  ! MENORIGUAL      [ shift and go to state 35 ]
+  ! IGUALIGUAL      [ shift and go to state 36 ]
   ! DIFERENTE       [ shift and go to state 37 ]
   ! RAND            [ shift and go to state 38 ]
   ! ROR             [ shift and go to state 39 ]
@@ -1878,32 +1878,32 @@ state 53
 
 state 54
 
-    (25) expresion -> expresion MENORIGUAL expresion .
+    (25) expresion -> expresion IGUALIGUAL expresion .
     (15) expresion -> expresion . MAS expresion
     (16) expresion -> expresion . MENOS expresion
     (17) expresion -> expresion . MULTIPLICACION expresion
     (18) expresion -> expresion . DIVISION expresion
     (19) expresion -> expresion . POTENCIA expresion
     (20) expresion -> expresion . MODULO expresion
-    (21) expresion -> expresion . IGUALIGUAL expresion
-    (22) expresion -> expresion . MAYORQUE expresion
-    (23) expresion -> expresion . MENORQUE expresion
-    (24) expresion -> expresion . MAYORIGUAL expresion
-    (25) expresion -> expresion . MENORIGUAL expresion
+    (21) expresion -> expresion . MAYORQUE expresion
+    (22) expresion -> expresion . MENORQUE expresion
+    (23) expresion -> expresion . MAYORIGUAL expresion
+    (24) expresion -> expresion . MENORIGUAL expresion
+    (25) expresion -> expresion . IGUALIGUAL expresion
     (26) expresion -> expresion . DIFERENTE expresion
     (27) expresion -> expresion . RAND expresion
     (28) expresion -> expresion . ROR expresion
 
-    IGUALIGUAL      reduce using rule 25 (expresion -> expresion MENORIGUAL expresion .)
-    MAYORQUE        reduce using rule 25 (expresion -> expresion MENORIGUAL expresion .)
-    MENORQUE        reduce using rule 25 (expresion -> expresion MENORIGUAL expresion .)
-    MAYORIGUAL      reduce using rule 25 (expresion -> expresion MENORIGUAL expresion .)
-    MENORIGUAL      reduce using rule 25 (expresion -> expresion MENORIGUAL expresion .)
-    DIFERENTE       reduce using rule 25 (expresion -> expresion MENORIGUAL expresion .)
-    RAND            reduce using rule 25 (expresion -> expresion MENORIGUAL expresion .)
-    ROR             reduce using rule 25 (expresion -> expresion MENORIGUAL expresion .)
-    PARC            reduce using rule 25 (expresion -> expresion MENORIGUAL expresion .)
-    COMA            reduce using rule 25 (expresion -> expresion MENORIGUAL expresion .)
+    MAYORQUE        reduce using rule 25 (expresion -> expresion IGUALIGUAL expresion .)
+    MENORQUE        reduce using rule 25 (expresion -> expresion IGUALIGUAL expresion .)
+    MAYORIGUAL      reduce using rule 25 (expresion -> expresion IGUALIGUAL expresion .)
+    MENORIGUAL      reduce using rule 25 (expresion -> expresion IGUALIGUAL expresion .)
+    IGUALIGUAL      reduce using rule 25 (expresion -> expresion IGUALIGUAL expresion .)
+    DIFERENTE       reduce using rule 25 (expresion -> expresion IGUALIGUAL expresion .)
+    RAND            reduce using rule 25 (expresion -> expresion IGUALIGUAL expresion .)
+    ROR             reduce using rule 25 (expresion -> expresion IGUALIGUAL expresion .)
+    PARC            reduce using rule 25 (expresion -> expresion IGUALIGUAL expresion .)
+    COMA            reduce using rule 25 (expresion -> expresion IGUALIGUAL expresion .)
     MAS             shift and go to state 26
     MENOS           shift and go to state 27
     MULTIPLICACION  shift and go to state 28
@@ -1911,17 +1911,17 @@ state 54
     POTENCIA        shift and go to state 30
     MODULO          shift and go to state 31
 
-  ! MAS             [ reduce using rule 25 (expresion -> expresion MENORIGUAL expresion .) ]
-  ! MENOS           [ reduce using rule 25 (expresion -> expresion MENORIGUAL expresion .) ]
-  ! MULTIPLICACION  [ reduce using rule 25 (expresion -> expresion MENORIGUAL expresion .) ]
-  ! DIVISION        [ reduce using rule 25 (expresion -> expresion MENORIGUAL expresion .) ]
-  ! POTENCIA        [ reduce using rule 25 (expresion -> expresion MENORIGUAL expresion .) ]
-  ! MODULO          [ reduce using rule 25 (expresion -> expresion MENORIGUAL expresion .) ]
-  ! IGUALIGUAL      [ shift and go to state 32 ]
-  ! MAYORQUE        [ shift and go to state 33 ]
-  ! MENORQUE        [ shift and go to state 34 ]
-  ! MAYORIGUAL      [ shift and go to state 35 ]
-  ! MENORIGUAL      [ shift and go to state 36 ]
+  ! MAS             [ reduce using rule 25 (expresion -> expresion IGUALIGUAL expresion .) ]
+  ! MENOS           [ reduce using rule 25 (expresion -> expresion IGUALIGUAL expresion .) ]
+  ! MULTIPLICACION  [ reduce using rule 25 (expresion -> expresion IGUALIGUAL expresion .) ]
+  ! DIVISION        [ reduce using rule 25 (expresion -> expresion IGUALIGUAL expresion .) ]
+  ! POTENCIA        [ reduce using rule 25 (expresion -> expresion IGUALIGUAL expresion .) ]
+  ! MODULO          [ reduce using rule 25 (expresion -> expresion IGUALIGUAL expresion .) ]
+  ! MAYORQUE        [ shift and go to state 32 ]
+  ! MENORQUE        [ shift and go to state 33 ]
+  ! MAYORIGUAL      [ shift and go to state 34 ]
+  ! MENORIGUAL      [ shift and go to state 35 ]
+  ! IGUALIGUAL      [ shift and go to state 36 ]
   ! DIFERENTE       [ shift and go to state 37 ]
   ! RAND            [ shift and go to state 38 ]
   ! ROR             [ shift and go to state 39 ]
@@ -1936,20 +1936,20 @@ state 55
     (18) expresion -> expresion . DIVISION expresion
     (19) expresion -> expresion . POTENCIA expresion
     (20) expresion -> expresion . MODULO expresion
-    (21) expresion -> expresion . IGUALIGUAL expresion
-    (22) expresion -> expresion . MAYORQUE expresion
-    (23) expresion -> expresion . MENORQUE expresion
-    (24) expresion -> expresion . MAYORIGUAL expresion
-    (25) expresion -> expresion . MENORIGUAL expresion
+    (21) expresion -> expresion . MAYORQUE expresion
+    (22) expresion -> expresion . MENORQUE expresion
+    (23) expresion -> expresion . MAYORIGUAL expresion
+    (24) expresion -> expresion . MENORIGUAL expresion
+    (25) expresion -> expresion . IGUALIGUAL expresion
     (26) expresion -> expresion . DIFERENTE expresion
     (27) expresion -> expresion . RAND expresion
     (28) expresion -> expresion . ROR expresion
 
-    IGUALIGUAL      reduce using rule 26 (expresion -> expresion DIFERENTE expresion .)
     MAYORQUE        reduce using rule 26 (expresion -> expresion DIFERENTE expresion .)
     MENORQUE        reduce using rule 26 (expresion -> expresion DIFERENTE expresion .)
     MAYORIGUAL      reduce using rule 26 (expresion -> expresion DIFERENTE expresion .)
     MENORIGUAL      reduce using rule 26 (expresion -> expresion DIFERENTE expresion .)
+    IGUALIGUAL      reduce using rule 26 (expresion -> expresion DIFERENTE expresion .)
     DIFERENTE       reduce using rule 26 (expresion -> expresion DIFERENTE expresion .)
     RAND            reduce using rule 26 (expresion -> expresion DIFERENTE expresion .)
     ROR             reduce using rule 26 (expresion -> expresion DIFERENTE expresion .)
@@ -1968,11 +1968,11 @@ state 55
   ! DIVISION        [ reduce using rule 26 (expresion -> expresion DIFERENTE expresion .) ]
   ! POTENCIA        [ reduce using rule 26 (expresion -> expresion DIFERENTE expresion .) ]
   ! MODULO          [ reduce using rule 26 (expresion -> expresion DIFERENTE expresion .) ]
-  ! IGUALIGUAL      [ shift and go to state 32 ]
-  ! MAYORQUE        [ shift and go to state 33 ]
-  ! MENORQUE        [ shift and go to state 34 ]
-  ! MAYORIGUAL      [ shift and go to state 35 ]
-  ! MENORIGUAL      [ shift and go to state 36 ]
+  ! MAYORQUE        [ shift and go to state 32 ]
+  ! MENORQUE        [ shift and go to state 33 ]
+  ! MAYORIGUAL      [ shift and go to state 34 ]
+  ! MENORIGUAL      [ shift and go to state 35 ]
+  ! IGUALIGUAL      [ shift and go to state 36 ]
   ! DIFERENTE       [ shift and go to state 37 ]
   ! RAND            [ shift and go to state 38 ]
   ! ROR             [ shift and go to state 39 ]
@@ -1987,11 +1987,11 @@ state 56
     (18) expresion -> expresion . DIVISION expresion
     (19) expresion -> expresion . POTENCIA expresion
     (20) expresion -> expresion . MODULO expresion
-    (21) expresion -> expresion . IGUALIGUAL expresion
-    (22) expresion -> expresion . MAYORQUE expresion
-    (23) expresion -> expresion . MENORQUE expresion
-    (24) expresion -> expresion . MAYORIGUAL expresion
-    (25) expresion -> expresion . MENORIGUAL expresion
+    (21) expresion -> expresion . MAYORQUE expresion
+    (22) expresion -> expresion . MENORQUE expresion
+    (23) expresion -> expresion . MAYORIGUAL expresion
+    (24) expresion -> expresion . MENORIGUAL expresion
+    (25) expresion -> expresion . IGUALIGUAL expresion
     (26) expresion -> expresion . DIFERENTE expresion
     (27) expresion -> expresion . RAND expresion
     (28) expresion -> expresion . ROR expresion
@@ -2006,11 +2006,11 @@ state 56
     DIVISION        shift and go to state 29
     POTENCIA        shift and go to state 30
     MODULO          shift and go to state 31
-    IGUALIGUAL      shift and go to state 32
-    MAYORQUE        shift and go to state 33
-    MENORQUE        shift and go to state 34
-    MAYORIGUAL      shift and go to state 35
-    MENORIGUAL      shift and go to state 36
+    MAYORQUE        shift and go to state 32
+    MENORQUE        shift and go to state 33
+    MAYORIGUAL      shift and go to state 34
+    MENORIGUAL      shift and go to state 35
+    IGUALIGUAL      shift and go to state 36
     DIFERENTE       shift and go to state 37
 
   ! MAS             [ reduce using rule 27 (expresion -> expresion RAND expresion .) ]
@@ -2019,11 +2019,11 @@ state 56
   ! DIVISION        [ reduce using rule 27 (expresion -> expresion RAND expresion .) ]
   ! POTENCIA        [ reduce using rule 27 (expresion -> expresion RAND expresion .) ]
   ! MODULO          [ reduce using rule 27 (expresion -> expresion RAND expresion .) ]
-  ! IGUALIGUAL      [ reduce using rule 27 (expresion -> expresion RAND expresion .) ]
   ! MAYORQUE        [ reduce using rule 27 (expresion -> expresion RAND expresion .) ]
   ! MENORQUE        [ reduce using rule 27 (expresion -> expresion RAND expresion .) ]
   ! MAYORIGUAL      [ reduce using rule 27 (expresion -> expresion RAND expresion .) ]
   ! MENORIGUAL      [ reduce using rule 27 (expresion -> expresion RAND expresion .) ]
+  ! IGUALIGUAL      [ reduce using rule 27 (expresion -> expresion RAND expresion .) ]
   ! DIFERENTE       [ reduce using rule 27 (expresion -> expresion RAND expresion .) ]
   ! RAND            [ shift and go to state 38 ]
   ! ROR             [ shift and go to state 39 ]
@@ -2038,11 +2038,11 @@ state 57
     (18) expresion -> expresion . DIVISION expresion
     (19) expresion -> expresion . POTENCIA expresion
     (20) expresion -> expresion . MODULO expresion
-    (21) expresion -> expresion . IGUALIGUAL expresion
-    (22) expresion -> expresion . MAYORQUE expresion
-    (23) expresion -> expresion . MENORQUE expresion
-    (24) expresion -> expresion . MAYORIGUAL expresion
-    (25) expresion -> expresion . MENORIGUAL expresion
+    (21) expresion -> expresion . MAYORQUE expresion
+    (22) expresion -> expresion . MENORQUE expresion
+    (23) expresion -> expresion . MAYORIGUAL expresion
+    (24) expresion -> expresion . MENORIGUAL expresion
+    (25) expresion -> expresion . IGUALIGUAL expresion
     (26) expresion -> expresion . DIFERENTE expresion
     (27) expresion -> expresion . RAND expresion
     (28) expresion -> expresion . ROR expresion
@@ -2056,11 +2056,11 @@ state 57
     DIVISION        shift and go to state 29
     POTENCIA        shift and go to state 30
     MODULO          shift and go to state 31
-    IGUALIGUAL      shift and go to state 32
-    MAYORQUE        shift and go to state 33
-    MENORQUE        shift and go to state 34
-    MAYORIGUAL      shift and go to state 35
-    MENORIGUAL      shift and go to state 36
+    MAYORQUE        shift and go to state 32
+    MENORQUE        shift and go to state 33
+    MAYORIGUAL      shift and go to state 34
+    MENORIGUAL      shift and go to state 35
+    IGUALIGUAL      shift and go to state 36
     DIFERENTE       shift and go to state 37
     RAND            shift and go to state 38
 
@@ -2070,11 +2070,11 @@ state 57
   ! DIVISION        [ reduce using rule 28 (expresion -> expresion ROR expresion .) ]
   ! POTENCIA        [ reduce using rule 28 (expresion -> expresion ROR expresion .) ]
   ! MODULO          [ reduce using rule 28 (expresion -> expresion ROR expresion .) ]
-  ! IGUALIGUAL      [ reduce using rule 28 (expresion -> expresion ROR expresion .) ]
   ! MAYORQUE        [ reduce using rule 28 (expresion -> expresion ROR expresion .) ]
   ! MENORQUE        [ reduce using rule 28 (expresion -> expresion ROR expresion .) ]
   ! MAYORIGUAL      [ reduce using rule 28 (expresion -> expresion ROR expresion .) ]
   ! MENORIGUAL      [ reduce using rule 28 (expresion -> expresion ROR expresion .) ]
+  ! IGUALIGUAL      [ reduce using rule 28 (expresion -> expresion ROR expresion .) ]
   ! DIFERENTE       [ reduce using rule 28 (expresion -> expresion ROR expresion .) ]
   ! RAND            [ reduce using rule 28 (expresion -> expresion ROR expresion .) ]
   ! ROR             [ shift and go to state 39 ]
