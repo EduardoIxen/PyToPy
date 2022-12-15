@@ -28,16 +28,19 @@ class Logica(Expresion):
             etiquAndOr = self.izq.etiquetaFalse = genC3D.nuevaEtiqueta()
             self.der.etiquetaFalse = self.etiquetaFalse
         else:
-            auxReturn.etiquetaTrue = self.etiquetaFalse
+            '''auxReturn.etiquetaTrue = self.etiquetaFalse
             auxReturn.etiquetaFalse = self.etiquetaTrue
-            return auxReturn
+            return auxReturn'''
+            self.izq.etiquetaTrue = self.der.etiquetaTrue = self.etiquetaFalse
+            self.izq.etiquetaFalse = self.der.etiquetaFalse = self.etiquetaTrue
 
         opIzq = self.izq.compilar(entorno)
         if opIzq.getTipo() != Tipo.BOOLEAN:
             genC3D.setExcepcion(Excepcion("Semantico", "Solo se pueden operar operaciones booleanas", self.linea, self.columna))
             return
 
-        genC3D.agregarEtiqueta(etiquAndOr)
+        if etiquAndOr != '':
+            genC3D.agregarEtiqueta(etiquAndOr)
 
         opDer = self.der.compilar(entorno)
         if opDer.getTipo() != Tipo.BOOLEAN:

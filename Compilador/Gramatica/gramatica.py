@@ -156,6 +156,7 @@ from src.Instruccion.Print import Print
 from src.Expresion.Aritmetica import Aritmetica
 from src.Expresion.Relacional import Relacional
 from src.Expresion.Logica import Logica
+from src.Expresion.Unaria import Unaria
 def p_init(t):
     'init            : ls_instr'
     t[0] = AST(t[1],0,0)
@@ -282,9 +283,12 @@ def p_logicas(t):
 
 def p_expre_not(t):
     'expresion      : RNOT expresion %prec UNOT'
+    if t[1] == 'not':
+        t[0] = Logica(t[2], Primitivo(True, Tipo.BOOLEAN, t.lineno(1), find_column(t.slice[1])), TipoOperacion.NOT, t.lineno(1), find_column(t.slice[1]))
 
 def p_negacion(t):
     'expresion      : MENOS expresion %prec UMENOS'
+    t[0] = Unaria(t[2], t.lineno(1), find_column(t.slice[1]))
 
 #////////////////////////////// EXPRESION DE AGRUPACION /////////////////////////////
 def p_parentesis(t):

@@ -23,10 +23,12 @@ class Primitivo(Expresion):
             if self.valor:
                 genC3D.agregarGoto(self.etiquetaTrue)
                 genC3D.agregarComentario("goto a boolean verdadero")
+                genC3D.agregarEspacio()
                 genC3D.agregarGoto(self.etiquetaFalse)
             else:
                 genC3D.agregarGoto(self.etiquetaFalse)
                 genC3D.agregarComentario("goto a boolean falso")
+                genC3D.agregarEspacio()
                 genC3D.agregarGoto(self.etiquetaTrue)
 
             retornar = Return(str(self.valor), self.tipo, False)

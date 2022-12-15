@@ -15,6 +15,8 @@ class Print(Instruccion):
 
         for expre in self.expresion:
             simbolo = expre.compilar(entorno) # obtengo lo un objeto Return
+            if simbolo is None:
+                return
             if simbolo.getTipo() == Tipo.BOOLEAN:
                 etiqTemp = genC3D.nuevaEtiqueta()
                 genC3D.agregarEtiqueta(simbolo.etiquetaTrue)

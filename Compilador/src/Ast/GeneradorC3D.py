@@ -271,7 +271,7 @@ class GeneradorC3D:
     def setExcepcion(self, valor):
         self.contExcepc += 1
         excepc = f"\"column1\": \"{self.contExcepc}\", \"column2\": \"{valor.getDescripcion()}\", \"column3\": \"{valor.getLinea()}\", \"column4\": \"{valor.getColumna()}\", \"column5\": \"{valor.getFechaHora()}\""
-        excepc = "{" + excepc + "}"
+        excepc = "{" + excepc + "},"
         self.excepciones.append(excepc)
 
     def getExcepciones(self):
