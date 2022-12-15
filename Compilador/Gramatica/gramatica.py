@@ -155,6 +155,7 @@ from src.Ast.Tipo import Tipo, TipoOperacion
 from src.Instruccion.Print import Print
 from src.Expresion.Aritmetica import Aritmetica
 from src.Expresion.Relacional import Relacional
+from src.Expresion.Logica import Logica
 def p_init(t):
     'init            : ls_instr'
     t[0] = AST(t[1],0,0)
@@ -274,6 +275,10 @@ def p_relacionales(t):
 def p_logicas(t):
     '''expresion    : expresion RAND expresion
                     | expresion ROR expresion'''
+    if t[2] == "and":
+        t[0] = Logica(t[1], t[3], TipoOperacion.AND, t.lineno(2), find_column(t.slice[2]))
+    elif t[2] == "or":
+        t[0] = Logica(t[1], t[3], TipoOperacion.OR, t.lineno(2), find_column(t.slice[2]))
 
 def p_expre_not(t):
     'expresion      : RNOT expresion %prec UNOT'
