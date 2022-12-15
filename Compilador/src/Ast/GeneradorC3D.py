@@ -126,6 +126,8 @@ class GeneradorC3D:
         self.agregarPrint("c", 101) # e
 
     def imprimirMathError(self):
+        self.agregarComentario("IMPRIMIENDO MATHERROR")
+        self.agregarEspacio()
         self.agregarPrint("c", 77)  # M
         self.agregarPrint("c", 97)  # a
         self.agregarPrint("c", 116) # t
@@ -138,6 +140,8 @@ class GeneradorC3D:
         self.agregarPrint("c", 10)  # \n
 
     def imprimirBoundsError(self):
+        self.agregarComentario("IMPRIMIENDO BOUNDS ERROR")
+        self.agregarEspacio()
         self.agregarPrint("c", 66)  # B
         self.agregarPrint("c", 111) # o
         self.agregarPrint("c", 117) # u

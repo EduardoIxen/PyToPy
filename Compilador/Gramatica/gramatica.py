@@ -238,6 +238,12 @@ def p_aritmeticas(t):
         t[0] = Aritmetica(t[1], t[3], TipoOperacion.SUMA, t.lineno(2), find_column(t.slice[2]))
     elif t[2] == '**':
         t[0] = Aritmetica(t[1], t[3], TipoOperacion.POTENCIA, t.lineno(2), find_column(t.slice[2]))
+    elif t[2] == '-':
+        t[0] = Aritmetica(t[1], t[3], TipoOperacion.RESTA, t.lineno(2), find_column(t.slice[2]))
+    elif t[2] == '/':
+        t[0] = Aritmetica(t[1], t[3], TipoOperacion.DIVISION, t.lineno(2), find_column(t.slice[2]))
+    elif t[2] == '%':
+        t[0] = Aritmetica(t[1], t[3], TipoOperacion.MODULO, t.lineno(2), find_column(t.slice[2]))
 
 #////////////////////////////// EXPRESIONES RELACIONALES ///////////////////////////////////
 def p_relacionales(t):

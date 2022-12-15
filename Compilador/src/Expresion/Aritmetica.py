@@ -30,7 +30,54 @@ class Aritmetica(Expresion):
             return self.concatenarCadena(entorno, izq.getValor(), der.getValor())
         if self.tipoOperacion == TipoOperacion.POTENCIA:
             genC3D.nativaPotencia()
-            return self.genPotencia(entorno, izq.getValor(), der.getValor())
+            return self.genPotencia(entorno, izq.getValor(), der.getValor(), izq, der)
+
+        obtenerTipo = TablaTipo()
+        tipoResultado = obtenerTipo.obtenerTipo(izq.getTipo(), der.getTipo())
+
+        if tipoResultado == Tipo.ERROR:
+            genC3D.setExcepcion(Excepcion("Semantico", f'La operacion ingresada no se puede realizar {izq.getTipo()} {self.tipoOperacion} {der.getTipo()}'), self.linea, self.columna)
+            return
+
+        tmp = genC3D.agregarTemp()
+        operacion = ''
+        if self.tipoOperacion == TipoOperacion.SUMA:
+            operacion = '+'
+        elif self.tipoOperacion == TipoOperacion.RESTA:
+            operacion = '-'
+        elif self.tipoOperacion == TipoOperacion.MULTIPLICACION:
+            operacion = '*'
+        elif self.tipoOperacion == TipoOperacion.DIVISION:
+            operacion = '/'
+            tipoResultado = Tipo.FLOAT
+            izq.valor = float(izq.getValor())
+        elif self.tipoOperacion == TipoOperacion.MODULO:
+            operacion = '%'
+
+        genC3D.liberarTemp(izq.getValor())
+        genC3D.liberarTemp(der.getValor())
+        if operacion == '%' or operacion == '/':
+            etiquTrue = genC3D.nuevaEtiqueta()
+            etiquSalida = genC3D.nuevaEtiqueta()
+            genC3D.agregarIf(der.getValor(), '0', '!=', etiquTrue)  #COMPARACION DINAMIVA DIVIDIDO 0
+            genC3D.imprimirMathError()
+            genC3D.agregarExpresion(tmp, '0', '','')
+            genC3D.agregarGoto(etiquSalida)
+            genC3D.agregarEtiqueta(etiquTrue)
+
+            if operacion == '%':
+                genC3D.math = True
+                genC3D.agregarExponModulo(tmp, izq.getValor(), der.getValor())
+            else:
+                if der.getValor() == '0':
+                    der.valor = '0.00001'
+                genC3D.agregarExpresion(tmp, izq.getValor(), der.getValor(), operacion)
+            genC3D.agregarEtiqueta(etiquSalida)
+        else:
+            genC3D.agregarExpresion(tmp, izq.getValor(), der.getValor(), operacion)
+
+        return Return(tmp, tipoResultado, True)
+
 
 
 
@@ -75,7 +122,7 @@ class Aritmetica(Expresion):
         genC3D.retornarEntorno(entorno.getTamanio())
         return Return(tmp, Tipo.STRING, True)
 
-    def genPotencia(self, entorno, numero, exponente):
+    def genPotencia(self, entorno, numero, exponente, izq, der):
         inst = GeneradorC3D()
         genC3D = inst.getInstance()
         #numero
@@ -93,4 +140,8 @@ class Aritmetica(Expresion):
         temp = genC3D.agregarTemp()
         genC3D.getStack(temp, 'P')
         genC3D.retornarEntorno(entorno.getTamanio())
-        return Return(temp, Tipo.INT, True)
+
+        obtenerTipo = TablaTipo()
+        tipoResultado = obtenerTipo.obtenerTipo(izq.getTipo(), der.getTipo())
+
+        return Return(temp, tipoResultado, True)
