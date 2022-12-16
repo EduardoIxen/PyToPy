@@ -18,6 +18,9 @@ class Return:
     def getTipoAux(self):
         return self.tipoAuxiliar
 
+    def setTipoAux(self, tipoAux):
+        self.tipoAuxiliar = tipoAux
+
     def setAtributos(self, atributos):
         self.atributos = atributos
 

@@ -48,11 +48,11 @@ class Entorno:
             _entorno = _entorno.anterior
         return None
 
-    def setVariable(self, id, tipo, posHeap, tipoAux='', tipoAtributos = [], valores = []):
+    def setVariable(self, id, tipo, enHeap, tipoAux='', tipoAtributos = [], valores = []):
         if id in self.variables.keys():
             print(f"Error// La variable {id} ya existe")
         else:
-            nuevoSimbolo = Simbolo(id, tipo, self.tamanio, self.anterior == None, posHeap)
+            nuevoSimbolo = Simbolo(id, tipo, self.tamanio, self.anterior == None, enHeap)
             nuevoSimbolo.setTipoAux(tipoAux)
             nuevoSimbolo.setAtributos(tipoAtributos)
             nuevoSimbolo.setValores(valores)
@@ -110,7 +110,7 @@ class Entorno:
         return None
 
     def setStruct(self, identificador, struct, tipo):
-        nuevoSimbolo = Simbolo(id, tipo, self.tamanio, self.anterior == None, False)
+        nuevoSimbolo = Simbolo(identificador, tipo, self.tamanio, self.anterior == None, False)
         nuevoSimbolo.setTipoAux(identificador)
         nuevoSimbolo.setAtributos(struct.atributos)
         self.structs[identificador] = nuevoSimbolo
@@ -122,7 +122,6 @@ class Entorno:
                 return entorno.structs[identificador]
             entorno = entorno.anterior
         return None
-
 
     def agregarFuncion(self, identificador, funcion):
         tipoAux = ''

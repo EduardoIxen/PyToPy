@@ -54,7 +54,7 @@ class Aritmetica(Expresion):
         elif self.tipoOperacion == TipoOperacion.MODULO:
             operacion = '%'
 
-        genC3D.liberarTemp(izq.getValor())
+        genC3D.liberarTemp(izq.getValor()) #comprobacion dinamica
         genC3D.liberarTemp(der.getValor())
         if operacion == '%' or operacion == '/':
             etiquTrue = genC3D.nuevaEtiqueta()

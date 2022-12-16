@@ -22,6 +22,7 @@ tokens = [
     'PARC',
     'PUNTO',
     'COMA',
+    'DOSPTS',
     'MAS',                      #aritmeticas
     'MENOS',
     'MODULO',
@@ -48,6 +49,7 @@ t_PARA              = r'\('
 t_PARC              = r'\)'
 t_PUNTO             = r'\.'
 t_COMA              = r'\,'
+t_DOSPTS            = r'\:'
 t_MAS               = r'\+'
 t_MENOS             = r'\-'
 t_MODULO            = r'\%'
@@ -157,6 +159,8 @@ from src.Expresion.Aritmetica import Aritmetica
 from src.Expresion.Relacional import Relacional
 from src.Expresion.Logica import Logica
 from src.Expresion.Unaria import Unaria
+from src.Instruccion.Variables.Declaracion import Declaracion
+from src.Expresion.Identificador import Identificador
 def p_init(t):
     'init            : ls_instr'
     t[0] = AST(t[1],0,0)
@@ -218,6 +222,7 @@ def p_instrucciones_instruccion(t) :
 
 def p_instruccion(t):
     '''instruccion      : imprimir_instr
+                        | declaracion_instr
     '''
     t[0] = t[1]
 
@@ -226,7 +231,36 @@ def p_imprimir(t):
     'imprimir_instr     : RPRINT PARA PARAMETROS PARC'
     t[0] = Print(t[3], t.lineno(1), find_column(t.slice[1]))
 
-#////////////////////////////// EXPRESIONES ARITMETICAS ///////////////////////////////////
+#////////////////////////////////////// DECLARACION ///////////////////////////////////////
+def p_declaracion(t):
+    '''declaracion_instr :  ID IGUAL expresion'''
+    t[0] = Declaracion(t[1], t[3], None, t.lineno(2), find_column(t.slice[2]))
+
+def p_declaracion2(t):
+    '''declaracion_instr : ID DOSPTS TIPO IGUAL expresion'''
+    t[0] = Declaracion(t[1], t[5], t[3], t.lineno(2), find_column(t.slice[2]))
+
+#//////////////////////////////////////// TIPO ///////////////////////////////////////////
+def p_tipo(t):
+    '''TIPO : RINT
+            | RFLOAT
+            | RBOOLEAN
+            | RSTRING
+            | ID''' #arraytype
+    if t[1] == "int":
+        t[0] = Tipo.INT
+    elif t[1] == "float":
+        t[0] = Tipo.FLOAT
+    elif t[1] == "bool":
+        t[0] = Tipo.BOOLEAN
+    elif t[1] == "string":
+        t[0] = Tipo.STRING
+    elif type(t[1]) == "TypeArray":
+        t[0] = t[1]
+    else:
+        t[0] = t[1]
+
+#////////////////////////////// EXPRESIONES ARITMETICAS //////////////////////////////////
 def p_aritmeticas(t):
     '''expresion     : expresion MAS expresion
                     | expresion MENOS expresion
@@ -310,7 +344,7 @@ def p_expresion_cadena(t):
 
 def p_expresion_id(t):
     'expresion      : ID'
-    t[0] = Primitivo(t[1], Tipo.IDENTIFICADOR, t.lineno(1), find_column(t.slice[1]))
+    t[0] = Identificador(t[1], Tipo.IDENTIFICADOR, t.lineno(1), find_column(t.slice[1]))
 
 def p_expresion_bool(t):
     '''expresion    : RTRUE
