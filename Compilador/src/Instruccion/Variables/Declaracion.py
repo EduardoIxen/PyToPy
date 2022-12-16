@@ -54,8 +54,15 @@ class Declaracion(Instruccion):
                     nuevaVariable = entorno.setVariable(self.id, tipoVar, True, valor.getTipoAux(), valor.getAtributos(), valor.getValores())
                 else:
                     nuevaVariable = entorno.setVariable(self.id, valor.getTipo(), False)
+            else:
+                #Se actualiza la variable por si el valor cambia y el tipo tambien
+                nuevaVariable = entorno.actualizarVar(self.id, valor.getTipo())
 
             posicionTemp = nuevaVariable.posicion
+
+            if not nuevaVariable.esGlobal:
+                posicionTemp = genC3D.agregarTemp()
+                genC3D.agregarExpresion(posicionTemp, 'P', nuevaVariable.posicion, "+")
 
             if valor.getTipo() == Tipo.BOOLEAN:
                 etiquTemp = genC3D.nuevaEtiqueta()

@@ -61,6 +61,19 @@ class Entorno:
             self.variables[id] = nuevoSimbolo
         return self.variables[id]
 
+    def actualizarVar(self, id, nuetoTipo):
+        ent = self
+        while ent is not None:
+            if id in ent.variables.keys():
+                simbActualiz = Simbolo(id, nuetoTipo, ent.variables[id].posicion, ent.variables[id].esGlobal, ent.variables[id].enHeap)
+                simbActualiz.setTipoAux(ent.variables[id].getTipoAux())
+                simbActualiz.setAtributos(ent.variables[id].getAtributos())
+                simbActualiz.setValores(ent.variables[id].getValores())
+                simbActualiz.setEntorno(ent.variables[id].getEntorno())
+                ent.variables[id] = simbActualiz
+                return ent.variables[id]
+            ent = ent.anterior
+        return None
     def getEntornoGlobal(self):
         entorno = self
         while entorno.anterior is not None:
