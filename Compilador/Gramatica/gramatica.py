@@ -14,6 +14,7 @@ reservadas = {
     'print'     :'RPRINT',
     'False'     :'RFALSE',
     'True'      :'RTRUE',
+    'def'       :'RDEF',
 }
 
 tokens = [
@@ -161,6 +162,7 @@ from src.Expresion.Logica import Logica
 from src.Expresion.Unaria import Unaria
 from src.Instruccion.Variables.Declaracion import Declaracion
 from src.Expresion.Identificador import Identificador
+from src.Instruccion.Funciones.Funcion import Funcion
 def p_init(t):
     'init            : ls_instr'
     t[0] = AST(t[1],0,0)
@@ -184,12 +186,10 @@ def p_ls_instr2(t):
 
 def p_instr_recib(t):
     '''instr    : instruccion
+                | funcion_instr
     '''
     t[0] = t[1]
 
-#///////////////////////////////// FUNCIONES ///////////////////////////////////////////////
-def p_funcion_instr(t):
-    '''funcion_instr : '''
 
 #////////////////////////////////////// PARAMETROS /////////////////////////////////////////
 def p_lista_parametros(t):
@@ -205,6 +205,24 @@ def p_parametro_v(t):
     '''PARAMETRO    : expresion'''
     t[0] = t[1]
 
+def p_parametros_tipo(t):
+    'PARAMETROSTIPO : PARAMETROSTIPO COMA PARAMETROTIPO'
+    t[1].append(t[3])
+    t[0] = t[1]
+
+def p_parametro_tipo(t):
+    'PARAMETROSTIPO : PARAMETROTIPO'
+    t[0] = [t[1]]
+
+def p_parametro_tipo_id(t):
+    '''PARAMETROTIPO : ID DOSPTS TIPO
+                    | ID DOSPTS ID
+                    | ID'''
+    if len(t) == 3:
+        t[0] = {"id": t[1], "tipo": t[3]}
+    else:
+        t[0] = {"id": t[1], "tipo": Tipo.ANY}
+
 #///////////////////////////////////////INSTRUCCIONES//////////////////////////////////////////////////
 def p_instrucciones_instrucciones_instruccion(t):
     'instrucciones    : instrucciones instruccion'
@@ -218,7 +236,6 @@ def p_instrucciones_instruccion(t) :
         t[0] = []
     else:
         t[0] = [t[1]]
-    print(t[1])
 
 def p_instruccion(t):
     '''instruccion      : imprimir_instr
@@ -239,6 +256,18 @@ def p_declaracion(t):
 def p_declaracion2(t):
     '''declaracion_instr : ID DOSPTS TIPO IGUAL expresion'''
     t[0] = Declaracion(t[1], t[5], t[3], t.lineno(2), find_column(t.slice[2]))
+
+#/////////////////////////////////// FUNCIONES ///////////////////////////////////////////
+def p_funciones(t):
+    '''funcion_instr :  RDEF ID PARA PARC DOSPTS instrucciones
+                    | RDEF ID PARA PARAMETROSTIPO PARC DOSPTS instrucciones '''
+
+    if len(t) == 7:
+        t[0] = Funcion(t[2], [], Tipo.ANY, t[6], t.lineno(1), find_column(t.slice[1]))
+    else:
+        t[0] = Funcion(t[2], t[4], Tipo.ANY, t[7], t.lineno(1), find_column(t.slice[1]))
+
+
 
 #//////////////////////////////////////// TIPO ///////////////////////////////////////////
 def p_tipo(t):
