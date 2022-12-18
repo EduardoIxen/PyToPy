@@ -17,7 +17,7 @@ class Identificador(Expresion):
         varId = entorno.getVariable(self.id)
 
         if varId is None:
-            genC3D.setExcepcion(Excepcion("Semantico", "La variable ingresada no existe", self.linea, self.columna))
+            genC3D.setExcepcion(Excepcion("Semantico", f"La variable {self.id} no existe", self.linea, self.columna))
             return
         temp = genC3D.agregarTemp() #temp para almacenar la variable
         posTemp = varId.posicion    #se obtiene la posicion de la variable

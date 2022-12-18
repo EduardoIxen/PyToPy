@@ -24,6 +24,7 @@ tokens = [
     'PUNTO',
     'COMA',
     'DOSPTS',
+    'LLAVEC',
     'MAS',                      #aritmeticas
     'MENOS',
     'MODULO',
@@ -51,6 +52,7 @@ t_PARC              = r'\)'
 t_PUNTO             = r'\.'
 t_COMA              = r'\,'
 t_DOSPTS            = r'\:'
+t_LLAVEC            = r'\}'
 t_MAS               = r'\+'
 t_MENOS             = r'\-'
 t_MODULO            = r'\%'
@@ -163,6 +165,7 @@ from src.Expresion.Unaria import Unaria
 from src.Instruccion.Variables.Declaracion import Declaracion
 from src.Expresion.Identificador import Identificador
 from src.Instruccion.Funciones.Funcion import Funcion
+from src.Instruccion.Funciones.LlamadaInstr import LlamadaInstr
 def p_init(t):
     'init            : ls_instr'
     t[0] = AST(t[1],0,0)
@@ -186,7 +189,7 @@ def p_ls_instr2(t):
 
 def p_instr_recib(t):
     '''instr    : instruccion
-                | funcion_instr
+                | funcion_instr LLAVEC
     '''
     t[0] = t[1]
 
@@ -218,7 +221,7 @@ def p_parametro_tipo_id(t):
     '''PARAMETROTIPO : ID DOSPTS TIPO
                     | ID DOSPTS ID
                     | ID'''
-    if len(t) == 3:
+    if len(t) == 4:
         t[0] = {"id": t[1], "tipo": t[3]}
     else:
         t[0] = {"id": t[1], "tipo": Tipo.ANY}
@@ -240,6 +243,7 @@ def p_instrucciones_instruccion(t) :
 def p_instruccion(t):
     '''instruccion      : imprimir_instr
                         | declaracion_instr
+                        | llamada_instr
     '''
     t[0] = t[1]
 
@@ -260,14 +264,21 @@ def p_declaracion2(t):
 #/////////////////////////////////// FUNCIONES ///////////////////////////////////////////
 def p_funciones(t):
     '''funcion_instr :  RDEF ID PARA PARC DOSPTS instrucciones
-                    | RDEF ID PARA PARAMETROSTIPO PARC DOSPTS instrucciones '''
+                    | RDEF ID PARA PARAMETROSTIPO PARC DOSPTS instrucciones'''
 
     if len(t) == 7:
         t[0] = Funcion(t[2], [], Tipo.ANY, t[6], t.lineno(1), find_column(t.slice[1]))
     else:
         t[0] = Funcion(t[2], t[4], Tipo.ANY, t[7], t.lineno(1), find_column(t.slice[1]))
 
-
+#/////////////////////////////////// LLAMADA INSTR ///////////////////////////////////////
+def p_llamada_instr(t):
+    '''llamada_instr : ID PARA PARC
+                    | ID PARA PARAMETROS PARC'''
+    if len(t) == 4:
+        t[0] = LlamadaInstr(t[1], [], t.lineno(1), find_column(t.slice[1]))
+    else:
+        t[0] = LlamadaInstr(t[1], t[3], t.lineno(1), find_column(t.slice[1]))
 
 #//////////////////////////////////////// TIPO ///////////////////////////////////////////
 def p_tipo(t):
