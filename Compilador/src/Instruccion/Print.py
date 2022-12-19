@@ -32,15 +32,32 @@ class Print(Instruccion):
             elif simbolo.getTipo() == Tipo.INT:
                 genC3D.agregarPrint('d', simbolo.getValor())
             elif simbolo.getTipo() == Tipo.LIST:
-                #codigo para imprimir listas
-                pass
+                temp = genC3D.agregarTemp()
+                temp2 = genC3D.agregarTemp()
+                genC3D.agregarExpresion(temp2, simbolo.getValor(), '1', '+')   #almacanar la posicion del arreglo
+                genC3D.agregarPrint("c", '91')                                  # 91 -> [
+                for atrib in range(len(simbolo.getAtributos())):
+                    genC3D.getHeap(temp, temp2)
+                    if simbolo.getAtributos()[atrib] == Tipo.INT:
+                        genC3D.agregarPrint("d", temp)
+                    elif simbolo.getAtributos()[atrib] == Tipo.STRING:
+                        genC3D.agregarPrint("c", '34')                          #34 -> "
+                        self.cadenaRecibida(genC3D, temp, entorno)
+                        genC3D.agregarPrint("c", 34)                            #34 -> "
+                    elif simbolo.getAtributos()[atrib] == Tipo.FLOAT:
+                        genC3D.agregarPrint("f", temp)
+
+                    elif simbolo.getAtributos()[atrib] == Tipo.LIST:
+                        self.listaRecibida(temp, simbolo.getValores()[atrib], entorno)
+                    if atrib != len(simbolo.getAtributos()) - 1:
+                        genC3D.agregarPrint("c", 44)
+                    genC3D.agregarExpresion(temp2, temp2, 1, '+')
+                genC3D.agregarPrint("c", 93)
+
             else:
                 genC3D.agregarPrint("f", simbolo.getValor())
 
         genC3D.nuevaLinea()
-
-
-
 
     def cadenaRecibida(self, genC3D, valor, entorno):
         genC3D.agregarComentario("INICIO IMPRIMIR STRING")
@@ -58,3 +75,30 @@ class Print(Instruccion):
         genC3D.getStack(tmp, 'P')
         genC3D.retornarEntorno(entorno.getTamanio())
         genC3D.agregarComentario('FIN IMPRIMIR STRING')
+
+
+    def listaRecibida(self, htemp, atributo, entorno):
+        nuevaInst = GeneradorC3D()
+        genC3D = nuevaInst.getInstance()
+
+        tmp = genC3D.agregarTemp()
+        tmp2 = genC3D.agregarTemp()
+
+        genC3D.agregarExpresion(tmp2, htemp, '1', '+')
+        genC3D.agregarPrint("c", 91)                    #91 -> [
+        for atrib in range(len(atributo.getAtributos())):
+            genC3D.getHeap(tmp, tmp2)           #esto par recuperar cada item
+            if atributo.getAtributos()[atrib] == Tipo.INT:
+                genC3D.agregarPrint("d", tmp)
+            elif atributo.getAtributos()[atrib] == Tipo.FLOAT:
+                genC3D.agregarPrint("f", tmp)
+            elif atributo.getAtributos()[atrib] == Tipo.STRING:
+                genC3D.agregarPrint("c", 34)                    #34 -> "
+                self.cadenaRecibida(genC3D, tmp, entorno)
+                genC3D.agregarPrint("c", 34)                    #fin de cadena->"
+            elif atributo.getAtributos()[atrib] == Tipo.LIST:
+                self.listaRecibida(tmp, atributo.getValores()[atrib], [atrib], entorno)
+            if atrib != len(atributo.getAtributos()) -1:
+                genC3D.agregarPrint("c", '44')                  #44 -> ,
+            genC3D.agregarExpresion(tmp2, tmp2, 1, '+')         #probar si no da error por ''
+        genC3D.agregarPrint("c", 93)

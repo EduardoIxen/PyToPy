@@ -25,6 +25,8 @@ tokens = [
     'COMA',
     'DOSPTS',
     'LLAVEC',
+    'CORCHA',
+    'CORCHC',
     'MAS',                      #aritmeticas
     'MENOS',
     'MODULO',
@@ -53,6 +55,8 @@ t_PUNTO             = r'\.'
 t_COMA              = r'\,'
 t_DOSPTS            = r'\:'
 t_LLAVEC            = r'\}'
+t_CORCHA            = r'\['
+t_CORCHC            = r'\]'
 t_MAS               = r'\+'
 t_MENOS             = r'\-'
 t_MODULO            = r'\%'
@@ -166,6 +170,7 @@ from src.Instruccion.Variables.Declaracion import Declaracion
 from src.Expresion.Identificador import Identificador
 from src.Instruccion.Funciones.Funcion import Funcion
 from src.Instruccion.Funciones.LlamadaInstr import LlamadaInstr
+from src.Instruccion.Listas.Lista import Lista
 def p_init(t):
     'init            : ls_instr'
     t[0] = AST(t[1],0,0)
@@ -279,6 +284,11 @@ def p_llamada_instr(t):
         t[0] = LlamadaInstr(t[1], [], t.lineno(1), find_column(t.slice[1]))
     else:
         t[0] = LlamadaInstr(t[1], t[3], t.lineno(1), find_column(t.slice[1]))
+
+#///////////////////////////////////// LISTAS ////////////////////////////////////////////
+def p_listas(t):
+    '''LISTA : CORCHA PARAMETROS CORCHC'''
+    t[0] = Lista(t[2], t.lineno(1), find_column(t.slice[1]))
 
 #//////////////////////////////////////// TIPO ///////////////////////////////////////////
 def p_tipo(t):
@@ -396,6 +406,11 @@ def p_expresion_bool(t):
         t[0] = Primitivo(False, Tipo.BOOLEAN, t.lineno(1), find_column(t.slice[1]))
     else:
         t[0] = t[0] = Primitivo(None, Tipo.NULL, t.lineno(1), find_column(t.slice[1]))
+
+#///////////////////////////////// EXPRESION LISTA ////////////////////////////////////////////
+def p_expresion_lista(t):
+    'expresion :    LISTA'
+    t[0] = t[1]
 
 #//////////////////////////////////////// ERRORES /////////////////////////////////////////////
 def p_error(t):
