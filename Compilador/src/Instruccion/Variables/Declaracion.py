@@ -14,7 +14,7 @@ class Declaracion(Instruccion):
         nuevaInst = GeneradorC3D()
         genC3D = nuevaInst.getInstance()
 
-        if isinstance(self.id, str):  #es solo un id
+        if isinstance(self.id, str):  #se obtiene un id
             if isinstance(self.expresion, str):
                 valor = self.expresion.compilar(entorno)
             else:

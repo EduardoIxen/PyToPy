@@ -66,7 +66,7 @@ class Aritmetica(Expresion):
             genC3D.agregarEtiqueta(etiquTrue)
 
             if operacion == '%':
-                genC3D.math = True
+                genC3D.math = True                      #esto para colocar la libreria de math
                 genC3D.agregarExponModulo(tmp, izq.getValor(), der.getValor())
             else:
                 if der.getValor() == '0':

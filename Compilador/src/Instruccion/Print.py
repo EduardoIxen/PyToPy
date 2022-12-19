@@ -50,9 +50,9 @@ class Print(Instruccion):
                     elif simbolo.getAtributos()[atrib] == Tipo.LIST:
                         self.listaRecibida(temp, simbolo.getValores()[atrib], entorno)
                     if atrib != len(simbolo.getAtributos()) - 1:
-                        genC3D.agregarPrint("c", 44)
+                        genC3D.agregarPrint("c", 44)                            #44 -> ,
                     genC3D.agregarExpresion(temp2, temp2, 1, '+')
-                genC3D.agregarPrint("c", 93)
+                genC3D.agregarPrint("c", 93)                                    #93 -> ]
 
             else:
                 genC3D.agregarPrint("f", simbolo.getValor())
@@ -101,4 +101,4 @@ class Print(Instruccion):
             if atrib != len(atributo.getAtributos()) -1:
                 genC3D.agregarPrint("c", '44')                  #44 -> ,
             genC3D.agregarExpresion(tmp2, tmp2, 1, '+')         #probar si no da error por ''
-        genC3D.agregarPrint("c", 93)
+        genC3D.agregarPrint("c", 93)                            #93 -> ]

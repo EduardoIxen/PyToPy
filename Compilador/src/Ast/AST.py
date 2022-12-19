@@ -43,8 +43,6 @@ class AST(Instruccion):
             return "string"
         elif (valor.getTipo() == Tipo.BOOLEAN):
             return "bool"
-        elif (valor.getTipo() == Tipo.CHAR):
-            return "char"
         elif (valor.getTipo() == Tipo.LIST):
             return "list"
         elif (valor.getTipo() == Tipo.ANY):

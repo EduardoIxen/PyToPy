@@ -3,6 +3,7 @@ from src.Abstract.Return import Return
 from src.Ast.TablaTipo import Tipo
 from src.Ast.GeneradorC3D import GeneradorC3D
 from src.Ast.Tipo import TipoOperacion
+from src.Excepcion.Excepcion import Excepcion
 
 class Relacional(Expresion):
     def __init__(self, izq, der, tipo, linea, columna):
@@ -36,6 +37,11 @@ class Relacional(Expresion):
                 genC3D.liberarTemp(opDer.getValor())
                 genC3D.agregarIf(self.compararCadena(entorno, opIzq.getValor(), opDer.getValor()), '1', '==', self.etiquetaTrue)
                 genC3D.agregarGoto(self.etiquetaFalse)
+            if opDer.tipo == Tipo.BOOLEAN:
+                genC3D.setExcepcion(
+                    Excepcion("Semantico", "En operaciones relacionales solo se puede comparar bool con bool",
+                              self.linea, self.columna))
+                return
         else:
             derGoto = genC3D.nuevaEtiqueta()
             tmpIzq = genC3D.agregarTemp()
@@ -51,6 +57,7 @@ class Relacional(Expresion):
 
             opDer = self.der.compilar(entorno)
             if opDer.tipo != Tipo.BOOLEAN:
+                genC3D.setExcepcion(Excepcion("Semantico", "En operaciones relacionales solo se puede comparar bool con bool", self.linea, self.columna))
                 return
 
             gotoFin = genC3D.nuevaEtiqueta()

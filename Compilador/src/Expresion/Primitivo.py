@@ -22,12 +22,12 @@ class Primitivo(Expresion):
                 self.etiquetaFalse = genC3D.nuevaEtiqueta()
             if self.valor:
                 genC3D.agregarGoto(self.etiquetaTrue)
-                genC3D.agregarComentario("goto a boolean verdadero")
+                genC3D.agregarComentario("Salto a boolean verdadero")
                 genC3D.agregarEspacio()
                 genC3D.agregarGoto(self.etiquetaFalse)
             else:
                 genC3D.agregarGoto(self.etiquetaFalse)
-                genC3D.agregarComentario("goto a boolean falso")
+                genC3D.agregarComentario("Salto a boolean falso")
                 genC3D.agregarEspacio()
                 genC3D.agregarGoto(self.etiquetaTrue)
 

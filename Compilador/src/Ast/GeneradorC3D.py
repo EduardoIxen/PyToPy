@@ -204,6 +204,7 @@ class GeneradorC3D:
     def retornarEntorno(self, tamanio):
         self.insertarCodigo(f'P = P - {tamanio};\n')
 
+    #heap es para almacenar cadenas separadas por caracteres
     def setHeap(self, posicion, valor):
         self.insertarCodigo(f'heap[int({posicion})] = {valor};\n')
 
