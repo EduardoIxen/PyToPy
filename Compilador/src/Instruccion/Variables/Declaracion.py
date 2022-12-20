@@ -2,6 +2,7 @@ from src.Ast.GeneradorC3D import GeneradorC3D
 from src.Abstract.Instruccion import Instruccion
 from src.Excepcion.Excepcion import Excepcion
 from src.Ast.Tipo import Tipo
+from src.Instruccion.Listas.TipoLista import TipoLista
 
 class Declaracion(Instruccion):
     def __init__(self, id, expresion, tipo, linea, columna):
@@ -20,7 +21,7 @@ class Declaracion(Instruccion):
             else:
                 if self.tipo is None:
                     valor = self.expresion.compilar(entorno)
-                    #print(valor.getTipo()) si tiene
+
                 else:
                     valor = self.expresion.compilar(entorno)
                     tipoVar = self.tipo
@@ -33,7 +34,7 @@ class Declaracion(Instruccion):
                             genC3D.setExcepcion(Excepcion("Semantico", "Tipo incorrecto en struct", self.linea, self.columna))
                             return
                     else:
-                        if type(tipoVar) == "TypeArray":
+                        if type(tipoVar) == TipoLista:
                             if tipoVar.tipo != valor.getTipo():
                                 genC3D.setExcepcion(Excepcion("Semantico", "Tipo de datos incompatibles.", self.linea, self.columna))
                                 return
@@ -47,7 +48,7 @@ class Declaracion(Instruccion):
                 if valor.getTipo() == Tipo.STRUCT or valor.getTipo() == Tipo.MUTSTRUCT:
                     nuevaVariable = entorno.setVariable(self.id, valor.getTipo(), True, valor.getTipoAux(), valor.getAtributos(), valor.getValores())
                 elif valor.getTipo() == Tipo.LIST:
-                    if type(self.tipo) == "TypeArray":
+                    if type(self.tipo) == TipoLista:
                         tipoVar = self.tipo
                     else:
                         tipoVar = Tipo.LIST

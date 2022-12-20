@@ -267,6 +267,10 @@ def p_declaracion2(t):
     '''declaracion_instr : ID DOSPTS TIPO IGUAL expresion'''
     t[0] = Declaracion(t[1], t[5], t[3], t.lineno(2), find_column(t.slice[2]))
 
+def p_declaracion3(t):
+    'declaracion_instr : ID ACCESOLISTA IGUAL expresion'
+    t[0] = Declaracion(t[1], t[4], None, t.lineno(3), find_column(t.slice[3]))
+
 #/////////////////////////////////// FUNCIONES ///////////////////////////////////////////
 def p_funciones(t):
     '''funcion_instr :  RDEF ID PARA PARC DOSPTS instrucciones
