@@ -171,6 +171,7 @@ from src.Expresion.Identificador import Identificador
 from src.Instruccion.Funciones.Funcion import Funcion
 from src.Instruccion.Funciones.LlamadaInstr import LlamadaInstr
 from src.Instruccion.Listas.Lista import Lista
+from src.Instruccion.Listas.AccesoLista import AccesoLista
 def p_init(t):
     'init            : ls_instr'
     t[0] = AST(t[1],0,0)
@@ -289,6 +290,20 @@ def p_llamada_instr(t):
 def p_listas(t):
     '''LISTA : CORCHA PARAMETROS CORCHC'''
     t[0] = Lista(t[2], t.lineno(1), find_column(t.slice[1]))
+
+#////////////////////////////////// ACCESO A LISTAS //////////////////////////////////////
+def p_acceso_lista(t):
+    'ACCESOLISTA : ACCESOLISTA ITEMLISTA'
+    t[1].append(t[2])
+    t[0] = t[1]
+
+def p_acceso_lista2(t):
+    'ACCESOLISTA : ITEMLISTA'
+    t[0] = [t[1]]
+
+def p_item_lista(t):
+    'ITEMLISTA : CORCHA expresion CORCHC'
+    t[0] = t[2]
 
 #//////////////////////////////////////// TIPO ///////////////////////////////////////////
 def p_tipo(t):
@@ -411,6 +426,10 @@ def p_expresion_bool(t):
 def p_expresion_lista(t):
     'expresion :    LISTA'
     t[0] = t[1]
+
+def p_expresion_accesolst(t):
+    'expresion : ID ACCESOLISTA'
+    t[0] = AccesoLista(t[1], t[2], t.lineno(1), find_column(t.slice[1]))
 
 #//////////////////////////////////////// ERRORES /////////////////////////////////////////////
 def p_error(t):

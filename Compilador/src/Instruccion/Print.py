@@ -61,6 +61,7 @@ class Print(Instruccion):
 
     def cadenaRecibida(self, genC3D, valor, entorno):
         genC3D.agregarComentario("INICIO IMPRIMIR STRING")
+        genC3D.agregarEspacio()
         genC3D.nativaPrint()
         tempParam = genC3D.agregarTemp()
 
@@ -75,6 +76,7 @@ class Print(Instruccion):
         genC3D.getStack(tmp, 'P')
         genC3D.retornarEntorno(entorno.getTamanio())
         genC3D.agregarComentario('FIN IMPRIMIR STRING')
+        genC3D.agregarEspacio()
 
 
     def listaRecibida(self, htemp, atributo, entorno):
