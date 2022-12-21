@@ -33,8 +33,10 @@ class Funcion(Instruccion):
         for param in self.parametros:
             tipo = param['tipo']
             if isinstance(tipo, str):
-                #agregar c3d para structs
-                pass
+                struct = nuevoEntorno.getStruct(tipo)
+                nuevoEntorno.setVariable(param['id'], struct.getTipo(), False, tipo, struct.getAtributos())
+                continue
+
             nuevoEntorno.setVariable(param['id'], param['tipo'], False)
         genC3D.limpiarAlmacenamTemp()
         genC3D.agregarInicioFunc(self.id)

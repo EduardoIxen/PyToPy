@@ -27,8 +27,8 @@ class Declaracion(Instruccion):
                     tipoVar = self.tipo
 
                     if isinstance(tipoVar, str):
-                        #compilar struct
-                        pass
+                        tipoVar = entorno.getStruct(tipoVar).getTipo()
+
                     if valor.getTipo() == Tipo.STRUCT or valor.getTipo() == Tipo.MUTSTRUCT:
                         if self.tipo != valor.getTipoAux():
                             genC3D.setExcepcion(Excepcion("Semantico", "Tipo incorrecto en struct", self.linea, self.columna))
@@ -77,5 +77,116 @@ class Declaracion(Instruccion):
                 genC3D.setStack(posicionTemp, valor.valor)
             genC3D.agregarEspacio()
         else:  #asignacion para structs
-            pass
+            var = entorno.getVariable(self.id[0])
+
+            if var is None:
+                genC3D.setExcepcion(Excepcion("Semantico", f"{self.id}, no esta definido", self.linea, self.columna))
+                return
+
+            if var.getTipo() == Tipo.STRUCT or var.getTipo() == Tipo.MUTSTRUCT:
+                genC3D.agregarComentario("INICIO DE STRUCT")
+                genC3D.agregarEspacio()
+
+                valor = self.expresion.compilar(entorno)
+                struct = entorno.getStruct(var.getTipoAux())
+
+                hTemp = genC3D.agregarTemp()
+                for nivelStruct in range(len(self.id) - 1):
+                    nivelStruct += 1        #posicion 0 es el id
+                    contador = 0
+                    for atrib in struct.atributos:
+                        if atrib['id'] == self.id[nivelStruct]:
+                            genC3D.getStack(hTemp, var.posicion)
+                            genC3D.agregarExpresion(hTemp, hTemp, contador, '+')
+                            genC3D.setHeap(hTemp, valor.getValor())
+                            break
+                        contador += 1
+                genC3D.agregarComentario("FIN STRUCT")
+            else:   #es una lista
+                self.declarar_lista(var, entorno, self.id[1])
+
+    def declarar_lista(self, valor, entorno, acceso):
+        nuevaInst = GeneradorC3D()
+        genC3D = nuevaInst.getInstance()
+        tempId = genC3D.agregarTemp()
+        genC3D.agregarExpresion(tempId, 'P',valor.posicion, '+')
+        genC3D.getStack(tempId, tempId)
+
+        tamanio = len(acceso)
+        itemTemp = genC3D.agregarTemp() #almacena el puntero de la posicion
+        anterior = 0
+        for i in range(tamanio):
+            if i == 0:
+                genC3D.agregarComentario("INICIO ACCESO A LISTA")
+                genC3D.agregarEspacio()
+                etiquTrue = genC3D.nuevaEtiqueta()
+                etiquFalse = genC3D.nuevaEtiqueta()
+                etiquSalida = genC3D.nuevaEtiqueta()
+
+                accesoTemp = genC3D.agregarTemp()    #index al cual acceder
+                temp = genC3D.agregarTemp()
+
+                index = acceso[i].compilar(entorno)     #compilar lo obtenido
+                genC3D.agregarExpresion(accesoTemp, index.getValor(), '', '')
+                genC3D.agregarExpresion(temp, tempId, '', '')
+                genC3D.getHeap(itemTemp, temp)
+
+                #index out of range
+                genC3D.agregarIf(accesoTemp, '1', '<', etiquTrue)  #limite inferior
+                genC3D.agregarIf(accesoTemp, itemTemp, '>', etiquTrue)  #limite superior
+                genC3D.agregarGoto(etiquFalse)
+                genC3D.agregarEtiqueta(etiquTrue)
+                genC3D.imprimirBoundsError()
+                genC3D.agregarExpresion(itemTemp, '0', '', '')  #asegurando un resultado 0
+                genC3D.agregarGoto(etiquSalida)
+                genC3D.agregarEtiqueta(etiquFalse)          #saltar cuando esta dentro de los limites
+
+                genC3D.agregarExpresion(itemTemp, temp, accesoTemp, '+')
+                val = self.expresion.compilar(entorno)
+                if i == tamanio - 1:
+                    genC3D.setHeap(itemTemp, val.getValor())        #se almacena el nuevo valor
+                else:
+                    genC3D.getHeap(itemTemp, itemTemp)              #se devuelve la posicion del arreglo
+                genC3D.agregarEtiqueta(etiquSalida)
+                genC3D.agregarComentario("FIN ACCESO A LISTA")
+                genC3D.agregarEspacio()
+            else:
+                genC3D.agregarComentario("INICIO ACCESO A LISTA")
+                genC3D.agregarEspacio()
+                etiquTrue = genC3D.nuevaEtiqueta()
+                etiquFalse = genC3D.nuevaEtiqueta()
+                etiquSalida = genC3D.nuevaEtiqueta()
+
+                accesoTemp = genC3D.agregarTemp()  # index al cual acceder
+                temp = genC3D.agregarTemp()
+
+                acceso = acceso[i].compilar(entorno)  # compilar lo obtenido
+
+                genC3D.agregarExpresion(accesoTemp, acceso.getValor(), '', '')
+                genC3D.agregarExpresion(temp, itemTemp, '', '')
+                genC3D.getHeap(itemTemp, temp)
+
+                # index out of range
+                genC3D.agregarIf(accesoTemp, '1', '<', etiquTrue)  # limite inferior
+                genC3D.agregarIf(accesoTemp, itemTemp, '>', etiquTrue)  # limite superior
+                genC3D.agregarGoto(etiquFalse)
+                genC3D.agregarEtiqueta(etiquTrue)
+                genC3D.imprimirBoundsError()
+                genC3D.agregarExpresion(itemTemp, '0', '', '')  # asegurando un resultado 0
+                genC3D.agregarGoto(etiquSalida)
+                genC3D.agregarEtiqueta(etiquFalse)  # saltar cuando esta dentro de los limites
+
+                genC3D.agregarExpresion(itemTemp, temp, accesoTemp, '+')
+                val = self.expresion.compilar(entorno)
+                if i == tamanio - 1:
+                    genC3D.setHeap(itemTemp, val.getValor())  # se almacena el nuevo valor
+                else:
+                    genC3D.getHeap(itemTemp, itemTemp)  # se devuelve la posicion del arreglo
+                genC3D.agregarEtiqueta(etiquSalida)
+                genC3D.agregarComentario("FIN ACCESO A LISTA")
+                genC3D.agregarEspacio()
+
+
+
+
 

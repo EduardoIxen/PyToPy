@@ -7,7 +7,8 @@ reservadas = {
     'string'    :'RSTRING',
     'None'      :'RNULO',
     'list'      :'RLIST',
-    'Struct'    :'TSTRUCT',
+    'struct'    :'RSTRUCT',
+    'mutable'   :'RMUTABLE',
     'or'        :'ROR',
     'and'       :'RAND',
     'not'       :'RNOT',
@@ -27,6 +28,7 @@ tokens = [
     'LLAVEC',
     'CORCHA',
     'CORCHC',
+    'PUNTOCOMA',
     'MAS',                      #aritmeticas
     'MENOS',
     'MODULO',
@@ -57,6 +59,7 @@ t_DOSPTS            = r'\:'
 t_LLAVEC            = r'\}'
 t_CORCHA            = r'\['
 t_CORCHC            = r'\]'
+t_PUNTOCOMA         = r'\;'
 t_MAS               = r'\+'
 t_MENOS             = r'\-'
 t_MODULO            = r'\%'
@@ -170,8 +173,12 @@ from src.Instruccion.Variables.Declaracion import Declaracion
 from src.Expresion.Identificador import Identificador
 from src.Instruccion.Funciones.Funcion import Funcion
 from src.Instruccion.Funciones.LlamadaInstr import LlamadaInstr
+from src.Expresion.LlamadaExpre import LlamadaExpre
 from src.Instruccion.Listas.Lista import Lista
 from src.Instruccion.Listas.AccesoLista import AccesoLista
+from src.Instruccion.Listas.TipoLista import TipoLista
+from src.Instruccion.Struct.Struct import Struct
+from src.Instruccion.Struct.GetStruct import GetStruct
 def p_init(t):
     'init            : ls_instr'
     t[0] = AST(t[1],0,0)
@@ -250,6 +257,7 @@ def p_instruccion(t):
     '''instruccion      : imprimir_instr
                         | declaracion_instr
                         | llamada_instr
+                        | struct_instr
     '''
     t[0] = t[1]
 
@@ -266,15 +274,22 @@ def p_declaracion(t):
 def p_declaracion2(t):
     '''declaracion_instr : ID DOSPTS TIPO IGUAL expresion'''
     t[0] = Declaracion(t[1], t[5], t[3], t.lineno(2), find_column(t.slice[2]))
+    #provar con x = {valor, tipo}
 
 def p_declaracion3(t):
     'declaracion_instr : ID ACCESOLISTA IGUAL expresion'
     t[0] = Declaracion(t[1], t[4], None, t.lineno(3), find_column(t.slice[3]))
+    #probar con valor = [t[1], t[2]]
+
+def p_declaracion4(t):
+    '''declaracion_instr : GETSTRUCTS IGUAL expresion'''
+    t[0] = Declaracion(t[1], t[3], None, t.lineno(2), find_column(t.slice[2]))
 
 #/////////////////////////////////// FUNCIONES ///////////////////////////////////////////
 def p_funciones(t):
-    '''funcion_instr :  RDEF ID PARA PARC DOSPTS instrucciones
-                    | RDEF ID PARA PARAMETROSTIPO PARC DOSPTS instrucciones'''
+    '''funcion_instr : RDEF ID PARA PARC DOSPTS instrucciones
+                     | RDEF ID PARA PARAMETROSTIPO PARC DOSPTS instrucciones'''
+    #probar con tipo de retorno cuando tenga el return
 
     if len(t) == 7:
         t[0] = Funcion(t[2], [], Tipo.ANY, t[6], t.lineno(1), find_column(t.slice[1]))
@@ -289,6 +304,15 @@ def p_llamada_instr(t):
         t[0] = LlamadaInstr(t[1], [], t.lineno(1), find_column(t.slice[1]))
     else:
         t[0] = LlamadaInstr(t[1], t[3], t.lineno(1), find_column(t.slice[1]))
+
+#///////////////////////////////// LLAMADA EXPRESION ////////////////////////////////////
+def p_llamada_expresion(t):
+    '''llamada_expre : ID PARA PARC
+                     | ID PARA PARAMETROS PARC'''
+    if len(t) == 4:
+        t[0] = LlamadaExpre(t[1], [], t.lineno(1), find_column(t.slice[1]))
+    else:
+        t[0] = LlamadaExpre(t[1], t[3], t.lineno(1), find_column(t.slice[1]))
 
 #///////////////////////////////////// LISTAS ////////////////////////////////////////////
 def p_listas(t):
@@ -309,13 +333,62 @@ def p_item_lista(t):
     'ITEMLISTA : CORCHA expresion CORCHC'
     t[0] = t[2]
 
+#/////////////////////////////////////// STRUCTS /////////////////////////////////////////
+def p_instr_struct(t):
+    '''struct_instr : RMUTABLE RSTRUCT ID ATRIBUTOSSTRUCT LLAVEC
+                    | RMUTABLE RSTRUCT ID LLAVEC
+                    | RSTRUCT ID ATRIBUTOSSTRUCT LLAVEC
+                    | RSTRUCT ID LLAVEC
+    '''
+    if len(t) == 6:
+        t[0] = Struct(t[3], t[4], t.lineno(1), find_column(t.slice[1]), True)
+    elif len(t) == 5:
+        if t[1] == "mutable":
+            t[0] = Struct(t[3], [], t.lineno(1), find_column(t.slice[1]), True)
+        else:
+            t[0] = Struct(t[2], t[3], t.lineno(1), find_column(t.slice[1]))
+    else:
+        t[0] = Struct(t[2], [], t.lineno(1), find_column(t.slice[1]))
+
+def p_atrib_struct(t):
+    'ATRIBUTOSSTRUCT : ATRIBUTOSSTRUCT ATRIBSTRUCT PUNTOCOMA'
+    t[1].append(t[2])
+    t[0] = t[1]
+
+def p_atrib_struct2(t):
+    'ATRIBUTOSSTRUCT : ATRIBSTRUCT PUNTOCOMA'
+    t[0] = [t[1]]
+
+def p_atrib_item(t):
+    '''ATRIBSTRUCT : ID DOSPTS TIPO
+                    | ID DOSPTS ID
+                    | ID'''
+    if (len(t) == 2):
+        t[0] = {"id": t[1], "tipo": Tipo.ANY}
+    else:
+        t[0] = {"id": t[1], "tipo": t[3]}
+
+def p_get_struct(t):
+    '''GETSTRUCTS : GETSTRUCTS PUNTO GETSTRUCT'''
+    t[1].append(t[3])
+    t[0] = t[1]
+
+def p_get_strct2(t):
+    '''GETSTRUCTS : GETSTRUCT'''
+    t[0] = [t[1]]
+
+def p_get_item(t):
+    'GETSTRUCT : ID'
+    t[0] = t[1]
+
 #//////////////////////////////////////// TIPO ///////////////////////////////////////////
 def p_tipo(t):
     '''TIPO : RINT
             | RFLOAT
             | RBOOLEAN
             | RSTRING
-            | ID''' #arraytype
+            | ID
+            | RLIST''' #arraytype
     if t[1] == "int":
         t[0] = Tipo.INT
     elif t[1] == "float":
@@ -324,8 +397,10 @@ def p_tipo(t):
         t[0] = Tipo.BOOLEAN
     elif t[1] == "string":
         t[0] = Tipo.STRING
-    elif type(t[1]) == "TypeArray":
+    elif type(t[1]) == "TypeArray":  #probar si funciona o colocar TypeArray
         t[0] = t[1]
+    elif t[1] == "list":
+        t[0] = TipoLista(Tipo.INT, Tipo.LIST, t.lineno(1), find_column(t.slice[1]))
     else:
         t[0] = t[1]
 
@@ -337,6 +412,7 @@ def p_aritmeticas(t):
                     | expresion DIVISION expresion
                     | expresion POTENCIA expresion
                     | expresion MODULO expresion
+                    | expresion PUNTO expresion
                     '''
     if t[2] == '*':
         t[0] = Aritmetica(t[1], t[3], TipoOperacion.MULTIPLICACION, t.lineno(2), find_column(t.slice[2]))
@@ -350,6 +426,8 @@ def p_aritmeticas(t):
         t[0] = Aritmetica(t[1], t[3], TipoOperacion.DIVISION, t.lineno(2), find_column(t.slice[2]))
     elif t[2] == '%':
         t[0] = Aritmetica(t[1], t[3], TipoOperacion.MODULO, t.lineno(2), find_column(t.slice[2]))
+    elif t[2] == '.':
+        t[0] = GetStruct(t[1], t[3], t.lineno(2), find_column(t.slice[2]))
 
 #////////////////////////////// EXPRESIONES RELACIONALES ///////////////////////////////////
 def p_relacionales(t):
@@ -388,6 +466,7 @@ def p_expre_not(t):
     'expresion      : RNOT expresion %prec UNOT'
     if t[1] == 'not':
         t[0] = Logica(t[2], Primitivo(True, Tipo.BOOLEAN, t.lineno(1), find_column(t.slice[1])), TipoOperacion.NOT, t.lineno(1), find_column(t.slice[1]))
+        #probar dejar der como None
 
 def p_negacion(t):
     'expresion      : MENOS expresion %prec UMENOS'
@@ -434,6 +513,11 @@ def p_expresion_lista(t):
 def p_expresion_accesolst(t):
     'expresion : ID ACCESOLISTA'
     t[0] = AccesoLista(t[1], t[2], t.lineno(1), find_column(t.slice[1]))
+
+#//////////////////////////////////// EXPRESION LLAMADA ///////////////////////////////////////
+def p_expresion_llamada(t):
+    'expresion : llamada_expre'
+    t[0] = t[1]
 
 #//////////////////////////////////////// ERRORES /////////////////////////////////////////////
 def p_error(t):

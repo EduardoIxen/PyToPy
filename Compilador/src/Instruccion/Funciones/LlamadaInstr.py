@@ -3,7 +3,7 @@ from src.Abstract.Expresion import Expresion
 from src.Excepcion.Excepcion import Excepcion
 from src.Abstract.Return import Return
 from src.Ast.Tipo import Tipo
-#tipo array
+from src.Instruccion.Listas.TipoLista import TipoLista
 
 class LlamadaInstr(Expresion):
     def __init__(self, id, parametros, linea, columna):
@@ -20,8 +20,7 @@ class LlamadaInstr(Expresion):
         #agregar funciones nativas
 
         simbFunc = entorno.obtenerFuncion(self.id)
-        #obtener struct
-        struct = None
+        struct = entorno.getStruct(self.id)
 
         if struct is None:
             if simbFunc is None:
@@ -42,8 +41,8 @@ class LlamadaInstr(Expresion):
                 tipoAlmacenado = simbFunc.parametros[i]['tipo']
                 tipoObtenido = parametroCompi.getTipo()
 
-                if isinstance(tipoAlmacenado, list): #"tipoArray"
-                    if isinstance(tipoObtenido, list): #"tipoArray"
+                if isinstance(tipoAlmacenado, TipoLista):
+                    if isinstance(tipoObtenido, TipoLista):
                         if tipoAlmacenado.tipo != tipoObtenido.tipo:
                             genC3D.setExcepcion(Excepcion("Semantico", f"Parametro de tipo {tipoObtenido} no es compatible con {tipoAlmacenado}", self.linea, self.columna))
                             return
@@ -53,8 +52,10 @@ class LlamadaInstr(Expresion):
                             return
                 else:
                     if isinstance(tipoAlmacenado, str):
-                        #structs
-                        pass
+                        struct = entorno.getStruct(tipoAlmacenado)
+                        if struct.getTipo() != tipoObtenido:
+                            genC3D.setExcepcion(Excepcion("Semantico", f"Se esperaba un argumento de tipo {tipoAlmacenado} pero se recibio {tipoObtenido}", self.linea, self.columna))
+                            return
                     elif tipoAlmacenado == Tipo.ANY:
                         tipoAlmacenado = tipoObtenido
                     elif tipoObtenido != tipoAlmacenado and tipoAlmacenado != Tipo.ANY:
@@ -112,5 +113,27 @@ class LlamadaInstr(Expresion):
             auxRetornar.etiquetaFalse = self.etiquetaFalse
             return auxRetornar
         else:   #es un struct
-            pass
+            tempStruct = genC3D.agregarTemp()
+            tempH = genC3D.agregarTemp()
+            genC3D.agregarExpresion(tempStruct, 'H', '', '')
+            genC3D.agregarExpresion(tempH, tempStruct, '', '')
+
+            if len(self.parametros) != len(struct.atributos):
+                genC3D.setExcepcion(Excepcion("Semantico", f"La cantidad de atributos son incorrectos {self.id}", self.linea, self.columna))
+                return
+            genC3D.agregarExpresion('H', 'H', len(self.parametros), '+')  #posiciones para referencias a los atributos
+
+            tiposAuxiliares = []
+            valoresAuxiliares = []
+            for par in self.parametros:
+                valor = par.compilar(entorno)
+                genC3D.setHeap(tempH, valor.getValor())
+                genC3D.agregarExpresion(tempH, tempH, '1', '+')
+                tiposAuxiliares.append(valor.getTipo())
+                valoresAuxiliares.append(valor)
+
+            auxReturn = Return(tempStruct, struct.getTipo(), False, self.id)
+            auxReturn.setAtributos(tiposAuxiliares)
+            auxReturn.setValores(valoresAuxiliares)
+            return auxReturn
 
