@@ -85,8 +85,55 @@ class ForInstr(Instruccion):
             genC3D.agregarGoto(etiquetaContinue)
             genC3D.agregarEtiqueta(etiquetaBreak)
 
-        else: #por si es un arreglo
-            pass
+        else: #llegó un arreglo
+            tipoVal = valor.getTipo()
+            tipoFinal = None
+            if valor.getTipo() == Tipo.LIST: #TipoLista
+                while tipoVal.value is not None:
+                    tipoFinal = tipoVal.value
+                    if type(tipoFinal) is not TipoLista: break
+                    tipoVal = tipoVal.value
+
+                genC3D.agregarEspacio()
+                var = nuevoEntorno.setVariable(self.id, tipoFinal, True)
+                genC3D.liberarTemp(valor.getValor())
+
+                etiquetaContinue = genC3D.nuevaEtiqueta()
+                etiquetaBreak = genC3D.nuevaEtiqueta()
+                nuevoEntorno.etiquetaContinue = etiquetaContinue
+                nuevoEntorno.etiquetaBreak = etiquetaBreak
+
+                tempFin = genC3D.agregarTemp()
+                genC3D.liberarTemp(tempFin)
+                temp2 = genC3D.agregarTemp()
+                genC3D.liberarTemp(temp2)
+                contTemp = genC3D.agregarTemp()
+                genC3D.liberarTemp(contTemp)
+                tempI = genC3D.agregarTemp()
+                genC3D.liberarTemp(tempI)
+
+                genC3D.getHeap(tempFin, valor.getValor())       #recuperar el tamaño de la lista
+                genC3D.agregarExpresion(temp2, valor.getValor(), '1', '+')
+
+                genC3D.agregarExpresion(contTemp, '1', '', '')
+                genC3D.agregarEtiqueta(etiquetaContinue)        #comenzando las iteraciones
+                genC3D.getHeap(tempI, temp2)                    #obteniendo item
+
+                genC3D.agregarExpresion(temp, 'P', var.posicion, '+')
+                genC3D.setStack(temp, tempI)                    #modificando el val de la variable
+                genC3D.agregarIf(contTemp, tempFin, '>', etiquetaBreak)         #evaluo la condicion
+                genC3D.agregarExpresion(temp2, temp2, '1', '+')     #i = i + 1
+                genC3D.agregarExpresion(contTemp, contTemp, '1', '+')   #i = i+1
+
+                for instr in self.instrucciones:
+                    instr.compilar(nuevoEntorno)
+                genC3D.agregarGoto(etiquetaContinue)        #retornar al inicio
+                genC3D.agregarEtiqueta(etiquetaBreak)       #fin del for
+
+                genC3D.agregarEspacio()
+            else:
+                genC3D.setExcepcion(Excepcion("Semantico", "La expresion del for debe ser un STRING, una LISTA o un RANGE", self.linea, self.columna))
+                return
 
         genC3D.agregarComentario("FIN FOR")
         genC3D.agregarEspacio()
