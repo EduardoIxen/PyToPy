@@ -23,6 +23,8 @@ reservadas = {
     'break'     :'RBREAK',
     'continue'  :'RCONTINUE',
     'return'    :'RRETURN',
+    'for'       :'RFOR',
+    'in'        :'RIN',
 }
 
 tokens = [
@@ -191,6 +193,7 @@ from src.Instruccion.loop.WhileInstr import WhileInstr
 from src.Instruccion.loop.BreakInstr import BreakInstr
 from src.Instruccion.loop.ContinueInstr import ContinueInstr
 from src.Instruccion.Funciones.ReturnInstr import ReturnInstr
+from src.Instruccion.loop.ForInstr import ForInstr
 def p_init(t):
     'init            : ls_instr'
     t[0] = AST(t[1],0,0)
@@ -275,6 +278,7 @@ def p_instruccion(t):
                         | break_instr
                         | continue_instr
                         | return_instr
+                        | for_instr
     '''
     t[0] = t[1]
 
@@ -450,6 +454,11 @@ def p_continue_instr(t):
 def p_return_instr(t):
     'return_instr : RRETURN expresion'
     t[0] = ReturnInstr(t[2], t.lineno(1), find_column(t.slice[1]))
+
+#//////////////////////////////////////// FOR ////////////////////////////////////////////
+def p_for_instr(t):
+    '''for_instr : RFOR ID RIN expresion DOSPTS instrucciones LLAVEC'''
+    t[0] = ForInstr(t[2], t[4], t[6], t.lineno(1), find_column(t.slice[1]))
 
 #//////////////////////////////////////// TIPO ///////////////////////////////////////////
 def p_tipo(t):

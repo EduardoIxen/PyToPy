@@ -31,6 +31,10 @@ class Print(Instruccion):
                 self.cadenaRecibida(genC3D, simbolo.getValor(), entorno)
             elif simbolo.getTipo() == Tipo.INT:
                 genC3D.agregarPrint('d', simbolo.getValor())
+            elif simbolo.getTipo() == Tipo.CHAR:
+                temp = genC3D.agregarTemp()
+                genC3D.getHeap(temp, simbolo.getValor())
+                genC3D.agregarPrint("c", temp)
             elif simbolo.getTipo() == Tipo.LIST:
                 temp = genC3D.agregarTemp()
                 temp2 = genC3D.agregarTemp()
