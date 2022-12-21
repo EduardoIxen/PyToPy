@@ -21,6 +21,7 @@ reservadas = {
     'elif'      :'RELIF',
     'while'     :'RWHILE',
     'break'     :'RBREAK',
+    'continue'  :'RCONTINUE',
 }
 
 tokens = [
@@ -187,6 +188,7 @@ from src.Instruccion.Struct.GetStruct import GetStruct
 from src.Instruccion.Condicional.IfInstr import IfInstr
 from src.Instruccion.loop.WhileInstr import WhileInstr
 from src.Instruccion.loop.BreakInstr import BreakInstr
+from src.Instruccion.loop.ContinueInstr import ContinueInstr
 def p_init(t):
     'init            : ls_instr'
     t[0] = AST(t[1],0,0)
@@ -269,6 +271,7 @@ def p_instruccion(t):
                         | if_instr
                         | while_instr
                         | break_instr
+                        | continue_instr
     '''
     t[0] = t[1]
 
@@ -434,6 +437,11 @@ def p_while_instr(t):
 def p_break_instr(t):
     'break_instr : RBREAK'
     t[0] = BreakInstr(t.lineno(1), find_column(t.slice[1]))
+
+#////////////////////////////////////// CONTINUE ///////////////////////////////////////
+def p_continue_instr(t):
+    'continue_instr : RCONTINUE'
+    t[0] = ContinueInstr(t.lineno(1), find_column(t.slice[1]))
 
 #//////////////////////////////////////// TIPO ///////////////////////////////////////////
 def p_tipo(t):
