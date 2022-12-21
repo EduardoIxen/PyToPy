@@ -87,7 +87,7 @@ class LlamadaExpre(Expresion):
             genC3D.llamarFunc(self.id)
             genC3D.getStack(temp, 'P')
             genC3D.retornarEntorno(entorno.tamanio)
-            genC3D.obtenerTemporales(entorno.tamanio, tamanio)
+            genC3D.obtenerTemporales(entorno, tamanio)
             genC3D.agregarAlmacTemp(temp)
 
             if simbFuncion.getTipo() != Tipo.BOOLEAN:

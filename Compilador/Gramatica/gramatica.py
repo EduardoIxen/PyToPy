@@ -22,6 +22,7 @@ reservadas = {
     'while'     :'RWHILE',
     'break'     :'RBREAK',
     'continue'  :'RCONTINUE',
+    'return'    :'RRETURN',
 }
 
 tokens = [
@@ -189,6 +190,7 @@ from src.Instruccion.Condicional.IfInstr import IfInstr
 from src.Instruccion.loop.WhileInstr import WhileInstr
 from src.Instruccion.loop.BreakInstr import BreakInstr
 from src.Instruccion.loop.ContinueInstr import ContinueInstr
+from src.Instruccion.Funciones.ReturnInstr import ReturnInstr
 def p_init(t):
     'init            : ls_instr'
     t[0] = AST(t[1],0,0)
@@ -272,6 +274,7 @@ def p_instruccion(t):
                         | while_instr
                         | break_instr
                         | continue_instr
+                        | return_instr
     '''
     t[0] = t[1]
 
@@ -442,6 +445,11 @@ def p_break_instr(t):
 def p_continue_instr(t):
     'continue_instr : RCONTINUE'
     t[0] = ContinueInstr(t.lineno(1), find_column(t.slice[1]))
+
+#///////////////////////////////////// RETURN ///////////////////////////////////////////
+def p_return_instr(t):
+    'return_instr : RRETURN expresion'
+    t[0] = ReturnInstr(t[2], t.lineno(1), find_column(t.slice[1]))
 
 #//////////////////////////////////////// TIPO ///////////////////////////////////////////
 def p_tipo(t):
