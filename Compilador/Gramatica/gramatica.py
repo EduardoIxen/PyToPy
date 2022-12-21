@@ -19,7 +19,8 @@ reservadas = {
     'if'        :'RIF',
     'else'      :'RELSE',
     'elif'      :'RELIF',
-    'while'     :'RWHILE'
+    'while'     :'RWHILE',
+    'break'     :'RBREAK',
 }
 
 tokens = [
@@ -185,6 +186,7 @@ from src.Instruccion.Struct.Struct import Struct
 from src.Instruccion.Struct.GetStruct import GetStruct
 from src.Instruccion.Condicional.IfInstr import IfInstr
 from src.Instruccion.loop.WhileInstr import WhileInstr
+from src.Instruccion.loop.BreakInstr import BreakInstr
 def p_init(t):
     'init            : ls_instr'
     t[0] = AST(t[1],0,0)
@@ -266,6 +268,7 @@ def p_instruccion(t):
                         | struct_instr
                         | if_instr
                         | while_instr
+                        | break_instr
     '''
     t[0] = t[1]
 
@@ -426,6 +429,11 @@ def p_lista_elif_item3(t):
 def p_while_instr(t):
     'while_instr : RWHILE expresion DOSPTS instrucciones LLAVEC'
     t[0] = WhileInstr(t[2], t[4], t.lineno(1), find_column(t.slice[1]))
+
+#///////////////////////////////////////// BREAK ////////////////////////////////////////
+def p_break_instr(t):
+    'break_instr : RBREAK'
+    t[0] = BreakInstr(t.lineno(1), find_column(t.slice[1]))
 
 #//////////////////////////////////////// TIPO ///////////////////////////////////////////
 def p_tipo(t):
