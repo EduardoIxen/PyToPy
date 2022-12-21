@@ -16,6 +16,9 @@ reservadas = {
     'False'     :'RFALSE',
     'True'      :'RTRUE',
     'def'       :'RDEF',
+    'if'        :'RIF',
+    'else'      :'RELSE',
+    'elif'      :'RELIF',
 }
 
 tokens = [
@@ -179,6 +182,7 @@ from src.Instruccion.Listas.AccesoLista import AccesoLista
 from src.Instruccion.Listas.TipoLista import TipoLista
 from src.Instruccion.Struct.Struct import Struct
 from src.Instruccion.Struct.GetStruct import GetStruct
+from src.Instruccion.Condicional.IfInstr import IfInstr
 def p_init(t):
     'init            : ls_instr'
     t[0] = AST(t[1],0,0)
@@ -258,6 +262,7 @@ def p_instruccion(t):
                         | declaracion_instr
                         | llamada_instr
                         | struct_instr
+                        | if_instr
     '''
     t[0] = t[1]
 
@@ -380,6 +385,39 @@ def p_get_strct2(t):
 def p_get_item(t):
     'GETSTRUCT : ID'
     t[0] = t[1]
+
+#////////////////////////////////////////// IF ///////////////////////////////////////////
+def p_if_instr(t):
+    '''if_instr : RIF expresion DOSPTS instrucciones LLAVEC'''
+    t[0] = IfInstr(t[2], t[4], None, None, t.lineno(1), find_column(t.slice[1]))
+
+def p_if_instr2(t):
+    'if_instr : RIF expresion DOSPTS instrucciones LLAVEC RELSE DOSPTS instrucciones LLAVEC'
+    t[0] = IfInstr(t[2], t[4], t[8], None, t.lineno(1), find_column(t.slice[1]))
+def p_if_instr3(t):
+    'if_instr : RIF expresion DOSPTS instrucciones LLAVEC lista_elif'
+    t[0] = IfInstr(t[2], t[4], None, t[6], t.lineno(1), find_column(t.slice[1]))
+
+def p_lista_elif(t):
+    '''lista_elif : lista_elif elif_inst'''
+    t[1].append(t[2])
+    t[0] = t[1]
+
+def p_lista_elif2(t):
+    'lista_elif : elif_inst'
+    t[0] = [t[1]]
+
+def p_lista_elif_item(t):
+    'elif_inst : RELIF expresion DOSPTS instrucciones LLAVEC'
+    t[0] = IfInstr(t[2], t[4], None, None, t.lineno(1), find_column(t.slice[1]))
+
+def p_lista_elif_item2(t):
+    '''elif_inst : RELIF expresion DOSPTS instrucciones LLAVEC RELSE DOSPTS instrucciones LLAVEC'''
+    t[0] = IfInstr(t[2], t[4], t[8], None, t.lineno(1), find_column(t.slice[1]))
+
+def p_lista_elif_item3(t):
+    'elif_inst : RELIF expresion DOSPTS instrucciones LLAVEC lista_elif'
+    t[0] = IfInstr(t[2], t[4], None, t[6], t.lineno(1), find_column(t.slice[1]))
 
 #//////////////////////////////////////// TIPO ///////////////////////////////////////////
 def p_tipo(t):
