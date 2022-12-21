@@ -25,6 +25,7 @@ reservadas = {
     'return'    :'RRETURN',
     'for'       :'RFOR',
     'in'        :'RIN',
+    'range'     :'RRANGE',
 }
 
 tokens = [
@@ -194,6 +195,7 @@ from src.Instruccion.loop.BreakInstr import BreakInstr
 from src.Instruccion.loop.ContinueInstr import ContinueInstr
 from src.Instruccion.Funciones.ReturnInstr import ReturnInstr
 from src.Instruccion.loop.ForInstr import ForInstr
+from src.Instruccion.loop.RangeInstr import RangeInstr
 def p_init(t):
     'init            : ls_instr'
     t[0] = AST(t[1],0,0)
@@ -459,6 +461,14 @@ def p_return_instr(t):
 def p_for_instr(t):
     '''for_instr : RFOR ID RIN expresion DOSPTS instrucciones LLAVEC'''
     t[0] = ForInstr(t[2], t[4], t[6], t.lineno(1), find_column(t.slice[1]))
+
+def p_for_range_instr(t):
+    'for_instr : RFOR ID RIN range_instr DOSPTS instrucciones LLAVEC'
+    t[0] = ForInstr(t[2], t[4], t[6], t.lineno(1), find_column(t.slice[1]))
+
+def p_range(t):
+    'range_instr : RRANGE PARA expresion PARC'
+    t[0] = RangeInstr(Primitivo(1, Tipo.INT, t.lineno(1), find_column(t.slice[1])), t[3], t.lineno(1), find_column(t.slice[1]))
 
 #//////////////////////////////////////// TIPO ///////////////////////////////////////////
 def p_tipo(t):
