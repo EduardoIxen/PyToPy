@@ -155,7 +155,9 @@ class LlamadaExpre(Expresion):
                 else:
                     genC3D.setExcepcion(Excepcion("Semantico", "Solo las cadenas se pueden convertir a float", self.linea, self.columna))
                     return
-
+        elif self.id == "len":
+            parametro = self.parametros[0].compilar(entorno)
+            return Return(self.nativaLen(entorno, parametro.getValor()), Tipo.INT, False)
 
         simbFuncion = entorno.obtenerFuncion(self.id)
         struct = entorno.getStruct(self.id)
@@ -299,6 +301,22 @@ class LlamadaExpre(Expresion):
         genC3D.nuevoEntorno(entorno.getTamanio())
         genC3D.llamarFunc('nativa_lower')
 
+        temp = genC3D.agregarTemp()
+        genC3D.getStack(temp, 'P')
+        genC3D.retornarEntorno(entorno.getTamanio())
+        return temp
+
+    def nativaLen(self, entorno, valor):
+        nuevaInst = GeneradorC3D()
+        genC3D = nuevaInst.getInstance()
+        genC3D.nativaLen()
+
+        paramTemp = genC3D.agregarTemp()
+        genC3D.agregarExpresion(paramTemp, 'P', entorno.getTamanio(), '+')
+        genC3D.agregarExpresion(paramTemp, paramTemp, '1', '+')
+        genC3D.setStack(paramTemp, valor)
+        genC3D.nuevoEntorno(entorno.getTamanio())
+        genC3D.llamarFunc('nativa_len')
         temp = genC3D.agregarTemp()
         genC3D.getStack(temp, 'P')
         genC3D.retornarEntorno(entorno.getTamanio())

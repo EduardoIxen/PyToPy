@@ -20,6 +20,7 @@ class GeneradorC3D:
         self.compararCadena = False
         self.natUpper = False
         self.natLower = False
+        self.natLen = False
         self.potencia = False
         self.math = False
         self.excepciones = []
@@ -659,3 +660,20 @@ class GeneradorC3D:
         self.agregarFinFunc()
         self.enNativas = False
 
+    def nativaLen(self):
+        if self.natLen:
+            return
+        self.natLen = True
+        self.enNativas = True
+        self.agregarInicioFunc("nativa_len")
+        temp = self.agregarTemp()
+        etiquReturn = self.nuevaEtiqueta()
+        self.agregarExpresion(temp, 'P', '1', '+')
+        self.getStack(temp, temp)
+        self.getHeap(temp, temp)
+        self.agregarGoto(etiquReturn)
+        self.agregarEtiqueta(etiquReturn)
+        self.setStack('P', temp)
+        self.agregarFinFunc()
+        self.enNativas = False
+        self.liberarTemp(temp)
