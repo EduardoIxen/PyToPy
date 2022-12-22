@@ -81,6 +81,12 @@ class LlamadaExpre(Expresion):
                     genC3D.agregarGoto(compE)
                     genC3D.agregarEtiqueta(salidaE)
                     return Return(tempP5, Tipo.INT, True)
+                elif expre.getTipo() == Tipo.FLOAT:
+                    tempP = genC3D.agregarTemp()
+                    genC3D.agregarExpresion(tempP, expre.getValor(), '', '')
+                    tempP2 = genC3D.agregarTemp()
+                    genC3D.addTrunc(tempP2, tempP)
+                    return Return(tempP2, Tipo.INT, True)
                 else:
                     genC3D.setExcepcion(Excepcion("Semantico", "Solo las cadenas se pueden convertir a int", self.linea, self.columna))
                     return
@@ -140,6 +146,12 @@ class LlamadaExpre(Expresion):
                     genC3D.agregarGoto(compE)
                     genC3D.agregarEtiqueta(salidaE)
                     return Return(tempP5, Tipo.FLOAT, True)
+                elif expre.getTipo() == Tipo.INT:
+                    tempP = genC3D.agregarTemp()
+                    genC3D.agregarExpresion(tempP, expre.getValor(), '', '')
+                    tempP2 = genC3D.agregarTemp()
+                    genC3D.addTrunc(tempP2, tempP)
+                    return Return(tempP2, Tipo.FLOAT, True)
                 else:
                     genC3D.setExcepcion(Excepcion("Semantico", "Solo las cadenas se pueden convertir a float", self.linea, self.columna))
                     return

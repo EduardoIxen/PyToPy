@@ -98,6 +98,9 @@ class GeneradorC3D:
     def agregarExponModulo(self, resultado, izq, der):
         self.insertarCodigo(f"{resultado} = math.Mod({izq}, {der});\n")
 
+    def addTrunc(self, result, val):
+        self.insertarCodigo(f'{result}=float64(int({val}));\n')
+
     def liberarTemp(self, temp):
         if temp in self.almacenamientoTemp.keys():
             del self.almacenamientoTemp[temp]
