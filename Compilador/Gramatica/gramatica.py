@@ -26,6 +26,8 @@ reservadas = {
     'for'       :'RFOR',
     'in'        :'RIN',
     'range'     :'RRANGE',
+    'upper'     :'RUPPER',
+    'lower'     :'RLOWER',
 }
 
 tokens = [
@@ -161,7 +163,8 @@ precedence = (
     ('left','ROR'),
     ('left','RAND'),
     ('right', 'UNOT'),
-    ('left','MENORQUE','MAYORQUE', 'MENORIGUAL', 'MAYORIGUAL', 'IGUALIGUAL', 'DIFERENTE'),
+    ('left', 'IGUALIGUAL', 'DIFERENTE'),
+    ('left','MENORQUE','MAYORQUE', 'MENORIGUAL', 'MAYORIGUAL'),
     ('left','MAS','MENOS'),
     ('left', 'MULTIPLICACION', 'DIVISION', 'MODULO'),
     ('left', 'POTENCIA'),
@@ -328,6 +331,10 @@ def p_llamada_instr(t):
     else:
         t[0] = LlamadaInstr(t[1], t[3], t.lineno(1), find_column(t.slice[1]))
 
+def p_llamada_instr_upper(t):
+    'llamada_instr : expresion PUNTO RUPPER PARA PARC'
+    t[0] = LlamadaInstr('upper', [t[1]], t.lineno(2), find_column(t.slice[2]))
+
 #///////////////////////////////// LLAMADA EXPRESION ////////////////////////////////////
 def p_llamada_expresion(t):
     '''llamada_expre : ID PARA PARC
@@ -336,6 +343,14 @@ def p_llamada_expresion(t):
         t[0] = LlamadaExpre(t[1], [], t.lineno(1), find_column(t.slice[1]))
     else:
         t[0] = LlamadaExpre(t[1], t[3], t.lineno(1), find_column(t.slice[1]))
+
+def p_llamada_upper(t):
+    'llamada_expre : expresion PUNTO RUPPER PARA PARC'
+    t[0] = LlamadaExpre('upper', [t[1]], t.lineno(2), find_column(t.slice[2]))
+
+def p_llamada_lower(t):
+    'llamada_expre : expresion PUNTO RLOWER PARA PARC'
+    t[0] = LlamadaExpre('lower', [t[1]], t.lineno(2), find_column(t.slice[2]))
 
 #///////////////////////////////////// LISTAS ////////////////////////////////////////////
 def p_listas(t):

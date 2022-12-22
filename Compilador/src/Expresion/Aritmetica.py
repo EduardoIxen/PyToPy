@@ -50,7 +50,10 @@ class Aritmetica(Expresion):
         elif self.tipoOperacion == TipoOperacion.DIVISION:
             operacion = '/'
             tipoResultado = Tipo.FLOAT
-            izq.valor = float(izq.getValor())
+            if isinstance(type(izq.valor), float):
+                izq.valor = float(izq.getValor())
+            if isinstance(type(der.valor), float):
+                der.valor = float(der.valor)
         elif self.tipoOperacion == TipoOperacion.MODULO:
             operacion = '%'
 

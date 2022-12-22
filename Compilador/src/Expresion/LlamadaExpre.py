@@ -16,6 +16,16 @@ class LlamadaExpre(Expresion):
         genC3D = nuevaInst.getInstance()
 
         #agregar funciones nativas
+        if self.id == "upper":
+            for param in self.parametros:
+                ret = param.compilar(entorno)
+                valor = ret.getValor()
+                return Return(self.nativaUpper(entorno, valor), Tipo.STRING, False)
+        elif self.id == "lower":
+            for param in self.parametros:
+                ret = param.compilar(entorno)
+                valor = ret.getValor()
+                return Return(self.nativaLower(entorno, valor), Tipo.STRING, False)
 
         simbFuncion = entorno.obtenerFuncion(self.id)
         struct = entorno.getStruct(self.id)
@@ -129,3 +139,37 @@ class LlamadaExpre(Expresion):
             auxReturn.setAtributos(tiposAuxiliares)
             auxReturn.setValores(valoresAuxiliares)
             return auxReturn
+
+    def nativaUpper(self, entorno, valor):
+        nuevaInst = GeneradorC3D()
+        genC3D = nuevaInst.getInstance()
+        genC3D.nativaUpper()
+        paramTemp = genC3D.agregarTemp()
+        genC3D.agregarExpresion(paramTemp, 'P', entorno.getTamanio(), '+')
+        genC3D.agregarExpresion(paramTemp, paramTemp, '1', '+')
+        genC3D.setStack(paramTemp, valor)
+        genC3D.nuevoEntorno(entorno.getTamanio())
+        genC3D.llamarFunc('nativa_upper')
+        temp = genC3D.agregarTemp()
+        genC3D.getStack(temp, 'P')
+        genC3D.retornarEntorno(entorno.getTamanio())
+        return temp
+
+    def nativaLower(self, entorno, valor):
+        nuevaIns = GeneradorC3D()
+        genC3D = nuevaIns.getInstance()
+        genC3D.nativaLower()
+
+        tempParam = genC3D.agregarTemp()
+
+        genC3D.agregarExpresion(tempParam, 'P', entorno.getTamanio(), '+')
+        genC3D.agregarExpresion(tempParam, tempParam, '1', '+')
+        genC3D.setStack(tempParam, valor)
+
+        genC3D.nuevoEntorno(entorno.getTamanio())
+        genC3D.llamarFunc('nativa_lower')
+
+        temp = genC3D.agregarTemp()
+        genC3D.getStack(temp, 'P')
+        genC3D.retornarEntorno(entorno.getTamanio())
+        return temp

@@ -18,6 +18,8 @@ class GeneradorC3D:
         self.repetirString = False
         self.concatenarCadena = False
         self.compararCadena = False
+        self.natUpper = False
+        self.natLower = False
         self.potencia = False
         self.math = False
         self.excepciones = []
@@ -543,3 +545,114 @@ class GeneradorC3D:
         self.agregarEtiqueta(etiquReturn)
         self.agregarFinFunc()
         self.enNativas = False
+
+    def nativaUpper(self):
+        if self.natUpper:
+            return
+        self.natUpper = True
+        self.enNativas = True
+        self.agregarInicioFunc('nativa_upper')
+
+        nuevaCadenaTemp = self.agregarTemp()
+        self.agregarExpresion(nuevaCadenaTemp, 'H', '', '')
+        etiquetaReturn = self.nuevaEtiqueta()               #etiqueta de salida
+
+        tempPtr = self.agregarTemp()                        #puntero a mi stack
+        self.liberarTemp(tempPtr)
+
+        tempH = self.agregarTemp()                          #puntero para mi heap
+        self.liberarTemp(tempH)
+
+        self.agregarExpresion(tempPtr, 'P', '1', '+')
+        self.getStack(tempH, tempPtr)
+
+        etiquInicio = self.nuevaEtiqueta()
+        self.agregarGoto(etiquInicio)
+        self.agregarEtiqueta(etiquInicio)
+
+        tempChar = self.agregarTemp()                   #temp para sacar los caracteres
+        self.liberarTemp(tempChar)
+        self.getHeap(tempChar, tempH)
+
+        etiquConvertir = self.nuevaEtiqueta()           #etiqu para cambiar los caracteres a mayusculas
+
+        self.agregarComentario("-1 ES EL FIN DE LA CADELA")
+        self.agregarEspacio()
+        self.agregarIf(tempChar, "-1", "==", etiquetaReturn)
+        self.agregarComentario("< 97 NO SON LETRAS")
+        self.agregarEspacio()
+        self.agregarIf(tempChar, "97", "<", etiquConvertir)
+        self.agregarComentario(">122 NO SON LETRAS")
+        self.agregarEspacio()
+        self.agregarIf(tempChar, "122", ">", etiquConvertir)
+        self.agregarComentario("RESTAR 32 PARA CAER EN LA LETRA MAYUSCULA EN ASCII")
+        self.agregarEspacio()
+        self.agregarExpresion(tempChar, tempChar, '32', '-')  #restarle 32 al ascii para que caiga en su mayuscula
+
+        self.agregarEtiqueta(etiquConvertir)
+        self.setHeap('H', tempChar)             #asignamos nueva posicion en el heap
+        self.siguienteHeap()                    #cambiamos a otro heap
+
+        self.agregarExpresion(tempH, tempH, '1', '+')       #siguiente ptr de heap
+        self.agregarGoto(etiquInicio)                       #volvemos a la etiqu de inicio
+        self.agregarEtiqueta(etiquetaReturn)
+
+        self.setHeap('H', '-1')                             #indicamos el final de la cadena
+        self.siguienteHeap()
+        self.setStack('P', nuevaCadenaTemp)
+        self.agregarFinFunc()
+        self.enNativas = False
+
+    def nativaLower(self):
+        if self.natLower:
+            return
+        self.natLower = True
+        self.enNativas = True
+
+        self.agregarInicioFunc("nativa_lower")
+
+        nuevoStringTemp = self.agregarTemp()
+        self.agregarExpresion(nuevoStringTemp, 'H', '', '')
+
+        etiquetaReturn = self.nuevaEtiqueta()
+
+        pTemp = self.agregarTemp()
+        self.liberarTemp(pTemp)
+
+        hTemp = self.agregarTemp()
+        self.liberarTemp(hTemp)
+
+        self.agregarExpresion(pTemp, 'P', '1', '+')
+        self.getStack(hTemp, pTemp)
+
+        etiquInicio = self.nuevaEtiqueta()
+        self.agregarGoto(etiquInicio)
+        self.agregarEtiqueta(etiquInicio)
+
+        cTemp = self.agregarTemp()
+        self.liberarTemp(cTemp)
+
+        self.getHeap(cTemp, hTemp)
+
+        etiquLower = self.nuevaEtiqueta()
+
+        self.agregarIf(cTemp, "-1", "==", etiquetaReturn)
+        self.agregarIf(cTemp, "65", "<", etiquLower)
+        self.agregarIf(cTemp, "90", ">", etiquLower)
+
+        self.agregarExpresion(cTemp, cTemp, "32", '+')
+        self.agregarEtiqueta(etiquLower)
+        self.setHeap('H', cTemp)
+
+        self.siguienteHeap()
+        self.agregarExpresion(hTemp, hTemp, '1', '+')
+        self.agregarGoto(etiquInicio)
+        self.agregarEtiqueta(etiquetaReturn)
+
+        self.setHeap('H', '-1')
+        self.siguienteHeap()
+        self.setStack('P', nuevoStringTemp)
+
+        self.agregarFinFunc()
+        self.enNativas = False
+
