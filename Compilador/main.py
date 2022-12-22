@@ -46,6 +46,7 @@ def compilar():
                 "symbol": simbolos}, 200
     except Exception as e:
         print(e)
+        errores = genC3D.getExcepciones()
         return {"result":salidaGo,
                 "err": errores,
                 "symbol": simbolos}, 200

@@ -352,6 +352,14 @@ def p_llamada_lower(t):
     'llamada_expre : expresion PUNTO RLOWER PARA PARC'
     t[0] = LlamadaExpre('lower', [t[1]], t.lineno(2), find_column(t.slice[2]))
 
+def p_llamada_int(t):
+    'llamada_expre : RINT PARA expresion PARC'
+    t[0] = LlamadaExpre("int", [t[3]], t.lineno(1), find_column(t.slice[1]))
+
+def p_llamada_float(t):
+    'llamada_expre : RFLOAT PARA expresion PARC'
+    t[0] = LlamadaExpre("float", [t[3]], t.lineno(1), find_column(t.slice[1]))
+
 #///////////////////////////////////// LISTAS ////////////////////////////////////////////
 def p_listas(t):
     '''LISTA : CORCHA PARAMETROS CORCHC'''

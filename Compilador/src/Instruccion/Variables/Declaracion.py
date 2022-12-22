@@ -21,6 +21,8 @@ class Declaracion(Instruccion):
             else:
                 if self.tipo is None:
                     valor = self.expresion.compilar(entorno)
+                    if valor is None:
+                        return
 
                 else:
                     valor = self.expresion.compilar(entorno)
