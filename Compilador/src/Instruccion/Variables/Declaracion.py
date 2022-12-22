@@ -189,6 +189,4 @@ class Declaracion(Instruccion):
                 genC3D.agregarEspacio()
 
 
-
-
-
+#revisado

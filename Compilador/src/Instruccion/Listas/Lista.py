@@ -46,3 +46,4 @@ class Lista(Instruccion):
         genC3D.agregarEspacio()
         return retornar
 
+#verificado

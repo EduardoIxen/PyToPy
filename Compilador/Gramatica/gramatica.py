@@ -335,6 +335,18 @@ def p_llamada_instr_upper(t):
     'llamada_instr : expresion PUNTO RUPPER PARA PARC'
     t[0] = LlamadaInstr('upper', [t[1]], t.lineno(2), find_column(t.slice[2]))
 
+def p_llamada_instr_lower(t):
+    'llamada_instr : expresion PUNTO RLOWER PARA PARC'
+    t[0] = LlamadaInstr('lower', [t[1]], t.lineno(2), find_column(t.slice[2]))
+
+def p_llamada_int_instr(t):
+    'llamada_instr : RINT PARA expresion PARC'
+    t[0] = LlamadaInstr("int", [t[3]], t.lineno(1), find_column(t.slice[1]))
+
+def p_llamada_float_instr(t):
+    'llamada_instr : RFLOAT PARA expresion PARC'
+    t[0] = LlamadaInstr("float", [t[3]], t.lineno(1), find_column(t.slice[1]))
+
 #///////////////////////////////// LLAMADA EXPRESION ////////////////////////////////////
 def p_llamada_expresion(t):
     '''llamada_expre : ID PARA PARC
@@ -378,6 +390,11 @@ def p_acceso_lista2(t):
 def p_item_lista(t):
     'ITEMLISTA : CORCHA expresion CORCHC'
     t[0] = t[2]
+
+#///////////////////////////////////// TIPO LISTA ////////////////////////////////////////
+def p_tipo_lista(t):
+    'tipo_lista : RLIST PARA TIPO PARC'
+    t[0] = TipoLista(t[3], Tipo.LIST, t.lineno(1), find_column(t.slice[1]))
 
 #/////////////////////////////////////// STRUCTS /////////////////////////////////////////
 def p_instr_struct(t):
@@ -500,7 +517,8 @@ def p_tipo(t):
             | RBOOLEAN
             | RSTRING
             | ID
-            | RLIST''' #arraytype
+            | tipo_lista
+            '''
     if t[1] == "int":
         t[0] = Tipo.INT
     elif t[1] == "float":
@@ -509,10 +527,8 @@ def p_tipo(t):
         t[0] = Tipo.BOOLEAN
     elif t[1] == "string":
         t[0] = Tipo.STRING
-    elif type(t[1]) == "TypeArray":  #probar si funciona o colocar TypeArray
+    elif type(t[1]) == TipoLista:  #probar si funciona
         t[0] = t[1]
-    elif t[1] == "list":
-        t[0] = TipoLista(Tipo.INT, Tipo.LIST, t.lineno(1), find_column(t.slice[1]))
     else:
         t[0] = t[1]
 

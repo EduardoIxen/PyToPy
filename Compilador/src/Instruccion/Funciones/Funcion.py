@@ -60,3 +60,5 @@ class Funcion(Instruccion):
                     return True
                 parametros.append(param['id'])
         return False
+
+#revisado

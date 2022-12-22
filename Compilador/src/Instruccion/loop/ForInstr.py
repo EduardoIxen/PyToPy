@@ -88,11 +88,15 @@ class ForInstr(Instruccion):
         else: #llegó un arreglo
             tipoVal = valor.getTipo()
             tipoFinal = None
-            if valor.getTipo() == Tipo.LIST: #TipoLista
-                while tipoVal.value is not None:
-                    tipoFinal = tipoVal.value
-                    if type(tipoFinal) is not TipoLista: break
-                    tipoVal = tipoVal.value
+            #if valor.getTipo() == Tipo.LIST: #TipoLista
+            if isinstance(valor.getTipo(), TipoLista) or valor.getTipo() == Tipo.LIST:
+                if valor.getTipo() == Tipo.LIST:
+                    tipoFinal = valor.getAtributos()[0]
+                else:
+                    while tipoVal.valor is not None:
+                        tipoFinal = tipoVal.valor         #ver si no da error
+                        if type(tipoFinal) is not TipoLista: break
+                        tipoVal = tipoVal.valor
 
                 genC3D.agregarEspacio()
                 var = nuevoEntorno.setVariable(self.id, tipoFinal, True)

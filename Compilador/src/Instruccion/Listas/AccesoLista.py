@@ -38,7 +38,7 @@ class AccesoLista(Instruccion):
                 etiquetaSalida = genC3D.nuevaEtiqueta()
 
                 valorElemento = self.accesInstr[i].compilar(entorno)   #compilo cada elemento de la lista
-                tipoFinal = _tipo.value
+                tipoFinal = _tipo.valor
                 genC3D.agregarExpresion(tmpPtr, valorElemento.getValor(), '', '')  #se almacena la posicion a acceder
 
                 posicionTemporal = valor.posicion
