@@ -104,6 +104,7 @@ class Declaracion(Instruccion):
                             break
                         contador += 1
                 genC3D.agregarComentario("FIN STRUCT")
+                genC3D.agregarEspacio()
             else:   #es una lista
                 self.declarar_lista(var, entorno, self.id[1])
 

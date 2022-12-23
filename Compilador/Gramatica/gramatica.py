@@ -310,7 +310,8 @@ def p_declaracion2(t):
 
 def p_declaracion3(t):
     'declaracion_instr : ID ACCESOLISTA IGUAL expresion'
-    t[0] = Declaracion(t[1], t[4], None, t.lineno(3), find_column(t.slice[3]))
+    valor = [t[1], t[2]]
+    t[0] = Declaracion(valor, t[4], None, t.lineno(3), find_column(t.slice[3]))
     #probar con valor = [t[1], t[2]]
 
 def p_declaracion4(t):

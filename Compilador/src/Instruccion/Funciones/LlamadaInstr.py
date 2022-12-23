@@ -184,10 +184,11 @@ class LlamadaInstr(Expresion):
                 tipoObtenido = parametroCompi.getTipo()
 
                 if isinstance(tipoAlmacenado, TipoLista):
-                    if isinstance(tipoObtenido, TipoLista):
-                        if tipoAlmacenado.tipo != tipoObtenido.tipo:
-                            genC3D.setExcepcion(Excepcion("Semantico", f"Parametro de tipo {tipoObtenido} no es compatible con {tipoAlmacenado}", self.linea, self.columna))
-                            return
+                    if isinstance(tipoObtenido, TipoLista) or tipoObtenido == Tipo.LIST:
+                        if tipoObtenido != Tipo.LIST:
+                            if tipoAlmacenado.tipo != tipoObtenido.tipo:
+                                genC3D.setExcepcion(Excepcion("Semantico", f"Parametro de tipo {tipoObtenido} no es compatible con {tipoAlmacenado}", self.linea, self.columna))
+                                return
                     else:
                         if tipoAlmacenado.tipo != tipoObtenido.tipo:
                             genC3D.setExcepcion(Excepcion("Semantico", f"Se espera un argumento de tipo {tipoAlmacenado} pero se obtuvo uno de tipo {tipoObtenido}", self.linea, self.columna))
