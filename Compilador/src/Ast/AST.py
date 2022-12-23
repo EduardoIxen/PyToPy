@@ -29,7 +29,7 @@ class AST(Instruccion):
         for id in self.entornoGlobal.getFunciones():
             valor = self.entornoGlobal.getFunciones()[id]
             cadena = f"\"column1\": \"{valor.getId()}\", \"column2\": \"{self.getTipo(valor)}\", \"column3\": \"{valor.getEntorno()}\", \"column4\": \"{valor.getLinea()}\", \"column5\": \"{valor.getColumna()}\""
-            cadena = "{" + cadena + "}"
+            cadena = "{" + cadena + "},"
             simbolos[valor.getId()] = cadena
 
         return simbolos

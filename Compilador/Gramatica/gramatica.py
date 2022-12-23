@@ -274,18 +274,24 @@ def p_instrucciones_instruccion(t) :
         t[0] = [t[1]]
 
 def p_instruccion(t):
-    '''instruccion      : imprimir_instr
-                        | declaracion_instr
-                        | llamada_instr
+    '''instruccion      : imprimir_instr finins
+                        | declaracion_instr finins
+                        | llamada_instr finins
                         | struct_instr
                         | if_instr
                         | while_instr
-                        | break_instr
-                        | continue_instr
-                        | return_instr
+                        | break_instr finins
+                        | continue_instr finins
+                        | return_instr finins
                         | for_instr
     '''
     t[0] = t[1]
+
+def p_finins(t) :
+    '''finins       : PUNTOCOMA
+                    |'''
+    t[0] = None
+
 
 #////////////////////////////////// IMPRIMIR //////////////////////////////////////////////
 def p_imprimir(t):

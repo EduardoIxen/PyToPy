@@ -36,7 +36,7 @@ class Aritmetica(Expresion):
         tipoResultado = obtenerTipo.obtenerTipo(izq.getTipo(), der.getTipo())
 
         if tipoResultado == Tipo.ERROR:
-            genC3D.setExcepcion(Excepcion("Semantico", f'La operacion ingresada no se puede realizar {izq.getTipo()} {self.tipoOperacion} {der.getTipo()}'), self.linea, self.columna)
+            genC3D.setExcepcion(Excepcion("Semantico", f'La operacion ingresada no se puede realizar {izq.getTipo()} {self.tipoOperacion} {der.getTipo()}', self.linea, self.columna))
             return
 
         tmp = genC3D.agregarTemp()
