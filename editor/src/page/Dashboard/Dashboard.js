@@ -24,8 +24,8 @@ export const Dashboard = () => {
   const [code] = useState(inputText);
   const [outcode, setOutCode] = useState(outputText);
 
-  const notifySuccessful = () => toast("Successful!");
-  const notifyError = () => toast("Error!");
+  const notifySuccessful = () => toast.success("Compilado");
+  const notifyError = () => toast.error("Error");
 
   const execute = async () => {
     await axios
