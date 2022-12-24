@@ -103,7 +103,7 @@ class Print(Instruccion):
                 self.cadenaRecibida(genC3D, tmp, entorno)
                 genC3D.agregarPrint("c", 34)                    #fin de cadena->"
             elif atributo.getAtributos()[atrib] == Tipo.LIST:
-                self.listaRecibida(tmp, atributo.getValores()[atrib], [atrib], entorno)
+                self.listaRecibida(tmp, atributo.getValores()[atrib] , entorno)
             if atrib != len(atributo.getAtributos()) -1:
                 genC3D.agregarPrint("c", '44')                  #44 -> ,
             genC3D.agregarExpresion(tmp2, tmp2, 1, '+')         #probar si no da error por ''

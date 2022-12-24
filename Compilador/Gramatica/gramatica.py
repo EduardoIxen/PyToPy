@@ -199,6 +199,8 @@ from src.Instruccion.loop.ContinueInstr import ContinueInstr
 from src.Instruccion.Funciones.ReturnInstr import ReturnInstr
 from src.Instruccion.loop.ForInstr import ForInstr
 from src.Instruccion.loop.RangeInstr import RangeInstr
+from src.Ast.GeneradorC3D import GeneradorC3D
+from src.Excepcion.Excepcion import Excepcion
 def p_init(t):
     'init            : ls_instr'
     t[0] = AST(t[1],0,0)
@@ -321,11 +323,14 @@ def p_declaracion4(t):
 #/////////////////////////////////// FUNCIONES ///////////////////////////////////////////
 def p_funciones(t):
     '''funcion_instr : RDEF ID PARA PARC DOSPTS instrucciones
-                     | RDEF ID PARA PARAMETROSTIPO PARC DOSPTS instrucciones'''
+                     | RDEF ID PARA PARAMETROSTIPO PARC DOSPTS instrucciones
+                     | RDEF ID PARA PARAMETROSTIPO PARC TIPO DOSPTS instrucciones'''
     #probar con tipo de retorno cuando tenga el return
 
     if len(t) == 7:
         t[0] = Funcion(t[2], [], Tipo.ANY, t[6], t.lineno(1), find_column(t.slice[1]))
+    elif len(t) == 9:
+        t[0] = Funcion(t[2], t[4], t[6], t[8], t.lineno(1), find_column(t.slice[1]))
     else:
         t[0] = Funcion(t[2], t[4], Tipo.ANY, t[7], t.lineno(1), find_column(t.slice[1]))
 
@@ -656,7 +661,10 @@ def p_expresion_llamada(t):
 
 #//////////////////////////////////////// ERRORES /////////////////////////////////////////////
 def p_error(t):
-    print("Error sintactico en '%s'" % t.value)
+    print("linea '%s'" % t)
+    nuevaInst = GeneradorC3D()
+    genC3D = nuevaInst.getInstance()
+    genC3D.setExcepcion(Excepcion("Sintactico", f"Error sintactico en '{t.value}'", t.lexer.lineno,find_column(t)))
 
 parser = yacc.yacc()
 input = ""

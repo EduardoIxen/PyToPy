@@ -91,20 +91,12 @@ export const Dashboard = () => {
     <>
       <div className="container-xl">
         <div className="row">
-          <div className="col-s">
-            <button type="button" onClick={execute} className="btn btn-dark">
+          <div className="position-relative col-s mb-1">
+            <button type="button" onClick={execute} className="btn btn-success me-4">
               Compilar
             </button>
-            <button type="button" onClick={mirilla} className="btn btn-dark">
+            <button type="button" onClick={mirilla} className="btn btn-success">
               Mirilla
-            </button>
-            <button
-              type="button"
-              data-bs-toggle="modal"
-              data-bs-target="#exampleModal"
-              className="btn btn-dark"
-            >
-              Errores
             </button>
           </div>
           <div className="col-md-6">

@@ -6,6 +6,7 @@ import "./Report.css";
 
 export const Report = () => {
   const { symbols } = useContext(UserContext);
+  const { err } = useContext(UserContext);
 
   console.log(symbols)
   const headers = {
@@ -16,12 +17,26 @@ export const Report = () => {
     head5: "Columna",
   };
 
+  const headers2 = {
+    head1: "No.",
+    head2: "Descripción",
+    head3: "Fila",
+    head4: "Columna",
+    head5: "Fecha y Hora",
+  };
+
   return (
     <div className="container">
       <div className="row">
-        <h3>Tabla de simbolos</h3>
+        <h3 class="text-white bg-dark">Tabla de simbolos</h3>
         <Table headers={headers} data={symbols} />
       </div>
+
+      <div className="row">
+        <h3 class="text-white bg-dark">Tabla de errores</h3>
+        <Table headers={headers2} data={err} />
+      </div>
     </div>
+
   );
 };

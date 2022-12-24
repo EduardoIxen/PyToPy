@@ -201,7 +201,7 @@ class LlamadaInstr(Expresion):
                             return
                     elif tipoAlmacenado == Tipo.ANY:
                         tipoAlmacenado = tipoObtenido
-                    elif tipoObtenido != tipoAlmacenado and tipoAlmacenado != Tipo.ANY:
+                    elif tipoObtenido != tipoAlmacenado and tipoAlmacenado != Tipo.ANY and type(tipoObtenido) != TipoLista:
                         genC3D.setExcepcion(Excepcion("Semantico", f"La variable ingresada de tipo {tipoObtenido} no coincide con lo declarado {tipoAlmacenado}", self.linea, self.columna))
                         return
 

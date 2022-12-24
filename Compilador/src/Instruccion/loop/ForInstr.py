@@ -98,6 +98,8 @@ class ForInstr(Instruccion):
                         if type(tipoFinal) is not TipoLista: break
                         tipoVal = tipoVal.valor
 
+                #if type(valor.getTipo()) == TipoLista:
+                #    tipoFinal = valor.getTipo()
                 genC3D.agregarEspacio()
                 var = nuevoEntorno.setVariable(self.id, tipoFinal, True)
                 genC3D.liberarTemp(valor.getValor())
