@@ -5,6 +5,7 @@ from src.Ast.Tipo import Tipo
 from src.Abstract.Return import Return
 from src.Excepcion.Excepcion import Excepcion
 from src.Ast.GeneradorC3D import GeneradorC3D
+from src.Expresion.Primitivo import Primitivo
 
 class Aritmetica(Expresion):
     def __init__(self, izquierda, derecha, tipoOperacion, linea, columna):
@@ -19,6 +20,10 @@ class Aritmetica(Expresion):
 
         izq = self.izquierda.compilar(entorno)
         der = self.derecha.compilar(entorno)
+        if type(der) == Primitivo:
+            der = der.compilar(entorno)
+        if type(izq) == Primitivo:
+            izq = izq.compilar(entorno)
 
         if (izq.getTipo() == Tipo.STRING and der.getTipo() == Tipo.INT and
             self.tipoOperacion == TipoOperacion.MULTIPLICACION):     #"hola"*3="holaholahola"

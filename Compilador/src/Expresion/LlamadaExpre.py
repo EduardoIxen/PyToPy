@@ -4,6 +4,7 @@ from src.Abstract.Return import Return
 from src.Excepcion.Excepcion import Excepcion
 from src.Ast.Tipo import Tipo
 from src.Instruccion.Listas.TipoLista import TipoLista
+from src.Expresion.Primitivo import Primitivo
 
 class LlamadaExpre(Expresion):
     def __init__(self, id, parametros, linea, columna):
@@ -158,6 +159,18 @@ class LlamadaExpre(Expresion):
         elif self.id == "len":
             parametro = self.parametros[0].compilar(entorno)
             return Return(self.nativaLen(entorno, parametro.getValor()), Tipo.INT, False)
+        elif self.id == "str":
+            parametro = self.parametros[0].compilar(entorno)
+            if parametro.getTipo() == Tipo.INT:
+                return Primitivo(str(parametro.getValor()), Tipo.STRING, self.linea, self.columna)
+            elif parametro.getTipo() == Tipo.FLOAT:
+                return Primitivo(str(parametro.getValor()), Tipo.STRING, self.linea, self.columna)
+            elif parametro.getTipo() == Tipo.BOOLEAN:
+                return Primitivo(str(parametro.getValor()), Tipo.STRING, self.linea, self.columna)
+            elif parametro.getTipo() == Tipo.STRING:
+                return Return(parametro.getValor(), Tipo.STRING, True)
+            else:
+                genC3D.setExcepcion(Excepcion("Semantico", f"Tipo de dato erroneo para el casteo a string.", self.linea, self.columna))
 
         simbFuncion = entorno.obtenerFuncion(self.id)
         struct = entorno.getStruct(self.id)
