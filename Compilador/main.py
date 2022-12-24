@@ -3,6 +3,7 @@ from flask_cors import CORS
 from src.Ast.GeneradorC3D import GeneradorC3D
 from src.Ast.Entorno import Entorno
 from Gramatica import gramatica
+from Gramatica.Optimizador import optimizadorGramatica
 
 app = Flask(__name__)
 CORS(app)
@@ -51,6 +52,22 @@ def compilar():
                 "err": errores,
                 "symbol": simbolos}, 200
 
+@app.post("/mirilla")
+def mirilla():
+    entrada = request.json['input']
+    data = ejecutarMirilla(entrada)
+    print(data)
+    return {"data": data}, 200
+
+def ejecutarMirilla(entrada):
+    try:
+        instrucciones = optimizadorGramatica.parse(entrada)
+        instrucciones.mirilla()
+        salida = instrucciones.get_code()
+        print(salida, "salidaaaaaaa")
+        return str(salida)
+    except:
+        return {'Optimizador', 'Error al ejecutar'}
 
 if __name__ == '__main__':
     app.debug = True
