@@ -14,7 +14,7 @@ class IfInstr(Instruccion):
     def compilar(self, entorno):
         nuevaInst = GeneradorC3D()
         genC3D = nuevaInst.getInstance()
-        genC3D.agregarComentario("INICIO IF")
+        genC3D.agregarComentario("------------------ INICIO IF ------------------")
         genC3D.agregarEspacio()
 
         #evaluando la condicion recibida
@@ -22,10 +22,15 @@ class IfInstr(Instruccion):
         if resultCondi.getTipo() != Tipo.BOOLEAN:
             genC3D.setExcepcion(Excepcion("Semantico", f"La condicion ingresada no es de tipo bool.", self.linea, self.columna))
             return
+        genC3D.agregarComentario("///////////////// INSTRUCCIONES IF /////////////////")
+        genC3D.agregarEspacio()
         genC3D.agregarEtiqueta(resultCondi.etiquetaTrue)
 
         for instr in self.instrucciones:
             instr.compilar(entorno)
+
+        genC3D.agregarComentario("//////////////// FIN INSTRUCCIONES IF ////////////////")
+        genC3D.agregarEspacio()
 
         if self.instruccionesElif is not None:
             etiquSalida = genC3D.nuevaEtiqueta()
@@ -35,14 +40,18 @@ class IfInstr(Instruccion):
                 instrElif.compilar(entorno)
             genC3D.agregarEtiqueta(etiquSalida)
         elif self.instruccionesElse is not None:
+            genC3D.agregarComentario("----------------- ELSE -----------------")
+            genC3D.agregarEspacio()
             etiquSalida = genC3D.nuevaEtiqueta()
             genC3D.agregarGoto(etiquSalida)
             genC3D.agregarEtiqueta(resultCondi.etiquetaFalse)
             for instrElse in self.instruccionesElse:
                 instrElse.compilar(entorno)
             genC3D.agregarEtiqueta(etiquSalida)
+            genC3D.agregarComentario("--------------- FIN ELSE ---------------")
+            genC3D.agregarEspacio()
         elif (self.instruccionesElif is None and self.instruccionesElse is None):
             genC3D.agregarEtiqueta(resultCondi.etiquetaFalse)
 
-        genC3D.agregarComentario("END IF")
+        genC3D.agregarComentario("------------------ END IF ------------------")
         genC3D.agregarEspacio()

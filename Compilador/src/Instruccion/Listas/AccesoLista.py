@@ -14,7 +14,7 @@ class AccesoLista(Instruccion):
     def compilar(self, entorno):
         nuevaInst = GeneradorC3D()
         genC3D = nuevaInst.getInstance()
-        genC3D.agregarComentario("INICIO DEL ACCESO A LA LISTA")
+        genC3D.agregarComentario("********* INICIO DEL ACCESO A LA LISTA *********")
         genC3D.agregarEspacio()
 
         valor = entorno.getVariable(self.id)
@@ -39,6 +39,8 @@ class AccesoLista(Instruccion):
 
                 valorElemento = self.accesInstr[i].compilar(entorno)   #compilo cada elemento de la lista
                 tipoFinal = _tipo.valor
+                genC3D.agregarComentario("ALMACENAR POSICION A ACCEDER")
+                genC3D.agregarEspacio()
                 genC3D.agregarExpresion(tmpPtr, valorElemento.getValor(), '', '')  #se almacena la posicion a acceder
 
                 posicionTemporal = valor.posicion
@@ -46,10 +48,16 @@ class AccesoLista(Instruccion):
                     posicionTemporal = genC3D.agregarTemp()
                     genC3D.liberarTemp(posicionTemporal)
                     genC3D.agregarExpresion(posicionTemporal, 'P', valor.posicion, "+")
-                genC3D.getStack(tmpIndex, posicionTemporal)             #se recupera la lista
 
+                genC3D.agregarComentario("OBTENER POSICION LISTA EN EL HEAP")
+                genC3D.agregarEspacio()
+                genC3D.getStack(tmpIndex, posicionTemporal)             #se recupera la lista
+                genC3D.agregarComentario("ALMACENAR EL TAMAÑO")
+                genC3D.agregarEspacio()
                 genC3D.getHeap(tmpItm, tmpIndex)                        #obtener el tamaño
 
+                genC3D.agregarComentario("VERIFICAR SI ESTA DENTRO DE LOS INDICES")
+                genC3D.agregarEspacio()
                 genC3D.agregarIf(tmpPtr, '1', '<', etiquetaTrue)
                 genC3D.agregarIf(tmpPtr, tmpItm, '>', etiquetaTrue)
                 genC3D.agregarGoto(etiquetaFalse)
@@ -59,7 +67,11 @@ class AccesoLista(Instruccion):
                 genC3D.agregarGoto(etiquetaSalida)
                 genC3D.agregarEtiqueta(etiquetaFalse)
 
+                genC3D.agregarComentario("SUMO POSICION INICIO + INDICE = posicion del item")
+                genC3D.agregarEspacio()
                 genC3D.agregarExpresion(tmpIndex, tmpIndex, tmpPtr, '+')
+                genC3D.agregarComentario("RECUPERO EL ITEM Y LO GUARDO EN UN TEMPORAL")
+                genC3D.agregarEspacio()
                 genC3D.getHeap(tmpItm, tmpIndex)
                 genC3D.agregarEtiqueta(etiquetaSalida)
             else:

@@ -14,7 +14,7 @@ class WhileInstr(Instruccion):
         nuevaInst = GeneradorC3D()
         genC3D = nuevaInst.getInstance()
 
-        genC3D.agregarComentario("INICIO WHILE")
+        genC3D.agregarComentario("--------------- INICIO WHILE ---------------")
         genC3D.agregarEspacio()
 
         etiquetaContinuar = genC3D.nuevaEtiqueta()      #se utiliza para regresar a la condicion
@@ -36,7 +36,7 @@ class WhileInstr(Instruccion):
 
         genC3D.agregarGoto(etiquetaContinuar)
         genC3D.agregarEtiqueta(condicion.etiquetaFalse)
-        genC3D.agregarComentario("FIN WHILE")
+        genC3D.agregarComentario("----------------- FIN WHILE -----------------")
         genC3D.agregarEspacio()
 
 

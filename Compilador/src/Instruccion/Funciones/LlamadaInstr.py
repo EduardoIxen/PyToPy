@@ -178,6 +178,8 @@ class LlamadaInstr(Expresion):
                 genC3D.setExcepcion(Excepcion("Semantico", "La cantidad de parametros declarados no coincide con los recibidos.", self.linea, self.columna))
                 return
             i = 0
+            genC3D.agregarComentario("GUARDANDO PARAMETROS A ENVIAR")
+            genC3D.agregarEspacio()
             for param in self.parametros:
                 parametroCompi = param.compilar(entorno)
                 tipoAlmacenado = simbFunc.parametros[i]['tipo']
@@ -233,8 +235,12 @@ class LlamadaInstr(Expresion):
                     if pos != len(valorParams) - 1:
                         genC3D.agregarExpresion(temp, temp, '1', '+')
 
+            genC3D.agregarComentario("FIN GUARDAR PARAMETROS A ENVIAR")
+            genC3D.agregarEspacio()
             genC3D.nuevoEntorno(entorno.tamanio)
             genC3D.llamarFunc(self.id)
+            genC3D.agregarComentario("OBTENGO EL RETURN DE LA FUNCION SI ES QUE HAY")
+            genC3D.agregarEspacio()
             genC3D.getStack(temp, 'P')
             genC3D.retornarEntorno(entorno.tamanio)
             genC3D.obtenerTemporales(entorno, tamanio)

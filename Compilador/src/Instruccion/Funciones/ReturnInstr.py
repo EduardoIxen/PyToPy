@@ -18,6 +18,8 @@ class ReturnInstr(Expresion):
 
         valor = self.valorRet.compilar(entorno)
         if valor.tipo == Tipo.BOOLEAN:
+            genC3D.agregarComentario("RETURN BOOLEANO")
+            genC3D.agregarEspacio()
             etiquTemp = genC3D.nuevaEtiqueta()
             genC3D.agregarEtiqueta(valor.etiquetaTrue)
             genC3D.setStack('P', '1')
@@ -26,5 +28,7 @@ class ReturnInstr(Expresion):
             genC3D.setStack('P', '0')
             genC3D.agregarEtiqueta(etiquTemp)
         else:
+            genC3D.agregarComentario("RETURN CON VALOR")
+            genC3D.agregarEspacio()
             genC3D.setStack('P', valor.valor)
         genC3D.agregarGoto(entorno.etiquetaReturn)

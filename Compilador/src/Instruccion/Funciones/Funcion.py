@@ -40,6 +40,8 @@ class Funcion(Instruccion):
             nuevoEntorno.setVariable(param['id'], param['tipo'], False)
         genC3D.limpiarAlmacenamTemp()
         genC3D.agregarInicioFunc(self.id)
+        genC3D.agregarComentario("INICIO DE INSTRUCCIONES")
+        genC3D.agregarEspacio()
         for instr in self.instrucciones:
             instr.compilar(nuevoEntorno)
 
