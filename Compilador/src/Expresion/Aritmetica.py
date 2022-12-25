@@ -67,10 +67,18 @@ class Aritmetica(Expresion):
         if operacion == '%' or operacion == '/':
             etiquTrue = genC3D.nuevaEtiqueta()
             etiquSalida = genC3D.nuevaEtiqueta()
+            genC3D.agregarComentario("SI OP-DER != 0, SE SALTA A TRUE, SINO MATHERROR")
+            genC3D.agregarEspacio()
             genC3D.agregarIf(der.getValor(), '0', '!=', etiquTrue)  #COMPARACION DINAMIVA DIVIDIDO 0
             genC3D.imprimirMathError()
+            genC3D.agregarComentario("ASIGNAR 0 CUANDO DA ERROR")
+            genC3D.agregarEspacio()
             genC3D.agregarExpresion(tmp, '0', '','')
+            genC3D.agregarComentario(f"ETIQUETA PARA LA SALIDA {str(etiquSalida)}")
+            genC3D.agregarEspacio()
             genC3D.agregarGoto(etiquSalida)
+            genC3D.agregarComentario(f"ETIQUETA PARA REALIZAR LA OPERACION {str(etiquTrue)}")
+            genC3D.agregarEspacio()
             genC3D.agregarEtiqueta(etiquTrue)
 
             if operacion == '%':
@@ -78,10 +86,12 @@ class Aritmetica(Expresion):
                 genC3D.agregarExponModulo(tmp, izq.getValor(), der.getValor())
             else:
                 if der.getValor() == '0':
-                    der.valor = '0.00001'
+                    der.valor = '0.00001'               #para que no de error en go -> division por 0
                 genC3D.agregarExpresion(tmp, izq.getValor(), der.getValor(), operacion)
             genC3D.agregarEtiqueta(etiquSalida)
         else:
+            genC3D.agregarComentario(f"AGREGANDO EXPRESION {operacion}")
+            genC3D.agregarEspacio()
             genC3D.agregarExpresion(tmp, izq.getValor(), der.getValor(), operacion)
 
         return Return(tmp, tipoResultado, True)

@@ -56,7 +56,7 @@ class Declaracion(Instruccion):
                         tipoVar = Tipo.LIST
                     nuevaVariable = entorno.setVariable(self.id, tipoVar, True, valor.getTipoAux(), valor.getAtributos(), valor.getValores())
                 else:
-                    nuevaVariable = entorno.setVariable(self.id, valor.getTipo(), False)
+                    nuevaVariable = entorno.setVariable(self.id, valor.getTipo(), False)    #retorna un simbolo
             else:
                 #Se actualiza la variable por si el valor cambia y el tipo tambien
                 nuevaVariable = entorno.actualizarVar(self.id, valor.getTipo())
@@ -65,17 +65,31 @@ class Declaracion(Instruccion):
 
             if not nuevaVariable.esGlobal:
                 posicionTemp = genC3D.agregarTemp()
+                genC3D.agregarComentario(f"GUARDANDO VARIABLE EN {posicionTemp}")
+                genC3D.agregarEspacio()
                 genC3D.agregarExpresion(posicionTemp, 'P', nuevaVariable.posicion, "+")
 
             if valor.getTipo() == Tipo.BOOLEAN:
                 etiquTemp = genC3D.nuevaEtiqueta()
+                genC3D.agregarComentario("ETIQUETA TRUE")
+                genC3D.agregarEspacio()
                 genC3D.agregarEtiqueta(valor.etiquetaTrue)
+                genC3D.agregarComentario("ASIGNADNO TRUE A VARIABLE")
+                genC3D.agregarEspacio()
                 genC3D.setStack(posicionTemp, "1")
                 genC3D.agregarGoto(etiquTemp)
+                genC3D.agregarComentario("ETIQUETA FALSE")
+                genC3D.agregarEspacio()
                 genC3D.agregarEtiqueta(valor.etiquetaFalse)
+                genC3D.agregarComentario("ASIGNANDO FALSE A LA VARIABLE")
+                genC3D.agregarEspacio()
                 genC3D.setStack(posicionTemp, "0")
+                genC3D.agregarComentario("ETIQUETA DE SALIDA")
+                genC3D.agregarEspacio()
                 genC3D.agregarEtiqueta(etiquTemp)
             else:
+                genC3D.agregarComentario(f"GUARDANDO VARIABLE EN {posicionTemp}")
+                genC3D.agregarEspacio()
                 genC3D.setStack(posicionTemp, valor.valor)
             genC3D.agregarEspacio()
         else:  #asignacion para structs
@@ -86,7 +100,7 @@ class Declaracion(Instruccion):
                 return
 
             if var.getTipo() == Tipo.STRUCT or var.getTipo() == Tipo.MUTSTRUCT:
-                genC3D.agregarComentario("INICIO DE STRUCT")
+                genC3D.agregarComentario("----------------- INICIO DE STRUCT -----------------")
                 genC3D.agregarEspacio()
 
                 valor = self.expresion.compilar(entorno)

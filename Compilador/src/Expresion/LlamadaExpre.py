@@ -263,18 +263,24 @@ class LlamadaExpre(Expresion):
         else: #es un struct
             structTemp = genC3D.agregarTemp()
             htemp = genC3D.agregarTemp()
+            genC3D.agregarComentario("---------- NUEVA INSTANCIA DE STRUCT ----------")
+            genC3D.agregarEspacio()
             genC3D.agregarExpresion(structTemp, 'H', '', '')
             genC3D.agregarExpresion(htemp, structTemp, '', '')
 
             if len(self.parametros) != len(struct.atributos):
                 genC3D.setExcepcion(Excepcion("Semantico", f"La cantidad de atributos no coincide con lo declarado - struct {self.id}", self.linea, self.columna))
                 return
+            genC3D.agregarComentario("RESERVO ESPACIO PARA LOS PARAMETROS (VAN EN ORDEN)")
+            genC3D.agregarEspacio()
             genC3D.agregarExpresion('H', 'H', len(self.parametros), '+')
 
             tiposAuxiliares = []
             valoresAuxiliares = []
             for par in self.parametros:
                 valor = par.compilar(entorno)
+                genC3D.agregarComentario("ASIGNO EL ATRIBUTO AL STRUCT")
+                genC3D.agregarEspacio()
                 genC3D.setHeap(htemp, valor.getValor())
                 genC3D.agregarExpresion(htemp, htemp, '1', '+')
                 tiposAuxiliares.append(valor.getTipo())
@@ -283,6 +289,9 @@ class LlamadaExpre(Expresion):
             auxReturn = Return(structTemp, struct.getTipo(), False, self.id)
             auxReturn.setAtributos(tiposAuxiliares)
             auxReturn.setValores(valoresAuxiliares)
+            genC3D.agregarComentario("---------------- FIN NUEVA INSTANCIA STRUCTO --------------")
+            genC3D.agregarEspacio()
+            genC3D.agregarEspacio()
             return auxReturn
 
     def nativaUpper(self, entorno, valor):

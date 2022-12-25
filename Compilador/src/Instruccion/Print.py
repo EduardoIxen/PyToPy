@@ -36,9 +36,15 @@ class Print(Instruccion):
                 genC3D.getHeap(temp, simbolo.getValor())
                 genC3D.agregarPrint("c", temp)
             elif simbolo.getTipo() == Tipo.LIST:
+                genC3D.agregarComentario("---------------- IMPRIMIENDO LISTA ----------------")
+                genC3D.agregarEspacio()
                 temp = genC3D.agregarTemp()
                 temp2 = genC3D.agregarTemp()
+                genC3D.agregarComentario("ALMACENO LA POSICION DEL ARREGLO, + 1 POR EL TAMAÑO EN LA PRIMERA POS")
+                genC3D.agregarEspacio()
                 genC3D.agregarExpresion(temp2, simbolo.getValor(), '1', '+')   #almacanar la posicion del arreglo
+                genC3D.agregarComentario("[")
+                genC3D.agregarEspacio()
                 genC3D.agregarPrint("c", '91')                                  # 91 -> [
                 for atrib in range(len(simbolo.getAtributos())):
                     genC3D.getHeap(temp, temp2)
@@ -56,7 +62,10 @@ class Print(Instruccion):
                     if atrib != len(simbolo.getAtributos()) - 1:
                         genC3D.agregarPrint("c", 44)                            #44 -> ,
                     genC3D.agregarExpresion(temp2, temp2, 1, '+')
+                genC3D.agregarComentario("]")
+                genC3D.agregarEspacio()
                 genC3D.agregarPrint("c", 93)                                    #93 -> ]
+                genC3D.agregarComentario("---------------- FIN IMPRE LISTA ----------------")
 
             else:
                 genC3D.agregarPrint("f", simbolo.getValor())
@@ -64,22 +73,27 @@ class Print(Instruccion):
         genC3D.nuevaLinea()
 
     def cadenaRecibida(self, genC3D, valor, entorno):
-        genC3D.agregarComentario("INICIO IMPRIMIR STRING")
+        genC3D.agregarComentario("-------------- INICIO IMPRIMIR STRING --------------")
         genC3D.agregarEspacio()
         genC3D.nativaPrint()
         tempParam = genC3D.agregarTemp()
 
         genC3D.agregarExpresion(tempParam, 'P', entorno.getTamanio(), '+')
         genC3D.agregarExpresion(tempParam, tempParam, '1', '+')
+        genC3D.agregarComentario("METER AL STACK EL TEMPORAL DEL INICIO DE LA CADENA A IMPRIMIR")
+        genC3D.agregarEspacio()
         genC3D.setStack(tempParam, valor)
 
         genC3D.nuevoEntorno(entorno.getTamanio())
         genC3D.llamarFunc('nativa_print')
 
         tmp = genC3D.agregarTemp()
+        genC3D.agregarComentario("RECUPERO LA VARIABLE DEL STACK")
+        genC3D.agregarEspacio()
         genC3D.getStack(tmp, 'P')
         genC3D.retornarEntorno(entorno.getTamanio())
-        genC3D.agregarComentario('FIN IMPRIMIR STRING')
+        genC3D.agregarComentario('------------ FIN IMPRIMIR STRING ------------')
+        genC3D.agregarEspacio()
         genC3D.agregarEspacio()
 
 
@@ -89,8 +103,11 @@ class Print(Instruccion):
 
         tmp = genC3D.agregarTemp()
         tmp2 = genC3D.agregarTemp()
-
+        genC3D.agregarComentario("ALMACENO LA POSICION DEL ARREGLO, + 1 POR EL TAMAÑO EN LA PRIMERA POS")
+        genC3D.agregarEspacio()
         genC3D.agregarExpresion(tmp2, htemp, '1', '+')
+        genC3D.agregarComentario("[")
+        genC3D.agregarEspacio()
         genC3D.agregarPrint("c", 91)                    #91 -> [
         for atrib in range(len(atributo.getAtributos())):
             genC3D.getHeap(tmp, tmp2)           #esto par recuperar cada item
@@ -107,4 +124,6 @@ class Print(Instruccion):
             if atrib != len(atributo.getAtributos()) -1:
                 genC3D.agregarPrint("c", '44')                  #44 -> ,
             genC3D.agregarExpresion(tmp2, tmp2, 1, '+')         #probar si no da error por ''
+        genC3D.agregarComentario("]")
+        genC3D.agregarEspacio()
         genC3D.agregarPrint("c", 93)                            #93 -> ]

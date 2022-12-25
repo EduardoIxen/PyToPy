@@ -57,7 +57,7 @@ class Entorno:
             nuevoSimbolo.setAtributos(tipoAtributos)
             nuevoSimbolo.setValores(valores)
             nuevoSimbolo.setEntorno(self.nombre)
-            self.tamanio += 1
+            self.tamanio += 1                               #el tamanio es la posicion que tiene en el stack
             self.variables[id] = nuevoSimbolo
         return self.variables[id]
 
