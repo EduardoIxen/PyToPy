@@ -31,7 +31,9 @@ class GetStruct(Instruccion):
                             der = entorno.getStruct(tipo)           #obtengo el struct (tipo)
                             tipo = der.getTipo()
                         if tipo == Tipo.STRUCT or tipo == Tipo.MUTSTRUCT:
+                            #Le sumo el numero de atributo
                             genC3D.agregarExpresion(temp, izq.getValor(), contador, '+')
+                            #Obtengo del heap la posicion que quiero
                             genC3D.getHeap(temp, temp)
 
                             auxReturn = Return(temp, tipo, True)
@@ -43,6 +45,7 @@ class GetStruct(Instruccion):
                             genC3D.agregarComentario("LE SUMO EL NUMERO DE ATRIBUTO A LA POSICION DEL STRUCT")
                             genC3D.agregarEspacio()
                             genC3D.agregarExpresion(temp, izq.getValor(), contador, '+')
+                            #obtengo del heap la posicion ingresada en temp
                             genC3D.getHeap(temp, temp)
                             break
                     contador += 1
