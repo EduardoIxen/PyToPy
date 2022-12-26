@@ -8,6 +8,4 @@ class Printf(C3DInstruction):
         self.exp = exp
 
     def get_code(self):
-        return (
-            'fmt.Printf(' + self.str_to + ', int(' + self.exp.get_code() + '));'
-        )
+        return f'fmt.Printf("{self.str_to}", int({self.exp.get_code()}));'

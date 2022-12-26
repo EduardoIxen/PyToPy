@@ -49,7 +49,7 @@ export const Dashboard = () => {
 
   const mirilla = async () => {
     await axios
-    .post(`${url}/mirilla`, { input: outputText })
+    .post(`${url}/bloques`, { input: outputText })
     .then((res) => {
       if (res.data.err !== "[]") {
         notifyError();
@@ -96,7 +96,7 @@ export const Dashboard = () => {
               Compilar
             </button>
             <button type="button" onClick={mirilla} className="btn btn-success">
-              Mirilla
+              Bloques
             </button>
           </div>
           <div className="col-md-6">

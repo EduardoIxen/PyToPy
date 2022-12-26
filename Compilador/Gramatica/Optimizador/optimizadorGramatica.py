@@ -1,15 +1,18 @@
-from src.optimizador.instrucciones.Function import Function
-from src.optimizador.instrucciones.Return import Return
-from src.optimizador.Optimizador import Optimizador
-from src.optimizador.expresiones.Access import Access
-from src.optimizador.expresiones.Expression import Expression
-from src.optimizador.expresiones.Literal import Literal
-from src.optimizador.gotos.Goto import Goto
-from src.optimizador.gotos.IF import IF
-from src.optimizador.instrucciones.Assignment import Assignment
-from src.optimizador.instrucciones.CallFun import CallFun
-from src.optimizador.instrucciones.Label import Label
-from src.optimizador.instrucciones.Printf import Printf
+# GENERAL
+import ply.yacc as yacc
+import ply.lex as lex
+from src.optimizador.Optimizador import *
+from src.optimizador.instrucciones.Assignment import *
+from src.optimizador.instrucciones.CallFun import *
+from src.optimizador.instrucciones.Function import *
+from src.optimizador.instrucciones.Label import *
+from src.optimizador.instrucciones.Printf import *
+from src.optimizador.instrucciones.Return import *
+from src.optimizador.gotos.IF import *
+from src.optimizador.gotos.Goto import *
+from src.optimizador.expresiones.Access import *
+from src.optimizador.expresiones.Expression import *
+from src.optimizador.expresiones.Literal import *
 
 # LEXICAL ANALYSIS
 rw = {
@@ -20,10 +23,12 @@ rw = {
     "IF": "IF",
     "GOTO": "GOTO",
     "FMT": "FMT",
+    "MATH": "MATH",
+    "MOD": "MOD",
     "PRINTF": "PRINTF",
     "PACKAGE": "PACKAGE",
     "IMPORT": "IMPORT",
-    "VAR": "VAR",
+    "VAR": "VAR"
 }
 
 tokens = [
@@ -31,27 +36,35 @@ tokens = [
     "INTLITERAL",
     "FLOATLITERAL",
     "STRINGLITERAL",
+
     "TIMES",
     "DIV",
     "PLUS",
     "MINUS",
+
+
     "GREATER",
     "LESS",
     "GREATEREQUAL",
     "LESSEQUAL",
     "EQUALSEQUALS",
     "DISTINT",
+
     "EQUALS",
     "SEMICOLON",
     "COLON",
     "POINT",
+
     "LEKEY",
     "RIKEY",
+
     "LEPAR",
     "RIPAR",
+
     "LECOR",
     "RICOR",
-    "COMMA",
+
+    "COMMA"
 ] + list(rw.values())
 
 t_TIMES = r'\*'
@@ -123,11 +136,9 @@ def t_MLCOMMENT(t):
     t.lexer.lineno += t.value.count("\n")
 
 
-# Simple // ...
 def t_COMENTARIO_SIMPLE(t):
-    r'(//.*\n)|(//.*)'
+    r'\/\/.*\n'
     t.lexer.lineno += 1
-    pass
 
 
 def t_newline(t):
@@ -140,23 +151,29 @@ def t_error(t):
     t.lexer.skip(1)
 
 
-import ply.lex as lex
-
 lexer1 = lex.lex()
 
 # SYNTACTIC ANALYSIS
 
 
 def p_start(t):
-    '''
-    start : PACKAGE ID fin_inst IMPORT LEPAR package_list RIPAR fin_inst declarations codeList
-    '''
+    '''start :  PACKAGE ID SEMICOLON IMPORT LEPAR imports RIPAR SEMICOLON declarations codeList'''
     t[0] = Optimizador(t[6], t[9], t[10])
+
+
+def p_imports(t):
+    '''imports : imports STRINGLITERAL
+                | STRINGLITERAL'''
+    if len(t) == 2:
+        t[0] = t[1]
+    else:
+        t[1] = t[1] + '"\n\t"'+t[2]
+        t[0] = t[1]
 
 
 def p_declarations(t):
     '''declarations : declarations declaration
-    | declaration'''
+                    | declaration'''
     if len(t) == 2:
         t[0] = [t[1]]
     else:
@@ -164,30 +181,9 @@ def p_declarations(t):
         t[0] = t[1]
 
 
-def p_packages(t):
-    '''
-    package_list        : package_list STRINGLITERAL
-                        | STRINGLITERAL
-    '''
-    if len(t) == 2:
-        t[0] = [t[1]]
-    else:
-        t[1].append(t[3])
-        t[0] = t[1]
-
-
-def p_fin_inst(t):
-    '''
-    fin_inst            : SEMICOLON
-                        |
-    '''
-    if len(t) == 2 or len(t) == 1:
-        t[0] = ';'
-
-
 def p_declaration(t):
     '''declaration :     VAR idList LECOR INTLITERAL RICOR FLOAT64 SEMICOLON
-    |   VAR idList type SEMICOLON'''
+                    |   VAR idList type SEMICOLON'''
     if len(t) == 5:
         t[0] = f'{t[2]} {t[3]};'
     else:
@@ -196,7 +192,7 @@ def p_declaration(t):
 
 def p_type(t):
     '''type : INT
-    | FLOAT64'''
+            | FLOAT64'''
     if t[1] == "int":
         t[0] = "int"
     else:
@@ -205,7 +201,7 @@ def p_type(t):
 
 def p_idList(t):
     '''idList :   idList COMMA ID
-    | ID'''
+                | ID'''
     if len(t) == 2:
         t[0] = f'{t[1]}'
     else:
@@ -214,7 +210,7 @@ def p_idList(t):
 
 def p_codeList(t):
     '''codeList : codeList code
-    | code'''
+                | code'''
     if len(t) == 2:
         t[0] = [t[1]]
     else:
@@ -234,7 +230,7 @@ def p_statement(t):
 
 def p_instructions(t):
     '''instructions : instructions instruction
-    | instruction'''
+                    | instruction'''
     if len(t) == 2:
         t[0] = [t[1]]
     else:
@@ -244,12 +240,12 @@ def p_instructions(t):
 
 def p_instruction(t):
     '''instruction :  assign SEMICOLON
-    | print SEMICOLON
-    | if
-    | gotoSt SEMICOLON
-    | label
-    | callFunc SEMICOLON
-    | retSt SEMICOLON'''
+                    | print SEMICOLON
+                    | if
+                    | gotoSt SEMICOLON
+                    | label
+                    | callFunc SEMICOLON
+                    | retSt SEMICOLON'''
     t[0] = t[1]
 
 
@@ -285,7 +281,7 @@ def p_assign(t):
 
 def p_assign2(t):
     '''assign :   ID EQUALS expression
-    | ID EQUALS access'''
+                | ID EQUALS access'''
     aux = Literal(t[1], t.lineno(1), t.lexpos(1))
     t[0] = Assignment(aux, t[3], t.lineno(2), t.lexpos(2))
 
@@ -297,7 +293,7 @@ def p_print(t):
 
 def p_printValue(t):
     '''printValue :   INT LEPAR finalExp RIPAR
-    | finalExp'''
+                    | finalExp'''
     if len(t) == 2:
         t[0] = t[1]
     else:
@@ -307,36 +303,39 @@ def p_printValue(t):
 
 def p_expression(t):
     '''expression :   finalExp PLUS finalExp
-    | finalExp MINUS finalExp
-    | finalExp TIMES finalExp
-    | finalExp DIV finalExp
-    | finalExp GREATER finalExp
-    | finalExp LESS finalExp
-    | finalExp GREATEREQUAL finalExp
-    | finalExp LESSEQUAL finalExp
-    | finalExp EQUALSEQUALS finalExp
-    | finalExp DISTINT finalExp
-    | finalExp'''
+                    | finalExp MINUS finalExp
+                    | finalExp TIMES finalExp
+                    | finalExp DIV finalExp
+                    | finalExp GREATER finalExp
+                    | finalExp LESS finalExp
+                    | finalExp GREATEREQUAL finalExp
+                    | finalExp LESSEQUAL finalExp
+                    | finalExp EQUALSEQUALS finalExp
+                    | finalExp DISTINT finalExp
+                    | MATH POINT MOD LEPAR finalExp COMMA finalExp RIPAR
+                    | finalExp'''
     if len(t) == 2:
         t[0] = t[1]
+    elif len(t) == 9:
+        t[0] = Expression(t[5], t[7], '%', t.lineno(2), t.lexpos(2))
     else:
         t[0] = Expression(t[1], t[3], t[2], t.lineno(2), t.lexpos(2))
 
 
 def p_finalExp(t):
     '''finalExp : ID
-    | INTLITERAL
-    | MINUS INTLITERAL
-    | FLOATLITERAL'''
+                | INTLITERAL
+                | MINUS INTLITERAL
+                | FLOATLITERAL'''
     if len(t) == 3:
-        t[0] = Literal(0 - t[2], t.lineno(1), t.lexpos(1))
+        t[0] = Literal(0-t[2], t.lineno(1), t.lexpos(1))
     else:
         t[0] = Literal(t[1], t.lineno(1), t.lexpos(1))
 
 
 def p_access(t):
     '''access :   ID LECOR INT LEPAR finalExp RIPAR RICOR
-    | ID LECOR finalExp RICOR'''
+                | ID LECOR finalExp RICOR'''
     if len(t) == 5:
         t[0] = Access(t[1], t[3], t.lineno(2), t.lexpos(2))
     else:
@@ -348,8 +347,6 @@ def p_error(t):
     print(t)
     print("Syntactic error in '%s'" % t.value)
 
-
-import ply.yacc as yacc
 
 parser2 = yacc.yacc()
 

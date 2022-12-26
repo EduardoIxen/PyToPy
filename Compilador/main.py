@@ -4,6 +4,7 @@ from src.Ast.GeneradorC3D import GeneradorC3D
 from src.Ast.Entorno import Entorno
 from Gramatica import gramatica
 from Gramatica.Optimizador import optimizadorGramatica
+from src.optimizador.Optimizador import Optimizador
 
 app = Flask(__name__)
 CORS(app)
@@ -54,20 +55,37 @@ def compilar():
 
 @app.post("/mirilla")
 def mirilla():
-    entrada = request.json['input']
-    data = ejecutarMirilla(entrada)
-    print(data)
-    return {"data": data}, 200
+    req = request.json
+    codigo1 = req['input']
+    codigo = ejecutarMirilla(codigo1)
+    print("salio mirilla", codigo)
+    return {"result": codigo,
+            "err": "[]",
+            "symbol": ""}, 200
 
 def ejecutarMirilla(entrada):
     try:
         instrucciones = optimizadorGramatica.parse(entrada)
-        instrucciones.mirilla()
+        instrucciones.Mirilla()
         salida = instrucciones.get_code()
-        print(salida, "salidaaaaaaa")
-        return str(salida)
+        return salida
     except:
         return {'Optimizador', 'Error al ejecutar'}
+
+@app.route("/bloques", methods=["POST"])
+def bloquess():
+    data = request.get_json(force=True)
+    codigo = bloques(data['input'])
+    return {"result": codigo,
+            "err": "[]",
+            "symbol": ""}, 200
+
+def bloques(input):
+    instructions = optimizadorGramatica.parse(input)
+    instructions.Bloques()
+    out = instructions.get_code()
+    return out
+
 
 if __name__ == '__main__':
     app.debug = True

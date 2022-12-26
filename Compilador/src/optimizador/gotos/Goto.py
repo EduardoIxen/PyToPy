@@ -9,4 +9,4 @@ class Goto(C3DInstruction):
     def get_code(self):
         if self.deleted:
             return ''
-        return 'goto ' + str(self.label)
+        return f'goto {self.label}'

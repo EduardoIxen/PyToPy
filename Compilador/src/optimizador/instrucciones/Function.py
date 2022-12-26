@@ -9,13 +9,13 @@ class Function(C3DInstruction):
 
     def get_code(self):
         ret = f'func {self.id}(){{\n'
-        for ins in self.instr:
-            auxText = ins.get_code()
-            if auxText == '':
+        for instruction in self.instr:
+            aux_text = instruction.get_code()
+            if aux_text == '':
                 continue
-            ret = ret + f'\t{auxText}'
-            if ins.isLeader:
-                ret = ret + '\t\t\t\t\t\t\t// Lider'
+            ret = ret + f'\t{aux_text}\n'
+            if instruction.is_leader:
+                ret = ret + '\t\t\t\t\t// Lider'
             ret = ret + '\n'
         ret = ret + '}'
         return ret
